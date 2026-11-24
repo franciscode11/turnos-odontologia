@@ -44,7 +44,7 @@ La cátedra exige **al menos 3**: uno feliz, uno de error de negocio y uno de bo
 
 Más la carpeta de tu change dentro de `openspec/changes/`, tu resumen de explore en `docs/explore/` y tu captura en `docs/evidencias/`.
 
-❌ **No toques:** `prisma/schema.prisma`, `CHANGES.md`, `.active-orchestrator-state.json`, `AGENTS.md`, `CLAUDE.md`, el layout/menú general ni los módulos de otros compañeros. Si necesitás algo ahí, pedíselo al líder.
+❌ **No toques:** `prisma/schema.prisma`, `CHANGES.md`, `.active-orchestrator-state.json`, `AGENTS.md`, `CLAUDE.md`, el layout/menú general, los componentes compartidos de `src/components/ui` ni los módulos de otros compañeros. Si necesitás algo ahí, pedíselo al líder.
 
 **Dependencias:** Solo de la base técnica (C01): el modelo `Paciente` ya existe en el esquema.
 
@@ -222,7 +222,7 @@ La especificación está aprobada. Vamos con APPLY de mi change, con TDD estrict
 primero el test de cada escenario (rojo), después la implementación mínima (verde), después refactor.
 Implementá solo lo que está en specs/ y tasks.md. Si aparece algo que no está especificado,
 frená y preguntame: volvemos a PROPOSE, no se improvisa en APPLY.
-Reutilizá los helpers existentes de autenticación/roles y los componentes del layout.
+Reutilizá los helpers existentes de autenticación/roles y los componentes del layout. Para la interfaz usá SOLO los componentes de `src/components/ui` (inputs, selects, botones, etc.): no escribas `<input>`, `<select>`, `<textarea>` ni `<button>` sueltos. Si falta un componente, frená y avisame para pedírselo al líder.
 Usá solo datos ficticios. Marcá cada tarea de tasks.md a medida que la completes.
 Al final corré npm test y mostrame el resultado.
 ```

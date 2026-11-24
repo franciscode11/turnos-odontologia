@@ -21,7 +21,7 @@ feat/c05   ●──●──●──●─────────────
 | Para qué | Formato | Ejemplo |
 |---|---|---|
 | Tarea 0 (verificación de fuente + captura) | `docs/<apellido>-verificacion` | `docs/crescini-verificacion` |
-| Tu change | `feat/<id-del-change>-<nombre-corto>` | `feat/c02-pacientes` |
+| Tu change (**la crea el líder**, vos solo la usás) | `feat/<id-del-change>-<nombre-corto>` | `feat/c02-pacientes` |
 | Corrección que pidió el líder | misma rama del PR | (seguís en la misma) |
 
 ## El ciclo completo, comando por comando
@@ -38,10 +38,26 @@ git checkout main
 git pull
 ```
 
-**2. Crear tu rama y pasarte a ella:**
+**2. Pasarte a tu rama.**
+
+- Si es **tu rama del change** (ya la creó el líder en GitHub):
 
 ```bash
-git checkout -b feat/c02-pacientes
+git fetch origin
+```
+
+```bash
+git checkout feat/c02-pacientes
+```
+
+```bash
+git merge main
+```
+
+- Si es una rama **nueva** tuya (por ejemplo la de la Tarea 0), creala con `-b`:
+
+```bash
+git checkout -b docs/crescini-verificacion
 ```
 
 **3. Trabajar** (tu IA crea y modifica archivos).
@@ -77,12 +93,12 @@ Las siguientes veces alcanza con `git push`.
 **7. Abrir el Pull Request:**
 
 ```bash
-gh pr create --base main --fill
+gh pr create --base main --fill --reviewer franciscode11
 ```
 
-Después completá la descripción en GitHub (la plantilla te guía). En **Reviewers** poné al líder (`franciscode11`).
+Después completá la descripción en GitHub (la plantilla te guía).
 
-**8. Esperar la revisión.** Si el líder te pide cambios: los hacés en **la misma rama**, `git add .`, `git commit -m "fix: ..."` y `git push`. El PR se actualiza solo.
+**8. Esperar la revisión.** GitHub no deja mergear sin la aprobación del líder (*code owner*). Si el líder te pide cambios: los hacés en **la misma rama**, `git add .`, `git commit -m "fix: ..."` y `git push`. El PR se actualiza solo.
 
 **9. Cuando el líder mergea:** volvé a `main` y traé lo nuevo:
 

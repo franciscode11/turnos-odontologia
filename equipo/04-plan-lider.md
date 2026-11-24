@@ -31,15 +31,16 @@ cd ~/active-stack && PATH="$HOME/.as-shim:$PATH" ./active-stack install
 
    Elegir **Claude Code + Codex**, modo **Full**, permisos **balanceado**. 📸 Captura de la pantalla final con la lista de harnesses → `docs/evidencias/instalacion/valles.png`. Después `rm -rf ~/.as-shim`. En Codex: `/hooks` → confiar en el hook de `active-stack`.
 
-2. **Crear el repo público** `turnos-odontologia`, subir el commit inicial y configurar `main`:
-   - Protección de `main`: requerir PR, requerir que pase el CI, requerir 1 aprobación de *code owners* (el líder puede mergear sus propios PR como admin).
-   - Merge: solo **"Create a merge commit"** (no squash), para que en `main` queden los commits individuales de cada integrante.
-   - Invitar a los 5 integrantes como colaboradores (rol *Write*). **Falta: sus usuarios de GitHub.**
+2. ✅ **Repo público creado** (`franciscode11/turnos-odontologia`) con el commit inicial:
+   - Protección de `main`: PR obligatorio + 1 aprobación de *code owner* (`.github/CODEOWNERS` = `@franciscode11`), sin force-push ni borrado. Como admin, el líder puede mergear sus propios PR.
+   - Merge: solo **"Create a merge commit"** (squash y rebase desactivados), para que en `main` queden los commits individuales de cada integrante. Las ramas no se borran al mergear (trazabilidad).
+   - Invitados con permiso *Write*: OctaCrescini, joaco-cortezb, Lautarodeco, joaquin-echenagorria, UlisesLucato. Tienen que aceptar (vence en 7 días).
+   - **Después del C01:** agregar el check del CI como obligatorio en la protección de `main` (no se puede antes porque el workflow todavía no existe) y crear desde `main` las ramas de cada integrante: `feat/c02-pacientes`, `feat/c03-catalogo`, `feat/c04-horarios`, `feat/c05-crear-turno`, `feat/c06-estados-turno` (la consigna pide que el líder cree las ramas).
 3. **Carpeta compartida de Drive** para clips del video y capturas, y mandar el mensaje al grupo (borrador en `../mensaje-whatsapp-equipo.md`, fuera del repo).
 
 ## Etapas 1 a 5 · Fundación con `/active-orchestrator` (martes 24)
 
-Abrí Claude Code **dentro del repo** (`cd turnos-odontologia && claude`) y ejecutá `/active-orchestrator`. En **cada** etapa: leer lo generado, decidir **Continuar / Ajustar / Parar acá**, anotar la decisión y hacer un commit (`docs(fundacion): etapa N …`). Sacá capturas de al menos un **Ajustar** por etapa importante.
+Como `main` está protegida (y Active Stack además le prohíbe al agente hacer push a `main`), la fundación se hace en la rama **`feat/fundacion`** y entra por PR: `git checkout -b feat/fundacion`. Abrí Claude Code **dentro del repo** (`cd turnos-odontologia && claude`) y ejecutá `/active-orchestrator`. En **cada** etapa: leer lo generado, decidir **Continuar / Ajustar / Parar acá**, anotar la decisión y hacer un commit (`docs(fundacion): etapa N …`). Sacá capturas de al menos un **Ajustar** por etapa importante.
 
 | Etapa | Qué pedir / responder | Revisión obligatoria | Commit |
 |---|---|---|---|
@@ -55,7 +56,7 @@ Abrí Claude Code **dentro del repo** (`cd turnos-odontologia && claude`) y ejec
 | **Team mode** | 6 integrantes, con nombres (versionados: sí). Aceptar proteger `main`. | `.active-stack/team.json`, plantilla de PR y `CODEOWNERS` (con `* @franciscode11`). | `chore(equipo): modo equipo` |
 | **Memory policy** | **`local`** (Engram Cloud requiere un servidor propio; no vale la pena para 3 días). | — | (incluido arriba) |
 
-Al terminar: push de `main` y avisar al grupo que ya pueden leer `CHANGES.md` y la knowledge-base.
+Conviene abrir el PR de `feat/fundacion` apenas el informe de Discovery esté aprobado (así los integrantes lo tienen en `main` para la Tarea 0) y otro PR al terminar el resto de las etapas. Al terminar: merge a `main` y avisar al grupo que ya pueden leer `CHANGES.md` y la knowledge-base.
 
 ## Supabase (martes 24, antes del apply del C01)
 
@@ -64,7 +65,7 @@ Al terminar: push de `main` y avisar al grupo que ya pueden leer `CHANGES.md` y 
    - `DATABASE_URL` = **Transaction pooler** (puerto 6543, agregar `?pgbouncer=true`) → la usa la app.
    - `DIRECT_URL` = **Session pooler / directa** (puerto 5432) → solo para migraciones. **Solo la tenés vos.**
 3. *Authentication → Sign In / Providers*: dejar **Email** y **desactivar "Allow new users to sign up"** (los usuarios los crea el seed/administrador).
-4. *SQL Editor* → cerrar la Data API sobre nuestras tablas (usamos Prisma, no PostgREST; si no, cualquiera con la *anon key* podría leer la base):
+4. *SQL Editor* → cerrar la Data API sobre nuestras tablas (usamos Prisma, no PostgREST; si no, cualquiera con la clave pública podría leer la base):
 
 ```sql
 revoke all on all tables in schema public from anon, authenticated;
@@ -87,7 +88,7 @@ alter default privileges for role postgres in schema public grant usage, select 
 ```
 
    La cadena de los integrantes usa el usuario `equipo_dev.<project-ref>` en el pooler. Probarla con `psql` antes de repartirla.
-6. Repartir el `.env` de los integrantes **por mensaje privado** (nunca en el repo ni en el grupo): `DATABASE_URL` con `equipo_dev`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` y los usuarios de prueba ficticios. La `service_role` key y `DIRECT_URL` **solo** las tiene el líder.
+6. Repartir el `.env` de los integrantes **por mensaje privado** (nunca en el repo ni en el grupo): `DATABASE_URL` con `equipo_dev`, la URL del proyecto, la **publishable key** (`sb_publishable_…`; en proyectos viejos se llama *anon key*) y los usuarios de prueba ficticios. La **secret key** (`sb_secret_…`, antes *service_role*) y `DIRECT_URL` **solo** las tiene el líder.
 7. Después de cada migración: correr *Advisors → Security* en Supabase y revisar que no haya alertas críticas.
 
 ## Change C01 · Base técnica (martes 24, noche) — ciclo OPSX completo
@@ -97,14 +98,14 @@ Rama `feat/c01-base-tecnica`. En Claude Code: `/sdd-orchestrator` y explore → 
 - Next.js App Router + TypeScript estricto, npm, ESLint, Tailwind. Scripts `dev`, `build`, `lint`, `typecheck`, `test` (Vitest).
 - `prisma/schema.prisma` con **todo el modelo del MVP**: `Usuario` (rol), `Paciente`, `Profesional`, `Prestacion`, `Sillon`, `HorarioAtencion`, `Bloqueo`, `Turno` (estado, inicio, fin), `HistorialTurno`. Enum de estados del turno y constante compartida `ESTADOS_QUE_OCUPAN_AGENDA` en `src/domain/shared/`.
 - Restricción de exclusión en PostgreSQL (`btree_gist` + `tstzrange`) que impida turnos solapados por profesional y por sillón cuando el estado ocupa agenda (migración SQL manual dentro de Prisma).
-- Supabase Auth (email y contraseña) + helper de servidor `requireRol([...])` y matriz de permisos de la knowledge-base. Middleware que protege `(panel)`.
+- Supabase Auth (email y contraseña) + helper de servidor `requireRol([...])` y matriz de permisos de la knowledge-base. Protección de las rutas de `(panel)` en el servidor (middleware/proxy de Next.js) además de chequear el rol en cada acción.
 - Layout con menú y **páginas placeholder** en las rutas de cada módulo: `/pacientes`, `/configuracion/profesionales`, `/configuracion/prestaciones`, `/configuracion/sillones`, `/configuracion/horarios`, `/turnos` (listado del día, solo lectura), `/turnos/nuevo`, `/turnos/[id]`. Carpetas vacías con `.gitkeep` en `src/domain/<modulo>`, `src/server/<modulo>` y `tests/<modulo>` para cada integrante.
 - Seed con datos **ficticios** (usuarios de prueba por rol, 2 profesionales, 3 prestaciones, 2 sillones, 5 pacientes inventados).
 - Tests de dominio sin base de datos (el README tiene que permitir `npm install && npm test` sin credenciales).
 - `.env.example` sin valores. GitHub Actions: lint + typecheck + test en cada PR.
 - README: requisitos, instalación, cómo correr tests, cómo levantar la app, estructura de carpetas.
 
-Aplicar la migración con `DIRECT_URL` (`npx prisma migrate deploy`), correr el seed, PR, CI verde, merge. Recién ahí avisar: "ya pueden arrancar sus changes".
+Aplicar la migración con `DIRECT_URL` (`npx prisma migrate deploy`), repetir los `revoke`, correr el seed, PR, CI verde, merge. Después: check del CI obligatorio en `main`, crear las 5 ramas de los integrantes desde `main` y recién ahí avisar: "ya pueden arrancar sus changes".
 
 ## Miércoles 25 · Revisar y mergear PRs
 
@@ -117,7 +118,7 @@ Aplicar la migración con `DIRECT_URL` (`npx prisma migrate deploy`), correr el 
 - [ ] La spec tiene ≥ 3 escenarios (feliz, error, borde) y cada uno tiene su test.
 - [ ] Commits del propio integrante (su nombre en la pestaña *Commits*).
 
-**Merge:** *Create a merge commit*. Después, en `main`: actualizar el estado del change en `CHANGES.md` (commit `chore(roadmap): C0X completado`) y avisar a los demás que hagan `git merge main` en sus ramas.
+**Aprobar** (*Review changes → Approve*) y después **Merge** con *Create a merge commit*. Después, en `main`: actualizar el estado del change en `CHANGES.md` (commit `chore(roadmap): C0X completado`) y avisar a los demás que hagan `git merge main` en sus ramas.
 
 **Orden sugerido** (no hay dependencias entre ellos, pero así se reducen conflictos): C03 → C02 → C04 → C05 → C06. Si dos tocan el mismo archivo compartido, mergear uno, pedirle al otro `git merge main` y que su agente resuelva.
 

@@ -25,7 +25,7 @@
 2. **Verificá tu email** (GitHub te manda un correo).
 3. Si GitHub te pide activar **autenticación de dos factores (2FA)**, activala con una app (Google Authenticator, Microsoft Authenticator o similar). Guardá los códigos de recuperación.
 4. **Mandale al líder por WhatsApp tu nombre de usuario de GitHub** (ej. `octaviocrescini`). Sin eso no te puede invitar al repositorio.
-5. Cuando te llegue el mail **"invited you to collaborate"**, abrilo y tocá **Accept invitation**. (También aparece en <https://github.com/notifications>.)
+5. Cuando te llegue el mail **"invited you to collaborate"**, abrilo y tocá **Accept invitation**. También podés aceptarla directo en <https://github.com/franciscode11/turnos-odontologia/invitations> (estando logueado). **La invitación vence a los 7 días.**
 
 ---
 
@@ -62,7 +62,7 @@ brew --version
 | Programa | Windows | Mac |
 |---|---|---|
 | **Git** | Descargá de <https://git-scm.com/downloads/win> e instalá con **todas las opciones por defecto** (Next, Next…). Esto también instala **Git Bash**. | `brew install git` |
-| **Node.js LTS** | Descargá el instalador **LTS** (`.msi`) de <https://nodejs.org/es/download> y dejá todo por defecto. | `brew install node` ← **en Mac instalalo con Homebrew, no con el `.pkg`** (si no, Active Stack falla al instalar OpenSpec). |
+| **Node.js LTS** | Descargá el instalador **LTS** (`.msi`) de <https://nodejs.org/es/download> y dejá todo por defecto. | `brew install node` ← **en Mac instalalo con Homebrew, no con el `.pkg`** (si no, Active Stack falla al instalar OpenSpec). Si ya tenías Node, ejecutá `npm config get prefix`: tiene que decir `/opt/homebrew` (o `/usr/local` en Mac Intel con Homebrew). Si dice otra cosa, avisá al líder antes del paso 5. |
 | **Go** | Descargá el `.msi` de <https://go.dev/dl/> e instalá. | `brew install go` |
 | **GitHub CLI** | `winget install --id GitHub.cli` (o el instalador de <https://cli.github.com>) | `brew install gh` |
 | **VS Code** | <https://code.visualstudio.com/download> | `brew install --cask visual-studio-code` |

@@ -73,7 +73,7 @@ No abras las URLs ni corrijas nada: solo listá las afirmaciones y sus fuentes.
 - **Sistema:**
 - **Tipo de fuente:** (sitio oficial / precios / centro de ayuda / video oficial / reseña)
 - **URL:**
-- **Fecha de consulta:** 2026-11-24
+- **Fecha de consulta:** AAAA-MM-DD (el día que la abriste vos)
 - **Qué afirma el informe:** (copiá la afirmación)
 - **Qué encontré en la URL:**
 - **Resultado:** ✅ Respaldado / ⚠️ Parcialmente / ❌ No respaldado
@@ -97,7 +97,7 @@ git push -u origin docs/lucato-verificacion
 ```
 
 ```bash
-gh pr create --base main --fill
+gh pr create --base main --fill --reviewer franciscode11
 ```
 
 ---
@@ -113,8 +113,18 @@ git checkout main && git pull
 ```
 
 ```bash
-git checkout -b feat/c06-estados-turno
+git fetch origin
 ```
+
+```bash
+git checkout feat/c06-estados-turno
+```
+
+```bash
+git merge main
+```
+
+La rama `feat/c06-estados-turno` **ya la creó el líder** en GitHub (la consigna pide que el líder cree una rama por integrante). Si `git checkout` dice que no existe, avisale al líder.
 
 ```bash
 npm install
@@ -235,7 +245,7 @@ Si algo está en rojo, no avancemos a ARCHIVE: decime qué falla.
 
 ✅ Todo verde. 📸 Captura de la terminal con los tests pasando.
 
-Probá la pantalla vos mismo: `npm run dev` → <http://localhost:3000/turnos> → entrá al detalle de un turno (con el `.env` y el usuario de prueba que te pasó el líder).
+Probá la pantalla vos mismo: `npm run dev` → <http://localhost:3000/turnos/> (con el `.env` y el usuario de prueba que te pasó el líder).
 
 ### Paso 8 — ARCHIVE
 
@@ -256,7 +266,7 @@ git push -u origin feat/c06-estados-turno
 ```
 
 ```bash
-gh pr create --base main --fill
+gh pr create --base main --fill --reviewer franciscode11
 ```
 
 Completá la plantilla del PR (qué hiciste, qué ajustaste, captura de los tests en verde) y asigná a `franciscode11` como reviewer. Avisá por WhatsApp. **No mergees vos.**
@@ -299,4 +309,5 @@ Mandáselo al líder por WhatsApp o agregalo en tu PR.
 | El agente quiere modificar `schema.prisma` | Decile que no, y pasale al líder qué campo necesitás. |
 | El agente no conoce `/sdd-orchestrator` | Revisá que Active Stack se haya instalado en modo Full (`openspec --version`, `engram version`) y abrí una sesión nueva. |
 | Conflicto al hacer `git merge main` | Seguí la sección de conflictos de [`../02-git-y-prs.md`](../02-git-y-prs.md). |
+| El agente propone crear un *worktree* u otra rama | Decile: "Trabajo en la rama actual (feat/c06-estados-turno), no crees worktrees ni ramas nuevas". |
 | No sabés qué contestarle al agente | Copiá su pregunta y mandala al grupo. **No improvises.** |

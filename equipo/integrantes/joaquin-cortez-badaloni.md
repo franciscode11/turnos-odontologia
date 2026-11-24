@@ -74,7 +74,7 @@ No abras las URLs ni corrijas nada: solo listá las afirmaciones y sus fuentes.
 - **Sistema:**
 - **Tipo de fuente:** (sitio oficial / precios / centro de ayuda / video oficial / reseña)
 - **URL:**
-- **Fecha de consulta:** 2026-11-24
+- **Fecha de consulta:** AAAA-MM-DD (el día que la abriste vos)
 - **Qué afirma el informe:** (copiá la afirmación)
 - **Qué encontré en la URL:**
 - **Resultado:** ✅ Respaldado / ⚠️ Parcialmente / ❌ No respaldado
@@ -98,7 +98,7 @@ git push -u origin docs/cortez-verificacion
 ```
 
 ```bash
-gh pr create --base main --fill
+gh pr create --base main --fill --reviewer franciscode11
 ```
 
 ---
@@ -114,8 +114,18 @@ git checkout main && git pull
 ```
 
 ```bash
-git checkout -b feat/c03-catalogo
+git fetch origin
 ```
+
+```bash
+git checkout feat/c03-catalogo
+```
+
+```bash
+git merge main
+```
+
+La rama `feat/c03-catalogo` **ya la creó el líder** en GitHub (la consigna pide que el líder cree una rama por integrante). Si `git checkout` dice que no existe, avisale al líder.
 
 ```bash
 npm install
@@ -257,7 +267,7 @@ git push -u origin feat/c03-catalogo
 ```
 
 ```bash
-gh pr create --base main --fill
+gh pr create --base main --fill --reviewer franciscode11
 ```
 
 Completá la plantilla del PR (qué hiciste, qué ajustaste, captura de los tests en verde) y asigná a `franciscode11` como reviewer. Avisá por WhatsApp. **No mergees vos.**
@@ -300,4 +310,5 @@ Mandáselo al líder por WhatsApp o agregalo en tu PR.
 | El agente quiere modificar `schema.prisma` | Decile que no, y pasale al líder qué campo necesitás. |
 | El agente no conoce `/sdd-orchestrator` | Revisá que Active Stack se haya instalado en modo Full (`openspec --version`, `engram version`) y abrí una sesión nueva. |
 | Conflicto al hacer `git merge main` | Seguí la sección de conflictos de [`../02-git-y-prs.md`](../02-git-y-prs.md). |
+| El agente propone crear un *worktree* u otra rama | Decile: "Trabajo en la rama actual (feat/c03-catalogo), no crees worktrees ni ramas nuevas". |
 | No sabés qué contestarle al agente | Copiá su pregunta y mandala al grupo. **No improvises.** |

@@ -211,6 +211,12 @@ En el menú elegí: **Agente** = el tuyo (Claude Code y/o Codex) · **Modo** = *
 rm -rf ~/.as-shim
 ```
 
+El instalador deja `active-stack` y `engram` en `~/.local/bin`, una carpeta que la Terminal de Mac no conoce. Este comando los hace visibles (sin él, Engram aparece como **✘ Failed** en `/mcp`):
+
+```bash
+ln -sf ~/.local/bin/active-stack "$(brew --prefix)/bin/active-stack" && ln -sf ~/.local/bin/engram "$(brew --prefix)/bin/engram"
+```
+
 ### Comprobar la instalación (Windows y Mac)
 
 Cerrá la terminal, abrí una nueva y ejecutá:

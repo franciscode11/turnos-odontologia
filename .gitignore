@@ -1,0 +1,87 @@
+# =============================================================================
+#  .gitignore — turnos-odontologia
+#  CONDICIÓN EXCLUYENTE DE LA CÁTEDRA: no subir dependencias, compilados,
+#  configuración del IDE ni secretos. Si dudás si algo va, preguntale al líder.
+# =============================================================================
+
+# --- Dependencias -------------------------------------------------------------
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# --- Compilados / builds ------------------------------------------------------
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+.vercel/
+.turbo/
+
+# --- Tests / cobertura --------------------------------------------------------
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# --- Secretos y variables de entorno (NUNCA se suben) -------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+secrets/
+supabase/.temp/
+supabase/.branches/
+
+# --- Prisma (el cliente generado no se versiona; las migraciones SÍ) ---------
+prisma/*.db
+prisma/*.db-journal
+src/generated/
+generated/prisma/
+
+# --- Logs ---------------------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- IDE / editores -----------------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*.sublime-*
+.fleet/
+
+# --- Sistema operativo --------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# --- Archivos locales de agentes / Active Stack (por persona, no se suben) ----
+.claude/settings.local.json
+.active-stack/me.local.json
+.active-stack/team.local.json
+.engram/*.db
+.engram/*.db-*
+*.local.md
+
+# --- Temporales ---------------------------------------------------------------
+tmp/
+.tmp/
+*.tmp

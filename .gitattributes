@@ -1,0 +1,16 @@
+# Normaliza finales de línea: el equipo usa Windows y macOS.
+# Sin esto, Git marca archivos enteros como "modificados" solo por CRLF/LF
+# y aparecen conflictos falsos en los PRs.
+* text=auto eol=lf
+
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+*.ps1  text eol=crlf
+
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.pdf  binary
+*.ico  binary

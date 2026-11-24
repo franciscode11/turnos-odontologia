@@ -46,8 +46,8 @@ Un **sistema de turnos para consultorios odontológicos** (agenda, pacientes, pr
 | Cuándo | Líder | Integrantes |
 |---|---|---|
 | **Martes 24 — mañana** | Instala Active Stack, crea el repo, corre la fundación (Discovery) | Paso 1: [`01-prerequisitos.md`](01-prerequisitos.md) (instalar todo). Mandar usuario de GitHub al líder |
-| **Martes 24 — tarde** | Knowledge-base, roadmap, reglas del agente | Aceptar invitación, clonar el repo, **Tarea 0**: verificar una fuente del Discovery y abrir tu primer PR ([`02-git-y-prs.md`](02-git-y-prs.md)) |
-| **Martes 24 — noche** | Change C01: base técnica (Next.js, Supabase, Prisma, login y roles) | Leer tu guía personal y la knowledge-base |
+| **Martes 24 — tarde** | Knowledge-base, roadmap, reglas del agente | Aceptar invitación, terminar las instalaciones y clonar el repo. **Todavía no crees ramas**: esperá el aviso del líder |
+| **Martes 24 — noche** | Change C01: base técnica (Next.js, Supabase, Prisma, login, roles y componentes compartidos) | Leer tu guía personal y la knowledge-base. Cuando el líder avise: **Tarea 0** (verificar una fuente del Discovery y abrir tu primer PR, ver [`02-git-y-prs.md`](02-git-y-prs.md)) |
 | **Miércoles 25** | Revisar y mergear PRs, resolver dudas | **Tu change completo** (OPSX) + PR + grabar tu parte del video |
 | **Jueves 26 — hasta 10:00** | Integración final, Engram, README, edición del video, entrega | Correcciones que pida el líder + tu párrafo de la reflexión |
 

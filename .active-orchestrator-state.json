@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "step": "agents",
+  "step": "done",
   "owner": "active-orchestrator",
   "foundation": {
     "version": 1,
@@ -146,7 +146,7 @@
       },
       "agents": {
         "variant": "generate",
-        "status": "pending",
+        "status": "done",
         "requires": [
           "kb",
           "roadmap",
@@ -406,5 +406,29 @@
     "created_by": "skill-registry",
     "path": ".atl/skill-registry.md",
     "engram": "no disponible en esta sesión"
+  },
+  "agents": {
+    "created_by": "agent-instruction",
+    "files": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ],
+    "reglas_applied": [
+      "datos ficticios",
+      "nunca .env ni claves",
+      "clave secreta solo en servidor",
+      "solo el líder migra y cambia el esquema",
+      "solo la Zona de la ficha",
+      "no inventar reglas de negocio",
+      "no mergear en rojo",
+      "commit/push/PR solo a pedido, convencionales en español",
+      "solo componentes de src/components/ui",
+      "sin any",
+      "lógica en src/domain con test",
+      "Server Action con sesión, requireRol y Zod",
+      "fechas UTC mostradas en hora de Argentina",
+      "specs con 3 escenarios RN y test por escenario"
+    ],
+    "team_section": true
   }
 }

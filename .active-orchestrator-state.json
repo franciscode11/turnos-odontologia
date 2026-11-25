@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "step": "kb",
+  "step": "visual-design",
   "owner": "active-orchestrator",
   "foundation": {
     "version": 1,
@@ -48,13 +48,14 @@
       },
       "kb": {
         "variant": "import",
-        "status": "pending",
+        "status": "done",
         "requires": [
           "discovery"
         ],
         "outputs": [
           "knowledge-base/"
-        ]
+        ],
+        "notes": "kb-creator import desde docs/discovery, docs/restricciones-equipo.md y equipo/; 5 inconsistencias registradas (IN-01..05)"
       },
       "visual-design": {
         "variant": "system-only",
@@ -317,6 +318,31 @@
       "Puntos 'No evidenciado' del informe",
       "Sobreturnos con permiso a futuro",
       "Cuándo sumar reserva online y recordatorios"
+    ]
+  },
+  "kb": {
+    "created_by": "kb-creator",
+    "source": "ingest",
+    "discovery": {
+      "problem": "Consultorios odontológicos argentinos chicos y medianos organizan la agenda con papel, planillas o turneros genéricos: turnos superpuestos por profesional o sillón y sin trazabilidad.",
+      "system_type": "web_app",
+      "domain": "salud / gestión de turnos odontológicos",
+      "scale": "team",
+      "stack": "Next.js (App Router) + TypeScript + Prisma + Supabase (PostgreSQL, Auth, Storage) + Tailwind + Vitest",
+      "needs_infra": true
+    },
+    "files": [
+      "knowledge-base/01_vision_y_objetivos.md",
+      "knowledge-base/02_descripcion_general.md",
+      "knowledge-base/03_actores_y_roles.md",
+      "knowledge-base/04_modelo_de_datos.md",
+      "knowledge-base/05_reglas_de_negocio.md",
+      "knowledge-base/06_funcionalidades.md",
+      "knowledge-base/07_flujos_principales.md",
+      "knowledge-base/08_arquitectura_propuesta.md",
+      "knowledge-base/09_decisiones_y_supuestos.md",
+      "knowledge-base/10_preguntas_abiertas.md",
+      "knowledge-base/README.md"
     ]
   }
 }

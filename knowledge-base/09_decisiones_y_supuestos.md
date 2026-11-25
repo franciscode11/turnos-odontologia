@@ -83,6 +83,16 @@
 **Justificación**: el dueño necesita ver ocupación, ausentismo y cancelaciones; el historial de estados ya tiene los datos.
 **Trade-offs aceptados**: un change más (C08) a cargo del líder.
 
+### DD-17 - Personal con los nombres del equipo y avatares 3D
+**Decisión**: en el seed, las capturas y el design system, el personal del consultorio usa los nombres de los integrantes (Francisco ADMIN; Octavio y Ulises RECEPCION; Joaquín C., Lautaro y Joaquín E. PROFESIONAL) y todas las fotos de perfil son los 15 avatares 3D aportados por el líder, también para pacientes. Pedido del líder (2026-11-25).
+**Justificación**: la demo y el video se entienden mejor con el equipo real como personal; las iniciales se veían pobres.
+**Trade-offs aceptados**: los nombres del equipo quedan en un repo público (ya figuraban en las guías). Los pacientes siguen siendo inventados; el personal no lleva DNI ni datos personales reales. El seed pasa a 3 profesionales y 3 sillones.
+
+### DD-18 - Ajustes técnicos del C01 por las versiones vigentes
+**Decisión** (aprobada por el líder el 2026-11-25, D1 a D7 del explore): Next.js 16 con `src/proxy.ts` (antes `middleware.ts`); Prisma 7.10.1 fijo con `prisma.config.ts` y adapter `pg`; TypeScript 5.9; el C01 entrega primero los componentes que usan C02 a C08 y deja `range`, `color`, `file`, `month`, `week`, `url` y `hidden` para el final del mismo change; el seed carga franjas de lunes a viernes; el C01 deja la página de activar cuenta y el C07 envía las invitaciones.
+**Justificación**: las versiones publicadas cambiaron nombres y configuración respecto de lo que asumía la KB; el plazo pide priorizar lo que desbloquea al equipo.
+**Trade-offs aceptados**: no se usa TypeScript 7 ni Prisma 8 (RC). Detalle en `docs/explore/base-tecnica.md`.
+
 ## Supuestos inferidos
 
 ### SU-01 — Un único consultorio

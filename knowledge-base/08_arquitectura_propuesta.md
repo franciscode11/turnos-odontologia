@@ -49,7 +49,7 @@ turnos-odontologia/
 │   │   ├── auth/                # sesión, requireRol (C01)
 │   │   ├── db.ts                # cliente Prisma (C01)
 │   │   └── pacientes/ catalogo/ horarios/ turnos/
-│   └── middleware.ts            # sesión en (panel)
+│   └── proxy.ts                 # sesión en (panel) (Next 16: antes middleware.ts)
 ├── tests/<modulo>/              # Vitest
 ├── design-system/               # tokens y referencia visual
 ├── knowledge-base/              # este directorio
@@ -62,7 +62,7 @@ turnos-odontologia/
 ## Seguridad
 
 - **Autenticación**: Supabase Auth con email y contraseña, registro público desactivado, sesión por cookies (`@supabase/ssr`).
-- **Autorización**: rol propio en la tabla `Usuario`; `requireRol([...])` en cada Server Action; middleware que exige sesión en `(panel)`.
+- **Autorización**: rol propio en la tabla `Usuario`; `requireRol([...])` en cada Server Action; proxy (`src/proxy.ts`) que exige sesión en `(panel)`.
 - **Acceso a datos**: solo vía Prisma desde el servidor. La Data API de Supabase (PostgREST) queda cerrada con `revoke` para `anon` y `authenticated` (repetir después de cada migración).
 - **Base compartida**: los integrantes usan el rol `equipo_dev` (DML sin DDL); solo el líder tiene `DIRECT_URL` y migra.
 - **Validación de entrada**: Zod en el servidor siempre, aunque el cliente ya haya validado.
@@ -78,6 +78,7 @@ turnos-odontologia/
 | `DIRECT_URL` | Conexión directa para migraciones. **Solo el líder.** | `postgresql://…:5432/postgres` | Y |
 | `NEXT_PUBLIC_SUPABASE_URL` | URL del proyecto Supabase. | `https://<ref>.supabase.co` | N |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Clave pública (`sb_publishable_…`). | `sb_publishable_…` | N (pública, pero no se versiona) |
+| `SEED_PASSWORD` | Contraseña común de los usuarios del seed. **Solo el líder**; se comparte por privado a quien necesite entrar. | (vacío) | Y |
 | `SUPABASE_SECRET_KEY` | Clave secreta (`sb_secret_…`) para el seed y para enviar invitaciones desde el servidor. Solo en el entorno de Vercel y en la máquina del líder; nunca en el cliente. | `sb_secret_…` | Y |
 
 ## Calidad y CI

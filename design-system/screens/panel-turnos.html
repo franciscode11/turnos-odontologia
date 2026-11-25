@@ -43,25 +43,25 @@
   var ICON = { reservado: "circle-dashed", confirmado: "circle-check", atendido: "user-check", ausente: "alert-triangle" };
   var LABEL = { reservado: "Reservado", confirmado: "Confirmado", atendido: "Atendido", ausente: "Ausente" };
   var pros = [
-    { name: "Dra. Lucía Bertolotti", sub: "Odontología general", ini: "LB", items: [
+    { name: "Dr. Joaquín Cortez", sub: "Odontología general", av: "09-anteojos-chomba-verde", items: [
       ["08:00","08:30","atendido","Martina Sosa","Consulta","Sillón 1"],
       ["08:30","09:30","atendido","Ramiro Ojeda","Extracción","Sillón 1"],
       ["09:30","10:00","ausente","Ignacio Zabala","Control","Sillón 1"],
       ["10:30","11:30","confirmado","Rocío Gaitán","Extracción","Sillón 1"],
       ["12:00","12:30","reservado","Camila Ledesma","Limpieza","Sillón 1"] ], off: [] },
-    { name: "Dr. Tomás Iriarte", sub: "Endodoncia", ini: "TI", items: [
+    { name: "Dr. Lautaro de Coninck", sub: "Endodoncia", av: "14-camisa-azul-petroleo", items: [
       ["09:00","09:45","atendido","Federico Albornoz","Conducto","Sillón 2"],
       ["10:00","10:30","confirmado","Agustina Molina","Control","Sillón 2"],
       ["11:00","12:00","block","Capacitación","Bloqueo",""],
       ["12:00","12:30","reservado","Héctor Benítez","Limpieza","Sillón 2"] ], off: [["08:00","09:00"]] },
-    { name: "Dra. Paula Quiroga", sub: "Ortodoncia", ini: "PQ", items: [
-      ["08:30","09:00","atendido","Lautaro Medina","Control de brackets","Sillón 3"],
+    { name: "Dr. Joaquín Echenagorria", sub: "Ortodoncia", av: "10-remera-celeste", items: [
+      ["08:30","09:00","atendido","Tobías Medina","Control de brackets","Sillón 3"],
       ["10:00","11:00","reservado","Sofía Carrizo","Colocación de brackets","Sillón 3"],
       ["11:30","12:00","confirmado","Bruno Villalba","Control","Sillón 3"] ], off: [["12:30","13:00"]] }
   ];
   function y(t) { var p = t.split(":"); return (p[0] - START) * HOUR + p[1] * HOUR / 60; }
   var I = window.dsIcon, h = '<div class="ag-h"></div>';
-  pros.forEach(function (p) { h += '<div class="ag-h"><span class="avatar lg">' + p.ini + '</span><div><b>' + p.name + '</b><span>' + p.sub + '</span></div></div>'; });
+  pros.forEach(function (p) { h += '<div class="ag-h" title="' + p.name + '"><span class="avatar lg"><img src="../assets/avatars/avatar-' + p.av + '.webp" alt=""></span><div><b>' + p.name + '</b><span>' + p.sub + '</span></div></div>'; });
   h += '<div class="ag-times">';
   for (var t = START; t < END; t++) h += '<div class="ag-t">' + (t < 10 ? "0" : "") + t + ':00</div>';
   h += '</div>';

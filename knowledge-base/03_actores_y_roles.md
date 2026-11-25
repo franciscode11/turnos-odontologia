@@ -43,7 +43,7 @@ C = crear · R = consultar · U = editar · D = desactivar/baja lógica · - = s
 - `/activar-cuenta`: activación desde el enlace de invitación (solo con un token válido).
 - Recursos estáticos de Next.js.
 
-Todo lo demás (grupo de rutas `(panel)`) exige sesión válida en el middleware/proxy y, además, rol en cada acción.
+Todo lo demás (grupo de rutas `(panel)`) exige sesión válida en el proxy (`src/proxy.ts`) y, además, rol en cada acción.
 
 ## Rutas del panel
 

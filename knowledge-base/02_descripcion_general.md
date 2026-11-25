@@ -30,7 +30,7 @@ Navegador ──► Next.js (Vercel)
                ├─ src/app/(panel)/…        páginas (Server Components) + formularios cliente
                ├─ src/server/<modulo>/     Server Actions: auth + rol + validación Zod + Prisma
                ├─ src/domain/<modulo>/     reglas de negocio puras (sin I/O, testeadas con Vitest)
-               └─ middleware/proxy          exige sesión en las rutas del panel
+               └─ proxy (src/proxy.ts)      exige sesión en las rutas del panel
                         │
                         ├──► Supabase Auth     (sesión por cookies)
                         └──► PostgreSQL (Supabase) vía Prisma

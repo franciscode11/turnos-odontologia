@@ -6,7 +6,7 @@
 
 **Disparador**: el usuario abre una ruta del panel. **Actor**: cualquier rol.
 
-1. El middleware/proxy lee la sesión de Supabase de las cookies.
+1. El proxy (`src/proxy.ts`) lee la sesión de Supabase de las cookies.
 2. Sin sesión → redirige a `/login`.
 3. El usuario envía email y contraseña; Supabase Auth valida.
 4. El servidor carga el `Usuario` por id; si no existe o está inactivo, cierra la sesión y muestra error.

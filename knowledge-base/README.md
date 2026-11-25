@@ -16,7 +16,7 @@ Base de conocimiento generada por `kb-creator` (modo import) a partir del Discov
 | [06_funcionalidades.md](06_funcionalidades.md) | Historias de usuario por change con escenarios mínimos |
 | [07_flujos_principales.md](07_flujos_principales.md) | Login, patrón de acción, crear turno, disponibilidad, estados, flujo del equipo |
 | [08_arquitectura_propuesta.md](08_arquitectura_propuesta.md) | Patrones, carpetas por módulo, seguridad, variables de entorno, CI |
-| [09_decisiones_y_supuestos.md](09_decisiones_y_supuestos.md) | 16 decisiones (DD) y 6 supuestos (SU) |
+| [09_decisiones_y_supuestos.md](09_decisiones_y_supuestos.md) | 18 decisiones (DD) y 6 supuestos (SU) |
 | [10_preguntas_abiertas.md](10_preguntas_abiertas.md) | 5 inconsistencias, preguntas priorizadas y puntos "No evidenciado" |
 
 ## Quick Start para Desarrolladores

@@ -1,7 +1,7 @@
 # Design system: Turnos Odontología
 
 - **Mode:** system-only (decisión del líder, 2026-11-25: sistema visual sí, mockups por change no)
-- **Revision:** 2 (rediseño pedido por el líder el 2026-11-25: tipografía, minimalismo, proporciones del panel, referencias de 21st.dev, microanimaciones medidas)
+- **Revision:** 3 (2026-11-25: avatares 3D en lugar de iniciales y nombres del equipo para el personal). Revision 2: tipografía, minimalismo, proporciones del panel, referencias de 21st.dev, microanimaciones medidas.
 - **Approval:** approved (2026-11-25, by user)
 - **Preview:** rendered (2026-11-25), capturas en `previews/` a 390×844 y 1440×900
 
@@ -24,6 +24,7 @@ Una sola base visual para todas las pantallas. Los integrantes no diseñan: usan
 | `brand.md` | Nombre, tono, logo e imágenes. |
 | `assets/fonts/` | Geist y Geist Mono (variables, woff2) con su licencia OFL. |
 | `assets/logo.svg` | Logo **provisional**, rotulado como tal. |
+| `assets/avatars/` | 15 avatares 3D (WebP, 256 px). En la app se copian a `public/avatars/`. |
 | `previews/` | Capturas mobile y desktop de cada vista. |
 
 ## Referencias que pidió el líder
@@ -44,6 +45,7 @@ Skills aplicadas: `design-taste-frontend` (Leonxlnx/taste-skill) para tipografí
 - **Radios (regla fija):** controles, botones y badges 8 px; cards, popovers, toasts y diálogos 12 px; avatares redondos.
 - **Densidad de panel:** cuerpo de 14 px, controles de 36 px (40 px en pantallas táctiles), filas de tabla de 48 px.
 - **Proporciones del panel:** sidebar de 248 px (60 px colapsado), encabezado de página de 64 px, márgenes laterales de 32 px (16 px en mobile), contenido hasta 1280 px, agenda con 88 px por hora.
+- **Avatares:** siempre foto, nunca iniciales: 28 px en tablas y 36 px en el menú y la agenda, recortados en círculo. Una invitación pendiente muestra el ícono de sobre. Personal (asignación fija): Francisco Valles `01` (Administrador), Octavio Crescini `03` y Ulises Lucato `11` (Recepción), Dr. Joaquín Cortez `09`, Dr. Lautaro de Coninck `14` y Dr. Joaquín Echenagorria `10` (Profesionales). Los demás avatares (`02`, `04` a `08`, `12`, `13`, `15`) son para pacientes ficticios.
 - **Sin decoración gratuita:** sin sombras fuertes, sin degradados en textos, sin puntos de color decorativos, sin rayas largas como separador.
 
 ## Tiempos (medidos)

@@ -32,6 +32,7 @@ erDiagram
 ## Convenciones
 
 - IDs: `uuid` (`Usuario.id` = id del usuario de Supabase Auth).
+- Avatares: `avatar` guarda solo el nombre del archivo (por ejemplo `avatar-06-camisa-oliva.webp`) de los 15 de `public/avatars/`. Sin avatar se muestra un ícono, nunca iniciales.
 - Fechas y horas de turnos y bloqueos: `timestamptz`, guardadas en UTC; se muestran en `America/Argentina/Buenos_Aires` (UTC−3, sin horario de verano).
 - Horas de una franja semanal: `"HH:mm"` en hora local del consultorio.
 - Nada se borra físicamente si puede tener turnos asociados: se usa `activo = false`.
@@ -40,17 +41,17 @@ erDiagram
 ## Entidades
 
 ### Usuario
-- `id` uuid PK (Supabase Auth) · `email` texto único · `nombre` texto? (lo completa al activar) · `rol` enum `Rol` (`ADMIN | RECEPCION | PROFESIONAL`) · `estado` enum `EstadoUsuario` (`INVITADO | ACTIVO | INACTIVO`) · `invitadoPorId` uuid? → `Usuario` · `invitadoEn` timestamptz? · `ultimoIngreso` timestamptz? · `profesionalId` uuid? único → `Profesional`.
+- `id` uuid PK (Supabase Auth) · `email` texto único · `nombre` texto? (lo completa al activar) · `rol` enum `Rol` (`ADMIN | RECEPCION | PROFESIONAL`) · `estado` enum `EstadoUsuario` (`INVITADO | ACTIVO | INACTIVO`) · `invitadoPorId` uuid? → `Usuario` · `invitadoEn` timestamptz? · `ultimoIngreso` timestamptz? · `profesionalId` uuid? único → `Profesional` · `avatar` texto? (nombre del archivo en `public/avatars/`).
 - Solo un usuario `ACTIVO` puede operar. Una invitación sin activar en 7 días vence (la valida Supabase Auth; el registro queda `INVITADO` hasta reenviarla o revocarla).
 - Constraint: `profesionalId` obligatorio si `rol = PROFESIONAL`; nulo en los demás (validado en código y seed).
 
 ### Paciente
-- `id` uuid PK · `nombre`, `apellido` texto · `dni` texto (solo dígitos, 7 u 8) · `fechaNacimiento` date · `telefono` texto (obligatorio) · `email` texto? · `obraSocial` texto? · `numeroAfiliado` texto? · `activo` bool (true).
+- `id` uuid PK · `nombre`, `apellido` texto · `dni` texto (solo dígitos, 7 u 8) · `fechaNacimiento` date · `telefono` texto (obligatorio) · `email` texto? · `obraSocial` texto? · `numeroAfiliado` texto? · `avatar` texto? · `activo` bool (true).
 - Constraint: DNI único entre pacientes **activos** → índice único parcial `(dni) WHERE activo` (SQL manual en la migración, Prisma no lo modela).
 - Índices: `apellido`, `dni`.
 
 ### Profesional
-- `id` uuid PK · `nombre`, `apellido` texto · `matricula` texto **único** · `especialidad` texto? · `activo` bool (true).
+- `id` uuid PK · `nombre`, `apellido` texto · `matricula` texto **único** · `especialidad` texto? · `avatar` texto? · `activo` bool (true).
 
 ### Prestacion
 - `id` uuid PK · `nombre` texto · `duracionMinutos` int · `precioReferencia` decimal(12,2)? · `activo` bool (true).
@@ -93,14 +94,14 @@ export const ESTADOS_FINALES = ["CANCELADO", "ATENDIDO", "AUSENTE"] as const;
 
 Debe coincidir con el `WHERE (estado <> 'CANCELADO')` de las restricciones de exclusión.
 
-## Seed data inicial (solo datos ficticios)
+## Seed data inicial (pacientes ficticios; personal con los nombres del equipo)
 
 | Entidad | Datos |
 |---|---|
-| Usuarios | 1 ADMIN (dueño), 1 RECEPCION, 2 PROFESIONAL (vinculados a los 2 profesionales), todos `ACTIVO`. Emails en dominio de ejemplo (`@example.com`); contraseñas solo fuera del repo. |
-| Profesionales | 2, con matrículas inventadas. |
+| Usuarios | 6, con los nombres del equipo (DD-17), todos `ACTIVO` y con su avatar: Francisco Valles (ADMIN, dueño), Octavio Crescini y Ulises Lucato (RECEPCION), Joaquín Cortez, Lautaro de Coninck y Joaquín Echenagorria (PROFESIONAL, vinculados a su profesional). Emails `nombre.apellido@example.com`; contraseñas solo fuera del repo. |
+| Profesionales | 3: Dr. Joaquín Cortez (Odontología general), Dr. Lautaro de Coninck (Endodoncia) y Dr. Joaquín Echenagorria (Ortodoncia), con matrículas inventadas. |
 | Prestaciones | 3 (por ejemplo, Consulta 30 min, Limpieza 30 min, Extracción 60 min). |
-| Sillones | 2 (Sillón 1, Sillón 2). |
-| Horarios | Franjas de lunes a viernes para ambos profesionales (permite probar C04 y C05 sin esperar al C04). |
-| Pacientes | 5, nombres y DNI inventados. |
+| Sillones | 3 (Sillón 1, Sillón 2, Sillón 3). |
+| Horarios | Franjas de lunes a viernes para los 3 profesionales (permite probar C04 y C05 sin esperar al C04). |
+| Pacientes | 5, nombres y DNI inventados, con avatar. |
 | Turnos | Algunos turnos de ejemplo en estados distintos, con su historial. |

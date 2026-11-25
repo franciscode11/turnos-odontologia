@@ -89,7 +89,7 @@ Mensajes de error acordados: "El profesional ya tiene un turno en ese horario", 
 
 ## Dominio: Excepciones globales (RN-GL)
 
-- **RN-GL-01**: Nunca se usan datos reales de personas: seeds, tests, ejemplos y capturas son ficticios.
+- **RN-GL-01**: Nunca se usan datos reales de pacientes: pacientes, DNI y teléfonos en seeds, tests, ejemplos y capturas son inventados. El personal del consultorio usa los nombres del equipo (DD-17) con emails `@example.com` y sin ningún otro dato personal.
 - **RN-GL-02**: Ninguna clave, contraseña ni cadena de conexión se versiona; solo `.env.example` con valores vacíos.
 - **RN-GL-03**: Las fechas se muestran en hora de Argentina (`America/Argentina/Buenos_Aires`) y se guardan en UTC.
 - **RN-GL-04**: Toda la interfaz usa exclusivamente los componentes de `src/components/ui` (regla de ESLint en CI).

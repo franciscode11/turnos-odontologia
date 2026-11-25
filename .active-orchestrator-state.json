@@ -1,24 +1,322 @@
 {
   "version": 5,
-  "step": "discovery",
+  "step": "kb",
   "owner": "active-orchestrator",
   "foundation": {
     "version": 1,
     "approved_on": "2026-11-25",
     "route": "foundation",
-    "order": ["openspec-init", "discovery", "kb", "visual-design", "roadmap", "task-management", "team-mode", "memory-policy", "find-skill", "registry", "agents"],
+    "order": [
+      "openspec-init",
+      "discovery",
+      "kb",
+      "visual-design",
+      "roadmap",
+      "task-management",
+      "team-mode",
+      "memory-policy",
+      "find-skill",
+      "registry",
+      "agents"
+    ],
     "phases": {
-      "openspec-init": {"variant": "init", "status": "done", "requires": [], "outputs": ["openspec/config.yaml", "openspec/specs/", "openspec/changes/archive/", ".claude/skills/", ".agents/skills/"], "notes": "openspec init --tools claude,codex --language es --scope project; perfil custom con verify"},
-      "discovery": {"variant": "competitors+existing-sources", "status": "in_progress", "requires": ["openspec-init"], "outputs": ["docs/discovery/checklist-discovery.md", "docs/discovery/informe-discovery.md", "docs/discovery/informe-discovery.pdf"]},
-      "kb": {"variant": "import", "status": "pending", "requires": ["discovery"], "outputs": ["knowledge-base/"]},
-      "visual-design": {"variant": "system-only", "status": "pending", "requires": ["kb"], "outputs": ["design-system/README.md"]},
-      "roadmap": {"variant": "local-markdown", "status": "pending", "requires": ["kb"], "outputs": ["CHANGES.md"]},
-      "task-management": {"variant": "local", "status": "pending", "requires": ["roadmap"], "outputs": [".active-stack/roadmap.json"]},
-      "team-mode": {"variant": "new", "status": "pending", "requires": ["task-management"], "outputs": [".active-stack/team.json", ".github/pull_request_template.md", ".github/CODEOWNERS"]},
-      "memory-policy": {"variant": "local", "status": "pending", "requires": ["team-mode"], "outputs": []},
-      "find-skill": {"variant": "install-selected", "status": "pending", "requires": ["kb"], "outputs": []},
-      "registry": {"variant": "index", "status": "pending", "requires": ["find-skill"], "outputs": [".atl/skill-registry.md"]},
-      "agents": {"variant": "generate", "status": "pending", "requires": ["kb", "roadmap", "registry", "team-mode", "memory-policy"], "outputs": ["AGENTS.md", "CLAUDE.md"]}
+      "openspec-init": {
+        "variant": "init",
+        "status": "done",
+        "requires": [],
+        "outputs": [
+          "openspec/config.yaml",
+          "openspec/specs/",
+          "openspec/changes/archive/",
+          ".claude/skills/",
+          ".agents/skills/"
+        ],
+        "notes": "openspec init --tools claude,codex --language es --scope project; perfil custom con verify"
+      },
+      "discovery": {
+        "variant": "competitors+existing-sources",
+        "status": "done",
+        "requires": [
+          "openspec-init"
+        ],
+        "outputs": [
+          "docs/discovery/checklist-discovery.md",
+          "docs/discovery/informe-discovery.md",
+          "docs/discovery/informe-discovery.pdf",
+          "docs/discovery/sources/"
+        ]
+      },
+      "kb": {
+        "variant": "import",
+        "status": "pending",
+        "requires": [
+          "discovery"
+        ],
+        "outputs": [
+          "knowledge-base/"
+        ]
+      },
+      "visual-design": {
+        "variant": "system-only",
+        "status": "pending",
+        "requires": [
+          "kb"
+        ],
+        "outputs": [
+          "design-system/README.md"
+        ]
+      },
+      "roadmap": {
+        "variant": "local-markdown",
+        "status": "pending",
+        "requires": [
+          "kb"
+        ],
+        "outputs": [
+          "CHANGES.md"
+        ]
+      },
+      "task-management": {
+        "variant": "local",
+        "status": "pending",
+        "requires": [
+          "roadmap"
+        ],
+        "outputs": [
+          ".active-stack/roadmap.json"
+        ]
+      },
+      "team-mode": {
+        "variant": "new",
+        "status": "pending",
+        "requires": [
+          "task-management"
+        ],
+        "outputs": [
+          ".active-stack/team.json",
+          ".github/pull_request_template.md",
+          ".github/CODEOWNERS"
+        ]
+      },
+      "memory-policy": {
+        "variant": "local",
+        "status": "pending",
+        "requires": [
+          "team-mode"
+        ],
+        "outputs": []
+      },
+      "find-skill": {
+        "variant": "install-selected",
+        "status": "pending",
+        "requires": [
+          "kb"
+        ],
+        "outputs": []
+      },
+      "registry": {
+        "variant": "index",
+        "status": "pending",
+        "requires": [
+          "find-skill"
+        ],
+        "outputs": [
+          ".atl/skill-registry.md"
+        ]
+      },
+      "agents": {
+        "variant": "generate",
+        "status": "pending",
+        "requires": [
+          "kb",
+          "roadmap",
+          "registry",
+          "team-mode",
+          "memory-policy"
+        ],
+        "outputs": [
+          "AGENTS.md",
+          "CLAUDE.md"
+        ]
+      }
     }
+  },
+  "discovery": {
+    "created_by": "discovery-research",
+    "approved_on": "2026-11-25",
+    "sources_fetched_at": "2026-11-25",
+    "report": "docs/discovery/informe-discovery.md",
+    "checklist": "docs/discovery/checklist-discovery.md",
+    "sources": [
+      "https://agendapro.com/ar/dental/software-odontologico",
+      "https://bilog.com.ar/",
+      "https://clinic-cloud.com/",
+      "https://www.clinicorp.com/",
+      "https://www.curvedental.com/",
+      "https://dentalcore.app/",
+      "https://www.softwaredentalink.com/ar",
+      "https://dentally.com/",
+      "https://dentalsoft.com.ar/",
+      "https://web.dentaltec.com.ar/",
+      "https://www.dentidesk.com/",
+      "https://www.dentrixascend.com/",
+      "https://www.doctocliq.com/",
+      "https://pro.doctoralia.com/ar",
+      "https://odonthia.com/",
+      "https://odonto.ar/",
+      "https://www.clinia.com.ar/odontologia",
+      "https://www.opendental.com/",
+      "https://hiorbita.com/",
+      "https://reservo.cl/ar/"
+    ],
+    "competitors": [
+      {
+        "name": "AgendaPro",
+        "notes_file": "docs/discovery/sources/agendapro.md"
+      },
+      {
+        "name": "Bilog",
+        "notes_file": "docs/discovery/sources/bilog.md"
+      },
+      {
+        "name": "Clinic Cloud",
+        "notes_file": "docs/discovery/sources/clinic-cloud.md"
+      },
+      {
+        "name": "Clinicorp",
+        "notes_file": "docs/discovery/sources/clinicorp.md"
+      },
+      {
+        "name": "Curve Dental",
+        "notes_file": "docs/discovery/sources/curve-dental.md"
+      },
+      {
+        "name": "DentalCore",
+        "notes_file": "docs/discovery/sources/dentalcore.md"
+      },
+      {
+        "name": "Dentalink",
+        "notes_file": "docs/discovery/sources/dentalink.md"
+      },
+      {
+        "name": "Dentally",
+        "notes_file": "docs/discovery/sources/dentally.md"
+      },
+      {
+        "name": "DentalSoft",
+        "notes_file": "docs/discovery/sources/dentalsoft.md"
+      },
+      {
+        "name": "DentalTec",
+        "notes_file": "docs/discovery/sources/dentaltec.md"
+      },
+      {
+        "name": "DENTIDESK",
+        "notes_file": "docs/discovery/sources/dentidesk.md"
+      },
+      {
+        "name": "Dentrix Ascend (Ascend by Dentrix)",
+        "notes_file": "docs/discovery/sources/dentrix-ascend.md"
+      },
+      {
+        "name": "Doctocliq",
+        "notes_file": "docs/discovery/sources/doctocliq.md"
+      },
+      {
+        "name": "Doctoralia (Docplanner) – Agenda Doctoralia para especialistas",
+        "notes_file": "docs/discovery/sources/doctoralia.md"
+      },
+      {
+        "name": "Odonthia",
+        "notes_file": "docs/discovery/sources/odonthia.md"
+      },
+      {
+        "name": "Odonto.ar",
+        "notes_file": "docs/discovery/sources/odonto-ar.md"
+      },
+      {
+        "name": "OdontoClinIA (módulo odontológico de ClinIA)",
+        "notes_file": "docs/discovery/sources/odontoclinia.md"
+      },
+      {
+        "name": "Open Dental",
+        "notes_file": "docs/discovery/sources/open-dental.md"
+      },
+      {
+        "name": "Órbita (Órbita Chat + Órbita Gestión)",
+        "notes_file": "docs/discovery/sources/orbita.md"
+      },
+      {
+        "name": "Reservo",
+        "notes_file": "docs/discovery/sources/reservo.md"
+      }
+    ],
+    "problema": "Consultorios odontológicos argentinos chicos y medianos organizan la agenda con papel, planillas o turneros genéricos: turnos superpuestos, horarios mal aprovechados y sin trazabilidad.",
+    "usuarios": [
+      "ADMIN",
+      "RECEPCION",
+      "PROFESIONAL"
+    ],
+    "casos_de_uso": [
+      "Registrar y buscar pacientes",
+      "Cargar profesionales, prestaciones con duración y sillones",
+      "Definir horarios de atención y bloqueos",
+      "Crear turno sin solapamientos por profesional y sillón",
+      "Cancelar con motivo y marcar asistencia con historial"
+    ],
+    "funcionalidades_necesarias": [
+      "Acceso con roles",
+      "Pacientes",
+      "Catálogo profesionales/prestaciones/sillones",
+      "Horarios, bloqueos y disponibilidad",
+      "Crear turno sin solapamientos",
+      "Cancelar turno y estados con historial"
+    ],
+    "funcionalidades_opcionales": [
+      "Reserva online",
+      "WhatsApp y recordatorios",
+      "Lista de espera",
+      "Ficha clínica/odontograma",
+      "Presupuestos",
+      "Cobros/Mercado Pago",
+      "Facturación ARCA",
+      "Obras sociales",
+      "Liquidaciones",
+      "Multi-sucursal",
+      "API pública"
+    ],
+    "reglas_de_negocio": [
+      "Sin sobreturnos por profesional ni por sillón (código + base de datos)",
+      "Intervalos semiabiertos [inicio, fin)",
+      "Duración definida por la prestación",
+      "Solo dentro del horario de atención y fuera de bloqueos",
+      "Cancelación sin plazo con motivo obligatorio; libera el horario",
+      "Cancelados no ocupan agenda",
+      "Historial de cambios de estado con usuario y fecha",
+      "Permisos por rol en el servidor"
+    ],
+    "integraciones": [
+      "Supabase (PostgreSQL, Auth, Storage)"
+    ],
+    "restricciones": [
+      "Entrega 2026-11-26 12:00",
+      "6 personas en paralelo",
+      "Next.js + Prisma + Supabase + Vitest",
+      "Solo datos ficticios",
+      "Sin secretos en el repo",
+      "Componentes de UI únicos"
+    ],
+    "riesgos": [
+      "Conflictos de merge",
+      "Pisar la base compartida",
+      "Datos inventados por la IA",
+      "Datos de salud sensibles",
+      "Falta de tiempo"
+    ],
+    "preguntas_abiertas": [
+      "Puntos 'No evidenciado' del informe",
+      "Sobreturnos con permiso a futuro",
+      "Cuándo sumar reserva online y recordatorios"
+    ]
   }
 }

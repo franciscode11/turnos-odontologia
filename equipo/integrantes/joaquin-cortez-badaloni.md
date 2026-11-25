@@ -46,7 +46,7 @@ La cátedra exige **al menos 3**: uno feliz, uno de error de negocio y uno de bo
 
 Más la carpeta de tu change dentro de `openspec/changes/`, tu resumen de explore en `docs/explore/` y tu captura en `docs/evidencias/`.
 
-❌ **No toques:** `prisma/schema.prisma`, `CHANGES.md`, `.active-orchestrator-state.json`, `AGENTS.md`, `CLAUDE.md`, el layout/menú general ni los módulos de otros compañeros. Si necesitás algo ahí, pedíselo al líder.
+❌ **No toques:** `prisma/schema.prisma`, `CHANGES.md`, `.active-orchestrator-state.json`, `AGENTS.md`, `CLAUDE.md`, el layout/menú general, los componentes compartidos de `src/components/ui` ni los módulos de otros compañeros. Si necesitás algo ahí, pedíselo al líder.
 
 **Dependencias:** Solo de la base técnica (C01): los modelos `Profesional`, `Prestacion` y `Sillon` ya existen en el esquema.
 
@@ -118,14 +118,14 @@ git fetch origin
 ```
 
 ```bash
-git checkout feat/c03-catalogo
+git checkout C-03-catalogo
 ```
 
 ```bash
 git merge main
 ```
 
-La rama `feat/c03-catalogo` **ya la creó el líder** en GitHub (la consigna pide que el líder cree una rama por integrante). Si `git checkout` dice que no existe, avisale al líder.
+La rama `C-03-catalogo` **ya la creó el líder** en GitHub (la consigna pide que el líder cree una rama por integrante). Si `git checkout` dice que no existe, avisale al líder.
 
 ```bash
 npm install
@@ -224,7 +224,7 @@ La especificación está aprobada. Vamos con APPLY de mi change, con TDD estrict
 primero el test de cada escenario (rojo), después la implementación mínima (verde), después refactor.
 Implementá solo lo que está en specs/ y tasks.md. Si aparece algo que no está especificado,
 frená y preguntame: volvemos a PROPOSE, no se improvisa en APPLY.
-Reutilizá los helpers existentes de autenticación/roles y los componentes del layout.
+Reutilizá los helpers existentes de autenticación/roles y los componentes del layout. Para la interfaz usá SOLO los componentes de `src/components/ui` (inputs, selects, botones, etc.): no escribas `<input>`, `<select>`, `<textarea>` ni `<button>` sueltos. Si falta un componente, frená y avisame para pedírselo al líder.
 Usá solo datos ficticios. Marcá cada tarea de tasks.md a medida que la completes.
 Al final corré npm test y mostrame el resultado.
 ```
@@ -263,7 +263,7 @@ git add . && git commit -m "chore(openspec): archivar change catalogo-consultori
 ### Paso 9 — Pull Request
 
 ```bash
-git push -u origin feat/c03-catalogo
+git push -u origin C-03-catalogo
 ```
 
 ```bash
@@ -310,5 +310,5 @@ Mandáselo al líder por WhatsApp o agregalo en tu PR.
 | El agente quiere modificar `schema.prisma` | Decile que no, y pasale al líder qué campo necesitás. |
 | El agente no conoce `/sdd-orchestrator` | Revisá que Active Stack se haya instalado en modo Full (`openspec --version`, `engram version`) y abrí una sesión nueva. |
 | Conflicto al hacer `git merge main` | Seguí la sección de conflictos de [`../02-git-y-prs.md`](../02-git-y-prs.md). |
-| El agente propone crear un *worktree* u otra rama | Decile: "Trabajo en la rama actual (feat/c03-catalogo), no crees worktrees ni ramas nuevas". |
+| El agente propone crear un *worktree* u otra rama | Decile: "Trabajo en la rama actual (C-03-catalogo), no crees worktrees ni ramas nuevas". |
 | No sabés qué contestarle al agente | Copiá su pregunta y mandala al grupo. **No improvises.** |

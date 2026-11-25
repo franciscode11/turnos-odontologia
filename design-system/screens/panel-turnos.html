@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda · {brand}</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../ui.css">
+<script src="../brand.js"></script>
+<script src="../icons.js"></script>
+<script src="../shell.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" data-sidebar data-active="turnos"></aside>
+  <div class="main">
+    <div class="mobile-bar"><div class="sb-mark"><span class="mark"><i data-icon="dental"></i></span><span class="sb-name" data-brand-name></span></div><button class="btn btn-ghost btn-icon btn-sm" aria-label="Abrir menú"><i data-icon="layout-sidebar-left-expand" class="nav"></i></button></div>
+    <header class="page-head">
+      <div>
+        <h1 class="page-title">Agenda</h1>
+        <p class="page-sub num">Miércoles 25 de noviembre · 18 turnos</p>
+      </div>
+      <div class="row">
+        <div class="row" style="gap:4px">
+          <button class="btn btn-secondary btn-icon btn-sm" aria-label="Día anterior"><i data-icon="chevron-left"></i></button>
+          <button class="btn btn-secondary btn-sm">Hoy</button>
+          <button class="btn btn-secondary btn-icon btn-sm" aria-label="Día siguiente"><i data-icon="chevron-right"></i></button>
+        </div>
+        <div class="segmented" role="group" aria-label="Vista"><button aria-pressed="true">Día</button><button aria-pressed="false">Lista</button></div>
+        <button class="btn btn-primary btn-sm"><i data-icon="plus"></i>Nuevo turno</button>
+      </div>
+    </header>
+    <div class="page-body">
+      <div class="agenda" id="agenda" style="--cols:3" aria-label="Agenda del día por profesional"></div>
+      <p class="help" style="margin-top:12px">Las franjas rayadas están fuera del horario de atención. Los turnos cancelados no aparecen: liberan el horario.</p>
+    </div>
+  </div>
+</div>
+<div class="toaster"><div class="toast t-success" role="status"><i data-icon="circle-check"></i><div class="t-text"><b>Turno creado</b> <span>Camila Ledesma, 12:00</span></div><button class="t-close" aria-label="Cerrar"><i data-icon="x" class="sm"></i></button></div></div>
+<script>
+(function () {
+  var START = 8, END = 13, HOUR = 88;
+  var ICON = { reservado: "circle-dashed", confirmado: "circle-check", atendido: "user-check", ausente: "alert-triangle" };
+  var LABEL = { reservado: "Reservado", confirmado: "Confirmado", atendido: "Atendido", ausente: "Ausente" };
+  var pros = [
+    { name: "Dra. Lucía Bertolotti", sub: "Odontología general", ini: "LB", items: [
+      ["08:00","08:30","atendido","Martina Sosa","Consulta","Sillón 1"],
+      ["08:30","09:30","atendido","Ramiro Ojeda","Extracción","Sillón 1"],
+      ["09:30","10:00","ausente","Ignacio Zabala","Control","Sillón 1"],
+      ["10:30","11:30","confirmado","Rocío Gaitán","Extracción","Sillón 1"],
+      ["12:00","12:30","reservado","Camila Ledesma","Limpieza","Sillón 1"] ], off: [] },
+    { name: "Dr. Tomás Iriarte", sub: "Endodoncia", ini: "TI", items: [
+      ["09:00","09:45","atendido","Federico Albornoz","Conducto","Sillón 2"],
+      ["10:00","10:30","confirmado","Agustina Molina","Control","Sillón 2"],
+      ["11:00","12:00","block","Capacitación","Bloqueo",""],
+      ["12:00","12:30","reservado","Héctor Benítez","Limpieza","Sillón 2"] ], off: [["08:00","09:00"]] },
+    { name: "Dra. Paula Quiroga", sub: "Ortodoncia", ini: "PQ", items: [
+      ["08:30","09:00","atendido","Lautaro Medina","Control de brackets","Sillón 3"],
+      ["10:00","11:00","reservado","Sofía Carrizo","Colocación de brackets","Sillón 3"],
+      ["11:30","12:00","confirmado","Bruno Villalba","Control","Sillón 3"] ], off: [["12:30","13:00"]] }
+  ];
+  function y(t) { var p = t.split(":"); return (p[0] - START) * HOUR + p[1] * HOUR / 60; }
+  var I = window.dsIcon, h = '<div class="ag-h"></div>';
+  pros.forEach(function (p) { h += '<div class="ag-h"><span class="avatar lg">' + p.ini + '</span><div><b>' + p.name + '</b><span>' + p.sub + '</span></div></div>'; });
+  h += '<div class="ag-times">';
+  for (var t = START; t < END; t++) h += '<div class="ag-t">' + (t < 10 ? "0" : "") + t + ':00</div>';
+  h += '</div>';
+  pros.forEach(function (p, ci) {
+    h += '<div class="ag-col" style="height:' + (END - START) * HOUR + 'px">';
+    p.off.forEach(function (o) { h += '<div class="ag-off" style="top:' + y(o[0]) + 'px;height:' + (y(o[1]) - y(o[0])) + 'px"></div>'; });
+    p.items.forEach(function (a) {
+      var top = y(a[0]) + 2, ht = y(a[1]) - y(a[0]) - 4;
+      if (a[2] === "block") { h += '<div class="appt a-block" style="top:' + top + 'px;height:' + ht + 'px"><b>' + a[3] + '</b><span class="a-meta">' + a[0] + '-' + a[1] + ', ' + a[4] + '</span></div>'; return; }
+      h += '<div class="appt a-' + a[2] + '" tabindex="0" style="top:' + top + 'px;height:' + ht + 'px"><span class="badge st-' + a[2] + '" title="' + LABEL[a[2]] + '">' + I(ICON[a[2]]) + '<span class="sr-only">' + LABEL[a[2]] + '</span></span><b>' + a[3] + '</b><span class="a-meta">' + a[0] + '-' + a[1] + ', ' + a[4] + (ht > 60 ? '<br>' + a[5] : '') + '</span></div>';
+    });
+    h += '<div class="now" style="top:' + y("10:12") + 'px" aria-label="Ahora, 10:12"></div>';
+    h += '</div>';
+  });
+  document.getElementById("agenda").innerHTML = h;
+})();
+</script>
+</body>
+</html>

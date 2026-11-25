@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estadísticas · {brand}</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../ui.css">
+<script src="../brand.js"></script>
+<script src="../icons.js"></script>
+<script src="../shell.js"></script>
+<style>
+  .chart { width: 100%; height: 200px; display: block; overflow: visible; }
+  .chart .grid-l { stroke: var(--color-border); stroke-dasharray: 2 4; }
+  .chart .ax { font: 11px var(--font-sans); fill: var(--color-text-subtle); font-variant-numeric: tabular-nums; }
+  .inline-bar { display: inline-block; height: 6px; border-radius: 3px; background: var(--color-accent-600); vertical-align: middle; margin-right: 8px; }
+  .chart-hover { position: absolute; pointer-events: none; padding: 6px 8px; border-radius: var(--radius-md); background: var(--color-text); color: #fff; font-size: var(--text-xs); white-space: nowrap; transform: translate(-50%, -120%); opacity: 0; transition: opacity var(--dur-tooltip) var(--ease-out); }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" data-sidebar data-active="estadisticas"></aside>
+  <div class="main">
+    <div class="mobile-bar"><div class="sb-mark"><span class="mark"><i data-icon="dental"></i></span><span class="sb-name" data-brand-name></span></div><button class="btn btn-ghost btn-icon btn-sm" aria-label="Abrir menú"><i data-icon="layout-sidebar-left-expand" class="nav"></i></button></div>
+    <header class="page-head">
+      <div>
+        <h1 class="page-title">Estadísticas</h1>
+        <p class="page-sub">Noviembre 2026, comparado con octubre</p>
+      </div>
+      <div class="row">
+        <div class="segmented" role="group" aria-label="Período"><button aria-pressed="false">7 días</button><button aria-pressed="true">Mes</button><button aria-pressed="false">Trimestre</button></div>
+        <button class="btn btn-secondary btn-sm" type="button">Todos los profesionales <i data-icon="chevron-down" class="sm subtle"></i></button>
+      </div>
+    </header>
+    <div class="page-body">
+      <div class="kpis">
+        <div class="kpi"><div class="k-label">Turnos dados</div><div class="k-value">312</div><div class="k-delta"><span class="up">+8,4%</span> vs. octubre</div></div>
+        <div class="kpi"><div class="k-label">Ocupación de agenda</div><div class="k-value">71,6%</div><div class="k-delta"><span class="up">+3,1 pts</span> vs. octubre</div></div>
+        <div class="kpi"><div class="k-label">Ausentismo</div><div class="k-value">7,4%</div><div class="k-delta"><span class="up">-1,2 pts</span> vs. octubre</div></div>
+        <div class="kpi"><div class="k-label">Cancelaciones</div><div class="k-value">11,2%</div><div class="k-delta"><span class="down">+0,9 pts</span> vs. octubre</div></div>
+      </div>
+
+      <div class="grid g-21" style="margin-top:24px">
+        <section class="card">
+          <div class="card-head"><h2 class="card-title">Turnos por día</h2><div class="legend"><span><i style="background:var(--color-accent-600)"></i>Atendidos</span><span><i style="background:var(--estado-ausente-fg)"></i>Ausentes</span></div></div>
+          <div class="card-body" style="position:relative">
+            <svg class="chart" id="chart" viewBox="0 0 600 200" preserveAspectRatio="none" role="img" aria-label="Turnos atendidos y ausentes por día hábil de noviembre"></svg>
+            <div class="chart-axis" id="axis"></div>
+            <div class="chart-hover" id="hover"></div>
+          </div>
+        </section>
+        <section class="card">
+          <div class="card-head"><h2 class="card-title">Motivos de cancelación</h2><span class="subtle num" style="font-size:12px">35 en total</span></div>
+          <div class="card-body" style="padding-top:12px;padding-bottom:12px">
+            <div class="bar-row"><span>Paciente avisó</span><span><span class="bar" style="width:100%;display:block"></span></span><span class="v">17</span></div>
+            <div class="bar-row"><span>Enfermedad</span><span><span class="bar" style="width:53%;display:block"></span></span><span class="v">9</span></div>
+            <div class="bar-row"><span>Reprogramó</span><span><span class="bar" style="width:29%;display:block"></span></span><span class="v">5</span></div>
+            <div class="bar-row"><span>Profesional</span><span><span class="bar soft" style="width:18%;display:block"></span></span><span class="v">3</span></div>
+            <div class="bar-row"><span>Otro</span><span><span class="bar soft" style="width:6%;display:block"></span></span><span class="v">1</span></div>
+          </div>
+        </section>
+      </div>
+
+      <section class="section" style="margin-top:24px">
+        <div class="table-wrap">
+          <table class="num">
+            <thead><tr><th>Profesional</th><th>Turnos</th><th>Ocupación</th><th>Ausentismo</th><th>Cancelaciones</th><th>Prestación más dada</th></tr></thead>
+            <tbody>
+              <tr><td><div class="cell-person"><span class="avatar">LB</span><div><b>Dra. Lucía Bertolotti</b><span>Odontología general</span></div></div></td><td class="strong">138</td><td><span class="inline-bar" style="width:62px"></span>78,3%</td><td>6,5%</td><td>9,4%</td><td>Consulta</td></tr>
+              <tr><td><div class="cell-person"><span class="avatar">TI</span><div><b>Dr. Tomás Iriarte</b><span>Endodoncia</span></div></div></td><td class="strong">96</td><td><span class="inline-bar" style="width:54px"></span>68,1%</td><td>8,3%</td><td>13,5%</td><td>Conducto</td></tr>
+              <tr><td><div class="cell-person"><span class="avatar">PQ</span><div><b>Dra. Paula Quiroga</b><span>Ortodoncia</span></div></div></td><td class="strong">78</td><td><span class="inline-bar" style="width:51px"></span>64,9%</td><td>7,7%</td><td>11,5%</td><td>Control de brackets</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="help" style="margin-top:10px">Ocupación: minutos con turno que ocupa agenda sobre minutos de atención, descontando bloqueos. Solo la ve el rol Administrador.</p>
+      </section>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  var days = ["2","3","4","5","6","9","10","11","12","13","16","17","18","19","20","23","24","25"];
+  var at = [14,17,15,18,12,16,19,17,15,13,15,18,20,16,14,17,19,12];
+  var au = [1,2,1,0,2,1,1,3,1,2,0,1,2,1,1,2,1,1];
+  var W = 600, H = 190, max = 24;
+  function pts(a) { return a.map(function (v, i) { return [i * W / (a.length - 1), H - v / max * H]; }); }
+  function line(p) { return p.map(function (q) { return q[0].toFixed(1) + "," + q[1].toFixed(1); }).join(" "); }
+  var pa = pts(at), pu = pts(au), s = "";
+  s += '<defs><linearGradient id="fa" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#0e7a6b" stop-opacity=".22"/><stop offset="1" stop-color="#0e7a6b" stop-opacity="0"/></linearGradient></defs>';
+  [0, 8, 16, 24].forEach(function (v) { var yy = H - v / max * H; s += '<line class="grid-l" x1="0" x2="600" y1="' + yy + '" y2="' + yy + '" vector-effect="non-scaling-stroke"/>'; });
+  s += '<polygon points="0,' + H + ' ' + line(pa) + ' ' + W + ',' + H + '" fill="url(#fa)"/>';
+  s += '<polyline points="' + line(pa) + '" fill="none" stroke="#0e7a6b" stroke-width="1.75" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>';
+  s += '<polyline points="' + line(pu) + '" fill="none" stroke="#925708" stroke-width="1.5" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"/>';
+  document.getElementById("chart").innerHTML = s;
+  document.getElementById("axis").innerHTML = ["2 nov", "9 nov", "16 nov", "25 nov"].map(function (d) { return "<span>" + d + "</span>"; }).join("");
+  var svg = document.getElementById("chart"), tip = document.getElementById("hover");
+  svg.addEventListener("pointermove", function (e) {
+    var r = svg.getBoundingClientRect(), i = Math.round((e.clientX - r.left) / r.width * (at.length - 1));
+    i = Math.max(0, Math.min(at.length - 1, i));
+    tip.style.left = (20 + i / (at.length - 1) * r.width) + "px"; tip.style.top = (20 + pa[i][1] / H * r.height) + "px";
+    tip.textContent = days[i] + " nov: " + at[i] + " atendidos, " + au[i] + " ausentes"; tip.style.opacity = 1;
+  });
+  svg.addEventListener("pointerleave", function () { tip.style.opacity = 0; });
+})();
+</script>
+</body>
+</html>

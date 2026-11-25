@@ -1,0 +1,150 @@
+/* Turnos Odontología - tokens del design system (Revision 2).
+   Fuente única de valores visuales. En la app se importan en src/app/globals.css y se
+   mapean al @theme de Tailwind. Cambiar un valor acá => subir Revision en README.md. */
+
+@font-face {
+  font-family: "Geist";
+  src: url("assets/fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("assets/fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* ---------- Color ----------
+     Neutros fríos (zinc) + un solo acento: verde azulado clínico.
+     Los colores de estado se usan SOLO en badges y toasts. */
+  --color-bg:            #ffffff;  /* fondo del contenido */
+  --color-bg-subtle:     #fafafa;  /* sidebar, fondo de login */
+  --color-muted:         #f4f4f5;  /* hover, celdas de encabezado, tracks */
+  --color-muted-strong:  #ececee;  /* presionado, ítem activo del menú */
+  --color-border:        #e4e4e7;
+  --color-border-strong: #d4d4d8;  /* borde de inputs (3:1 contra blanco con foco) */
+  --color-text:          #18181b;
+  --color-text-muted:    #52525b;  /* 7.7:1 sobre blanco */
+  --color-text-subtle:   #71717a;  /* 4.8:1 sobre blanco: mínimo para texto */
+  --color-overlay:       rgb(24 24 27 / 0.4);
+
+  --color-accent-50:  #effaf7;
+  --color-accent-100: #d3f1ea;
+  --color-accent-500: #149a87;
+  --color-accent-600: #0e7a6b;     /* acción primaria: 5.4:1 con texto blanco */
+  --color-accent-700: #0b6157;     /* hover de la primaria, texto de acento */
+  --color-on-accent:  #ffffff;
+
+  /* Estados del turno (fondo tenue + texto e ícono saturados, contraste AA) */
+  --estado-reservado-bg:  #f4f4f5; --estado-reservado-fg:  #52525b;   /* círculo punteado */
+  --estado-confirmado-bg: #eaf3fd; --estado-confirmado-fg: #1d64b5;   /* círculo con check */
+  --estado-atendido-bg:   #e9f8ef; --estado-atendido-fg:   #1b7340;   /* usuario con check */
+  --estado-ausente-bg:    #fdf3e1; --estado-ausente-fg:    #925708;   /* triángulo */
+  --estado-cancelado-bg:  #fdeeed; --estado-cancelado-fg:  #b4332b;   /* círculo con cruz */
+
+  /* Toasts reutilizan los mismos pares */
+  --toast-success-bg: var(--estado-atendido-bg);   --toast-success-fg: var(--estado-atendido-fg);
+  --toast-error-bg:   var(--estado-cancelado-bg);  --toast-error-fg:   var(--estado-cancelado-fg);
+  --toast-warning-bg: var(--estado-ausente-bg);    --toast-warning-fg: var(--estado-ausente-fg);
+  --toast-info-bg:    var(--estado-confirmado-bg); --toast-info-fg:    var(--estado-confirmado-fg);
+
+  /* Login (panel oscuro con humo) */
+  --login-ink:   #0c1110;
+  --login-smoke: #c9d6d3;
+  --login-thread:#2fd3b7;
+
+  /* ---------- Tipografía ----------
+     Geist (UI) + Geist Mono (DNI, matrícula, códigos). Archivos locales, OFL. */
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-2xs: 0.6875rem; /* 11px  etiquetas de sección del menú */
+  --text-xs:  0.75rem;   /* 12px  metadatos, ayuda, badges */
+  --text-sm:  0.8125rem; /* 13px  texto secundario, celdas */
+  --text-base:0.875rem;  /* 14px  cuerpo e inputs (densidad de panel) */
+  --text-md:  1rem;      /* 16px  título de card, diálogo */
+  --text-lg:  1.25rem;   /* 20px  título de página */
+  --text-xl:  1.75rem;   /* 28px  números de estadísticas, título de login */
+
+  --leading-tight: 1.2; --leading-snug: 1.35; --leading-normal: 1.5;
+  --tracking-tight: -0.02em;   /* títulos */
+  --tracking-caps:  0.06em;    /* etiquetas en mayúscula */
+  --weight-regular: 400; --weight-medium: 500; --weight-semibold: 600;
+
+  /* ---------- Espaciado (grilla de 4px) ---------- */
+  --space-0-5: 2px; --space-1: 4px; --space-1-5: 6px; --space-2: 8px; --space-2-5: 10px;
+  --space-3: 12px;  --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px;
+  --space-10: 40px; --space-12: 48px; --space-16: 64px;
+
+  /* ---------- Proporciones del panel ---------- */
+  --sidebar-width: 248px;
+  --sidebar-width-collapsed: 60px;
+  --sidebar-item-height: 32px;
+  --page-header-height: 64px;
+  --page-padding-x: 32px;          /* 16px en mobile */
+  --content-max: 1280px;
+  --control-height: 36px;          /* 40px en pantallas táctiles */
+  --control-height-sm: 28px;
+  --icon-sm: 14px; --icon: 16px; --icon-nav: 18px;
+
+  /* ---------- Radios (regla fija) ----------
+     controles, badges y botones 8px · cards, popovers, toasts y diálogos 12px · avatares 999px */
+  --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px; --radius-full: 999px;
+
+  /* ---------- Sombras (teñidas de zinc, nunca negro puro) ---------- */
+  --shadow-xs: 0 1px 2px rgb(24 24 27 / 0.05);
+  --shadow-sm: 0 1px 2px rgb(24 24 27 / 0.06), 0 1px 1px rgb(24 24 27 / 0.03);
+  --shadow-md: 0 4px 12px -2px rgb(24 24 27 / 0.08), 0 2px 4px -2px rgb(24 24 27 / 0.05);
+  --shadow-lg: 0 16px 40px -12px rgb(24 24 27 / 0.22), 0 4px 10px -4px rgb(24 24 27 / 0.08);
+
+  /* ---------- Foco (instantáneo, nunca animado) ---------- */
+  --focus-ring: 0 0 0 1px var(--color-accent-600), 0 0 0 4px rgb(14 122 107 / 0.18);
+  --focus-ring-error: 0 0 0 1px var(--estado-cancelado-fg), 0 0 0 4px rgb(180 51 43 / 0.15);
+
+  /* ---------- Movimiento (medido; ver README "Tiempos") ---------- */
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);    /* entradas, respuesta a acciones */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);   /* algo que se mueve en pantalla */
+  --ease-hover:  ease;                              /* cambios de color */
+
+  --dur-press:   120ms;  /* botón presionado (scale) */
+  --dur-hover:   150ms;  /* color de fondo/borde en hover */
+  --dur-tooltip: 125ms;
+  --dur-popover: 160ms;  /* select, date picker, combobox, menú */
+  --dur-popover-exit: 110ms;
+  --dur-dialog:  220ms;
+  --dur-dialog-exit: 150ms;
+  --dur-toast:   240ms;
+  --dur-toast-exit: 160ms;
+  --dur-nav:     200ms;  /* indicador del ítem activo del menú */
+  --dur-sidebar: 220ms;  /* colapsar/expandir */
+  --dur-enter:   450ms;  /* entrada del login (una sola vez por sesión) */
+  --dur-spin:    600ms;  /* spinner rápido = se percibe más rápido */
+
+  --press-scale: 0.97;
+  --pop-scale:   0.96;
+
+  /* Tiempos de reacción (los aplica el código, ver README) */
+  --delay-tooltip: 400ms;   /* primera vez; las siguientes son instantáneas */
+  --delay-spinner: 150ms;   /* no mostrar "cargando" si responde antes */
+  --min-spinner:   400ms;   /* si aparece, se ve al menos esto (evita parpadeo) */
+  --debounce-search: 250ms;
+  --toast-duration: 4000ms; /* errores: 6000ms; se pausa con hover o foco */
+}
+
+@media (pointer: coarse) {
+  :root { --control-height: 40px; --sidebar-item-height: 40px; }
+}
+
+@media (max-width: 767px) {
+  :root { --page-padding-x: 16px; --page-header-height: 56px; }
+}
+
+/* Movimiento reducido: sin desplazamientos ni escalas; solo fundidos cortos que ayudan a entender. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --press-scale: 1; --pop-scale: 1;
+    --dur-popover: 120ms; --dur-dialog: 120ms; --dur-toast: 120ms;
+    --dur-nav: 0ms; --dur-sidebar: 0ms; --dur-enter: 0ms;
+    --dur-spin: 1500ms;
+  }
+}

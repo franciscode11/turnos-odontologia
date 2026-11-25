@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "size": 6,
+  "tracking": "local",
+  "names_versioned": true,
+  "members": [
+    {"id": "francisco-valles", "name": "Francisco Diego Valles Adad", "github": "franciscode11"},
+    {"id": "octavio-crescini", "name": "Octavio Crescini", "github": "OctaCrescini"},
+    {"id": "joaquin-cortez", "name": "Joaquín Cortez Badaloni", "github": "joaco-cortezb"},
+    {"id": "lautaro-de-coninck", "name": "Lautaro de Coninck", "github": "Lautarodeco"},
+    {"id": "joaquin-echenagorria", "name": "Joaquín Echenagorria", "github": "joaquin-echenagorria"},
+    {"id": "ulises-lucato", "name": "Ulises Lucato Flores", "github": "UlisesLucato"}
+  ]
+}

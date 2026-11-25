@@ -7,9 +7,9 @@
 ```
 main  ●────────●────────────●──────────●──────▶   (versión oficial, la mergea el líder)
         \                  /            /
-feat/c02 ●──●──●──────────●  (PR #3)   /          (rama de Octavio)
+C-02     ●──●──●──────────●  (PR #3)   /          (rama de Octavio)
           \                            /
-feat/c05   ●──●──●──●─────────────────●  (PR #5)  (rama de Joaquín E.)
+C-05       ●──●──●──●─────────────────●  (PR #5)  (rama de Joaquín E.)
 ```
 
 - `main` es la versión oficial. **Nadie trabaja directo en `main`** (GitHub lo bloquea).
@@ -21,7 +21,7 @@ feat/c05   ●──●──●──●─────────────
 | Para qué | Formato | Ejemplo |
 |---|---|---|
 | Tarea 0 (verificación de fuente + captura) | `docs/<apellido>-verificacion` | `docs/crescini-verificacion` |
-| Tu change (**la crea el líder**, vos solo la usás) | `feat/<id-del-change>-<nombre-corto>` | `feat/c02-pacientes` |
+| Tu change (**la crea el líder**, vos solo la usás) | `<id>-<nombre-corto>` (formato de Active Stack) | `C-02-pacientes` |
 | Corrección que pidió el líder | misma rama del PR | (seguís en la misma) |
 
 ## El ciclo completo, comando por comando
@@ -47,7 +47,7 @@ git fetch origin
 ```
 
 ```bash
-git checkout feat/c02-pacientes
+git checkout C-02-pacientes
 ```
 
 ```bash
@@ -85,7 +85,7 @@ Hacé **varios commits chicos** a lo largo del change (después de propose, desp
 **6. Subir tu rama a GitHub** (la primera vez):
 
 ```bash
-git push -u origin feat/c02-pacientes
+git push -u origin C-02-pacientes
 ```
 
 Las siguientes veces alcanza con `git push`.
@@ -144,7 +144,7 @@ git checkout main && git pull
 ```
 
 ```bash
-git checkout feat/c02-pacientes
+git checkout C-02-pacientes
 ```
 
 ```bash

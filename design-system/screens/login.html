@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ingresar · {brand}</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../ui.css">
+<script src="../brand.js"></script>
+<script src="../icons.js"></script>
+<script src="../shell.js"></script>
+<script src="../smoke.js"></script>
+</head>
+<body>
+<main class="auth">
+  <section class="auth-art" aria-hidden="true">
+    <canvas data-smoke></canvas>
+    <div class="art-top"><span class="mark"><i data-icon="dental"></i></span><span class="sb-name" data-brand-name></span></div>
+    <p class="art-quote">La agenda que no se superpone.<span>Turnos por profesional y por sillón, con el historial de cada cambio.</span></p>
+  </section>
+  <section class="auth-panel">
+    <div class="ap-top"></div>
+    <form class="auth-form" onsubmit="return false" novalidate>
+      <h1>Ingresá al consultorio</h1>
+      <p class="lead">Usá el email con el que te invitaron.</p>
+      <div class="stack-lg">
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <div class="input-wrap has-lead"><i data-icon="mail" class="lead"></i><input class="control" id="email" type="email" autocomplete="email" placeholder="nombre@consultorio.com"></div>
+        </div>
+        <div class="field">
+          <label class="label" for="pass">Contraseña <a href="#" style="font-weight:500;font-size:12px">¿La olvidaste?</a></label>
+          <div class="input-wrap has-lead has-trail"><i data-icon="lock" class="lead"></i><input class="control" id="pass" type="password" autocomplete="current-password" value="turnos-2026"><button type="button" class="trail-btn" data-reveal="pass" aria-label="Mostrar contraseña"><i data-icon="eye"></i></button></div>
+        </div>
+        <button class="btn btn-primary btn-block" style="height:40px;margin-top:4px" type="submit">Ingresar <i data-icon="arrow-right" class="arrow"></i></button>
+      </div>
+    </form>
+    <p class="auth-foot">¿No tenés cuenta? La crea el administrador del consultorio desde Equipo.</p>
+  </section>
+</main>
+</body>
+</html>

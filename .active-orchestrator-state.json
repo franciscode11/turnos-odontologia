@@ -1,0 +1,434 @@
+{
+  "version": 5,
+  "step": "done",
+  "owner": "active-orchestrator",
+  "foundation": {
+    "version": 1,
+    "approved_on": "2026-11-25",
+    "route": "foundation",
+    "order": [
+      "openspec-init",
+      "discovery",
+      "kb",
+      "visual-design",
+      "roadmap",
+      "task-management",
+      "team-mode",
+      "memory-policy",
+      "find-skill",
+      "registry",
+      "agents"
+    ],
+    "phases": {
+      "openspec-init": {
+        "variant": "init",
+        "status": "done",
+        "requires": [],
+        "outputs": [
+          "openspec/config.yaml",
+          "openspec/specs/",
+          "openspec/changes/archive/",
+          ".claude/skills/",
+          ".agents/skills/"
+        ],
+        "notes": "openspec init --tools claude,codex --language es --scope project; perfil custom con verify"
+      },
+      "discovery": {
+        "variant": "competitors+existing-sources",
+        "status": "done",
+        "requires": [
+          "openspec-init"
+        ],
+        "outputs": [
+          "docs/discovery/checklist-discovery.md",
+          "docs/discovery/informe-discovery.md",
+          "docs/discovery/informe-discovery.pdf",
+          "docs/discovery/sources/"
+        ]
+      },
+      "kb": {
+        "variant": "import",
+        "status": "done",
+        "requires": [
+          "discovery"
+        ],
+        "outputs": [
+          "knowledge-base/"
+        ],
+        "notes": "kb-creator import desde docs/discovery, docs/restricciones-equipo.md y equipo/; 5 inconsistencias registradas (IN-01..05)"
+      },
+      "visual-design": {
+        "variant": "system-only",
+        "status": "done",
+        "requires": [
+          "kb"
+        ],
+        "outputs": [
+          "design-system/README.md"
+        ],
+        "notes": "Revision 2 aprobada; pantallas de referencia en design-system/screens"
+      },
+      "roadmap": {
+        "variant": "local-markdown",
+        "status": "done",
+        "requires": [
+          "kb"
+        ],
+        "outputs": [
+          "CHANGES.md"
+        ],
+        "notes": "8 fichas; verificador fichas.sh ok sin errores ni avisos"
+      },
+      "task-management": {
+        "variant": "local",
+        "status": "done",
+        "requires": [
+          "roadmap"
+        ],
+        "outputs": [
+          ".active-stack/roadmap.json"
+        ]
+      },
+      "team-mode": {
+        "variant": "new",
+        "status": "done",
+        "requires": [
+          "task-management"
+        ],
+        "outputs": [
+          ".active-stack/team.json",
+          ".github/pull_request_template.md",
+          ".github/CODEOWNERS",
+          ".gitignore"
+        ],
+        "size": 6,
+        "names_versioned": true,
+        "tracking": "local",
+        "reviewers": {
+          "primary": "franciscode11",
+          "backup": null
+        },
+        "codeowners": "existente conservado (* @franciscode11)",
+        "main_protection": "ya aplicada: PR + 1 aprobación de code owner, sin force-push; check de CI se agrega después de C-01"
+      },
+      "memory-policy": {
+        "variant": "local",
+        "status": "done",
+        "requires": [
+          "team-mode"
+        ],
+        "outputs": [],
+        "choice": "local",
+        "notes": "Engram personal de cada integrante; no se ejecutó active-stack memory init ni se escribió .engram/"
+      },
+      "find-skill": {
+        "variant": "install-selected",
+        "status": "done",
+        "requires": [
+          "kb"
+        ],
+        "outputs": [
+          "skills-lock.json",
+          ".agents/skills/",
+          ".claude/skills/",
+          "docs/decisiones-skills.md"
+        ]
+      },
+      "registry": {
+        "variant": "index",
+        "status": "done",
+        "requires": [
+          "find-skill"
+        ],
+        "outputs": [
+          ".atl/skill-registry.md"
+        ]
+      },
+      "agents": {
+        "variant": "generate",
+        "status": "done",
+        "requires": [
+          "kb",
+          "roadmap",
+          "registry",
+          "team-mode",
+          "memory-policy"
+        ],
+        "outputs": [
+          "AGENTS.md",
+          "CLAUDE.md"
+        ]
+      }
+    }
+  },
+  "discovery": {
+    "created_by": "discovery-research",
+    "approved_on": "2026-11-25",
+    "sources_fetched_at": "2026-11-25",
+    "report": "docs/discovery/informe-discovery.md",
+    "checklist": "docs/discovery/checklist-discovery.md",
+    "sources": [
+      "https://agendapro.com/ar/dental/software-odontologico",
+      "https://bilog.com.ar/",
+      "https://clinic-cloud.com/",
+      "https://www.clinicorp.com/",
+      "https://www.curvedental.com/",
+      "https://dentalcore.app/",
+      "https://www.softwaredentalink.com/ar",
+      "https://dentally.com/",
+      "https://dentalsoft.com.ar/",
+      "https://web.dentaltec.com.ar/",
+      "https://www.dentidesk.com/",
+      "https://www.dentrixascend.com/",
+      "https://www.doctocliq.com/",
+      "https://pro.doctoralia.com/ar",
+      "https://odonthia.com/",
+      "https://odonto.ar/",
+      "https://www.clinia.com.ar/odontologia",
+      "https://www.opendental.com/",
+      "https://hiorbita.com/",
+      "https://reservo.cl/ar/"
+    ],
+    "competitors": [
+      {
+        "name": "AgendaPro",
+        "notes_file": "docs/discovery/sources/agendapro.md"
+      },
+      {
+        "name": "Bilog",
+        "notes_file": "docs/discovery/sources/bilog.md"
+      },
+      {
+        "name": "Clinic Cloud",
+        "notes_file": "docs/discovery/sources/clinic-cloud.md"
+      },
+      {
+        "name": "Clinicorp",
+        "notes_file": "docs/discovery/sources/clinicorp.md"
+      },
+      {
+        "name": "Curve Dental",
+        "notes_file": "docs/discovery/sources/curve-dental.md"
+      },
+      {
+        "name": "DentalCore",
+        "notes_file": "docs/discovery/sources/dentalcore.md"
+      },
+      {
+        "name": "Dentalink",
+        "notes_file": "docs/discovery/sources/dentalink.md"
+      },
+      {
+        "name": "Dentally",
+        "notes_file": "docs/discovery/sources/dentally.md"
+      },
+      {
+        "name": "DentalSoft",
+        "notes_file": "docs/discovery/sources/dentalsoft.md"
+      },
+      {
+        "name": "DentalTec",
+        "notes_file": "docs/discovery/sources/dentaltec.md"
+      },
+      {
+        "name": "DENTIDESK",
+        "notes_file": "docs/discovery/sources/dentidesk.md"
+      },
+      {
+        "name": "Dentrix Ascend (Ascend by Dentrix)",
+        "notes_file": "docs/discovery/sources/dentrix-ascend.md"
+      },
+      {
+        "name": "Doctocliq",
+        "notes_file": "docs/discovery/sources/doctocliq.md"
+      },
+      {
+        "name": "Doctoralia (Docplanner) – Agenda Doctoralia para especialistas",
+        "notes_file": "docs/discovery/sources/doctoralia.md"
+      },
+      {
+        "name": "Odonthia",
+        "notes_file": "docs/discovery/sources/odonthia.md"
+      },
+      {
+        "name": "Odonto.ar",
+        "notes_file": "docs/discovery/sources/odonto-ar.md"
+      },
+      {
+        "name": "OdontoClinIA (módulo odontológico de ClinIA)",
+        "notes_file": "docs/discovery/sources/odontoclinia.md"
+      },
+      {
+        "name": "Open Dental",
+        "notes_file": "docs/discovery/sources/open-dental.md"
+      },
+      {
+        "name": "Órbita (Órbita Chat + Órbita Gestión)",
+        "notes_file": "docs/discovery/sources/orbita.md"
+      },
+      {
+        "name": "Reservo",
+        "notes_file": "docs/discovery/sources/reservo.md"
+      }
+    ],
+    "problema": "Consultorios odontológicos argentinos chicos y medianos organizan la agenda con papel, planillas o turneros genéricos: turnos superpuestos, horarios mal aprovechados y sin trazabilidad.",
+    "usuarios": [
+      "ADMIN",
+      "RECEPCION",
+      "PROFESIONAL"
+    ],
+    "casos_de_uso": [
+      "Registrar y buscar pacientes",
+      "Cargar profesionales, prestaciones con duración y sillones",
+      "Definir horarios de atención y bloqueos",
+      "Crear turno sin solapamientos por profesional y sillón",
+      "Cancelar con motivo y marcar asistencia con historial"
+    ],
+    "funcionalidades_necesarias": [
+      "Acceso con roles",
+      "Pacientes",
+      "Catálogo profesionales/prestaciones/sillones",
+      "Horarios, bloqueos y disponibilidad",
+      "Crear turno sin solapamientos",
+      "Cancelar turno y estados con historial"
+    ],
+    "funcionalidades_opcionales": [
+      "Reserva online",
+      "WhatsApp y recordatorios",
+      "Lista de espera",
+      "Ficha clínica/odontograma",
+      "Presupuestos",
+      "Cobros/Mercado Pago",
+      "Facturación ARCA",
+      "Obras sociales",
+      "Liquidaciones",
+      "Multi-sucursal",
+      "API pública"
+    ],
+    "reglas_de_negocio": [
+      "Sin sobreturnos por profesional ni por sillón (código + base de datos)",
+      "Intervalos semiabiertos [inicio, fin)",
+      "Duración definida por la prestación",
+      "Solo dentro del horario de atención y fuera de bloqueos",
+      "Cancelación sin plazo con motivo obligatorio; libera el horario",
+      "Cancelados no ocupan agenda",
+      "Historial de cambios de estado con usuario y fecha",
+      "Permisos por rol en el servidor"
+    ],
+    "integraciones": [
+      "Supabase (PostgreSQL, Auth, Storage)"
+    ],
+    "restricciones": [
+      "Entrega 2026-11-26 12:00",
+      "6 personas en paralelo",
+      "Next.js + Prisma + Supabase + Vitest",
+      "Solo datos ficticios",
+      "Sin secretos en el repo",
+      "Componentes de UI únicos"
+    ],
+    "riesgos": [
+      "Conflictos de merge",
+      "Pisar la base compartida",
+      "Datos inventados por la IA",
+      "Datos de salud sensibles",
+      "Falta de tiempo"
+    ],
+    "preguntas_abiertas": [
+      "Puntos 'No evidenciado' del informe",
+      "Sobreturnos con permiso a futuro",
+      "Cuándo sumar reserva online y recordatorios"
+    ]
+  },
+  "kb": {
+    "created_by": "kb-creator",
+    "source": "ingest",
+    "discovery": {
+      "problem": "Consultorios odontológicos argentinos chicos y medianos organizan la agenda con papel, planillas o turneros genéricos: turnos superpuestos por profesional o sillón y sin trazabilidad.",
+      "system_type": "web_app",
+      "domain": "salud / gestión de turnos odontológicos",
+      "scale": "team",
+      "stack": "Next.js (App Router) + TypeScript + Prisma + Supabase (PostgreSQL, Auth, Storage) + Tailwind + Vitest",
+      "needs_infra": true
+    },
+    "files": [
+      "knowledge-base/01_vision_y_objetivos.md",
+      "knowledge-base/02_descripcion_general.md",
+      "knowledge-base/03_actores_y_roles.md",
+      "knowledge-base/04_modelo_de_datos.md",
+      "knowledge-base/05_reglas_de_negocio.md",
+      "knowledge-base/06_funcionalidades.md",
+      "knowledge-base/07_flujos_principales.md",
+      "knowledge-base/08_arquitectura_propuesta.md",
+      "knowledge-base/09_decisiones_y_supuestos.md",
+      "knowledge-base/10_preguntas_abiertas.md",
+      "knowledge-base/README.md"
+    ]
+  },
+  "visual_design": {
+    "created_by": "design-system",
+    "mode": "system-only",
+    "status": "approved",
+    "revision": 2,
+    "path": "design-system/README.md"
+  },
+  "roadmap": {
+    "created_by": "roadmap-generator",
+    "source": "CHANGES.md",
+    "changes_file": "CHANGES.md",
+    "changes": [
+      "C-01",
+      "C-02",
+      "C-03",
+      "C-04",
+      "C-05",
+      "C-06",
+      "C-07",
+      "C-08"
+    ]
+  },
+  "skills": {
+    "created_by": "find-skill",
+    "mode": "install-selected",
+    "installed": [
+      "supabase",
+      "supabase-postgres-best-practices",
+      "prisma-cli",
+      "prisma-client-api",
+      "shadcn",
+      "nextjs-app-router-patterns",
+      "vitest"
+    ],
+    "scope": "project",
+    "lockfile": "skills-lock.json",
+    "decisions": "docs/decisiones-skills.md"
+  },
+  "registry": {
+    "created_by": "skill-registry",
+    "path": ".atl/skill-registry.md",
+    "engram": "no disponible en esta sesión"
+  },
+  "agents": {
+    "created_by": "agent-instruction",
+    "files": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ],
+    "reglas_applied": [
+      "datos ficticios",
+      "nunca .env ni claves",
+      "clave secreta solo en servidor",
+      "solo el líder migra y cambia el esquema",
+      "solo la Zona de la ficha",
+      "no inventar reglas de negocio",
+      "no mergear en rojo",
+      "commit/push/PR solo a pedido, convencionales en español",
+      "solo componentes de src/components/ui",
+      "sin any",
+      "lógica en src/domain con test",
+      "Server Action con sesión, requireRol y Zod",
+      "fechas UTC mostradas en hora de Argentina",
+      "specs con 3 escenarios RN y test por escenario"
+    ],
+    "team_section": true
+  }
+}

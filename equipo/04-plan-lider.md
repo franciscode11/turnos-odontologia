@@ -35,7 +35,8 @@ cd ~/active-stack && PATH="$HOME/.as-shim:$PATH" ./active-stack install
    - Protección de `main`: PR obligatorio + 1 aprobación de *code owner* (`.github/CODEOWNERS` = `@franciscode11`), sin force-push ni borrado. Como admin, el líder puede mergear sus propios PR.
    - Merge: solo **"Create a merge commit"** (squash y rebase desactivados), para que en `main` queden los commits individuales de cada integrante. Las ramas no se borran al mergear (trazabilidad).
    - Invitados con permiso *Write*: OctaCrescini, joaco-cortezb, Lautarodeco, joaquin-echenagorria, UlisesLucato. Tienen que aceptar (vence en 7 días).
-   - **Después del C01:** agregar el check del CI como obligatorio en la protección de `main` (no se puede antes porque el workflow todavía no existe) y crear desde `main` las ramas de cada integrante: `feat/c02-pacientes`, `feat/c03-catalogo`, `feat/c04-horarios`, `feat/c05-crear-turno`, `feat/c06-estados-turno` (la consigna pide que el líder cree las ramas).
+   - **Ramas de las fichas (creadas el 2026-11-25, al mergear la fundación):** `C-01-base-tecnica`, `C-02-pacientes`, `C-03-catalogo`, `C-04-horarios`, `C-05-crear-turno`, `C-06-estados-turno`, `C-07-equipo`, `C-08-estadisticas` (la consigna pide que el líder cree las ramas; formato `<id>-slug` de Active Stack).
+   - **Después del C01:** agregar el check del CI como obligatorio en la protección de `main` (no se puede antes porque el workflow todavía no existe) y actualizar con `main` las ramas C-02 a C-08 (`git merge origin/main` en cada una y push) antes de avisarle al equipo.
 3. **Carpeta compartida de Drive** para clips del video y capturas, y mandar el mensaje al grupo (borrador en `../mensaje-whatsapp-equipo.md`, fuera del repo).
 
 ## Etapas 1 a 5 · Fundación con `/active-orchestrator` (martes 24)
@@ -93,12 +94,14 @@ alter default privileges for role postgres in schema public grant usage, select 
 
 ## Change C01 · Base técnica (martes 24, noche) — ciclo OPSX completo
 
-Rama `feat/c01-base-tecnica`. En Claude Code: `/sdd-orchestrator` y explore → propose → **Ajustar** → apply → verify → archive. Requisitos que la spec del C01 tiene que cubrir (son los que asumen las guías de los integrantes):
+Rama `C-01-base-tecnica`. En Claude Code: `/sdd-orchestrator` y explore → propose → **Ajustar** → apply → verify → archive. Requisitos que la spec del C01 tiene que cubrir (son los que asumen las guías de los integrantes):
 
 - Next.js App Router + TypeScript estricto, npm, ESLint, Tailwind. Scripts `dev`, `build`, `lint`, `typecheck`, `test` (Vitest).
 - `prisma/schema.prisma` con **todo el modelo del MVP**: `Usuario` (rol), `Paciente`, `Profesional`, `Prestacion`, `Sillon`, `HorarioAtencion`, `Bloqueo`, `Turno` (estado, inicio, fin), `HistorialTurno`. Enum de estados del turno y constante compartida `ESTADOS_QUE_OCUPAN_AGENDA` en `src/domain/shared/`.
 - Restricción de exclusión en PostgreSQL (`btree_gist` + `tstzrange`) que impida turnos solapados por profesional y por sillón cuando el estado ocupa agenda (migración SQL manual dentro de Prisma).
 - Supabase Auth (email y contraseña) + helper de servidor `requireRol([...])` y matriz de permisos de la knowledge-base. Protección de las rutas de `(panel)` en el servidor (middleware/proxy de Next.js) además de chequear el rol en cada acción.
+- **Sistema de componentes compartido** en `src/components/ui` (base shadcn/ui + Radix, personalizado con los tokens del design system): todos los controles de formulario custom y homogéneos — inputs `text`, `password` (con mostrar/ocultar), `email`, `url`, `tel`, `search` (con botón limpiar), `number` (stepper), `range` (slider), `date`, `datetime-local`, `time`, `month`, `week` (pickers propios, no los nativos del navegador), `checkbox`, `radio` (RadioGroup), `file` (dropzone), `color`, botones (`submit`, `reset`, `button`, botón con ícono en lugar de `image`), `hidden` (wrapper para formularios), `Select` con grupos (`optgroup`) y `multiple`, `Combobox` con sugerencias (reemplaza `datalist`) y `Textarea`. Cada uno con `Label`, texto de ayuda, estado de error, `disabled`, `required` y foco accesible; integrados con Zod/react-hook-form (`FormField`). Además `Card`, `Table`, `Dialog`, `Badge`, `Toast`. Página `/dev/componentes` que muestra todos (sirve de catálogo para el equipo y para el video).
+- **Regla verificable en CI:** ESLint (`no-restricted-syntax`) prohíbe `<input>`, `<select>`, `<textarea>` y `<button>` crudos fuera de `src/components/ui`. Así nadie arma componentes propios ni distintos.
 - Layout con menú y **páginas placeholder** en las rutas de cada módulo: `/pacientes`, `/configuracion/profesionales`, `/configuracion/prestaciones`, `/configuracion/sillones`, `/configuracion/horarios`, `/turnos` (listado del día, solo lectura), `/turnos/nuevo`, `/turnos/[id]`. Carpetas vacías con `.gitkeep` en `src/domain/<modulo>`, `src/server/<modulo>` y `tests/<modulo>` para cada integrante.
 - Seed con datos **ficticios** (usuarios de prueba por rol, 2 profesionales, 3 prestaciones, 2 sillones, 5 pacientes inventados).
 - Tests de dominio sin base de datos (el README tiene que permitir `npm install && npm test` sin credenciales).

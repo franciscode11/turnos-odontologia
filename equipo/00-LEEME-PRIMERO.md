@@ -24,7 +24,7 @@ Un **sistema de turnos para consultorios odontológicos** (agenda, pacientes, pr
 ## ¿Cómo nos organizamos?
 
 - Hay **un solo repositorio** en GitHub. La rama `main` es la versión oficial y **solo el líder (Francisco) la mergea**.
-- **Cada uno trabaja en su propia rama** (por ejemplo `feat/c02-pacientes`), hace su change ahí y abre un **Pull Request (PR)**.
+- **Cada uno trabaja en su propia rama** (por ejemplo `C-02-pacientes`), hace su change ahí y abre un **Pull Request (PR)**.
 - El líder revisa el PR, y si los tests dan verde, lo mergea a `main`.
 - Así GitHub muestra los commits de cada uno (la cátedra lo exige: *cada integrante con sus propios commits*).
 
@@ -46,8 +46,8 @@ Un **sistema de turnos para consultorios odontológicos** (agenda, pacientes, pr
 | Cuándo | Líder | Integrantes |
 |---|---|---|
 | **Martes 24 — mañana** | Instala Active Stack, crea el repo, corre la fundación (Discovery) | Paso 1: [`01-prerequisitos.md`](01-prerequisitos.md) (instalar todo). Mandar usuario de GitHub al líder |
-| **Martes 24 — tarde** | Knowledge-base, roadmap, reglas del agente | Aceptar invitación, clonar el repo, **Tarea 0**: verificar una fuente del Discovery y abrir tu primer PR ([`02-git-y-prs.md`](02-git-y-prs.md)) |
-| **Martes 24 — noche** | Change C01: base técnica (Next.js, Supabase, Prisma, login y roles) | Leer tu guía personal y la knowledge-base |
+| **Martes 24 — tarde** | Knowledge-base, roadmap, reglas del agente | Aceptar invitación, terminar las instalaciones y clonar el repo. **Todavía no crees ramas**: esperá el aviso del líder |
+| **Martes 24 — noche** | Change C01: base técnica (Next.js, Supabase, Prisma, login, roles y componentes compartidos) | Leer tu guía personal y la knowledge-base. Cuando el líder avise: **Tarea 0** (verificar una fuente del Discovery y abrir tu primer PR, ver [`02-git-y-prs.md`](02-git-y-prs.md)) |
 | **Miércoles 25** | Revisar y mergear PRs, resolver dudas | **Tu change completo** (OPSX) + PR + grabar tu parte del video |
 | **Jueves 26 — hasta 10:00** | Integración final, Engram, README, edición del video, entrega | Correcciones que pida el líder + tu párrafo de la reflexión |
 

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Equipo · {brand}</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../ui.css">
+<script src="../brand.js"></script>
+<script src="../icons.js"></script>
+<script src="../shell.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" data-sidebar data-active="equipo"></aside>
+  <div class="main">
+    <div class="mobile-bar"><div class="sb-mark"><span class="mark"><i data-icon="dental"></i></span><span class="sb-name" data-brand-name></span></div><button class="btn btn-ghost btn-icon btn-sm" aria-label="Abrir menú"><i data-icon="layout-sidebar-left-expand" class="nav"></i></button></div>
+    <header class="page-head">
+      <div>
+        <h1 class="page-title">Equipo</h1>
+        <p class="page-sub">Quién puede entrar al sistema y con qué rol.</p>
+      </div>
+      <button class="btn btn-primary btn-sm" data-open="invite"><i data-icon="user-plus"></i>Invitar</button>
+    </header>
+    <div class="page-body">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Persona</th><th>Rol</th><th>Estado</th><th>Último ingreso</th><th style="width:48px"><span class="sr-only">Acciones</span></th></tr></thead>
+          <tbody class="num">
+            <tr><td><div class="cell-person"><span class="avatar">VR</span><div><b>Valeria Ríos</b><span>valeria.rios@example.com</span></div></div></td><td><span class="tag">Administrador</span></td><td><span class="badge st-atendido"><i data-icon="circle-check"></i>Activo</span></td><td class="muted">Hoy, 08:02</td><td><button class="btn btn-ghost btn-icon btn-sm" aria-label="Opciones"><i data-icon="dots"></i></button></td></tr>
+            <tr><td><div class="cell-person"><span class="avatar">LB</span><div><b>Dra. Lucía Bertolotti</b><span>lucia.bertolotti@example.com</span></div></div></td><td><span class="tag">Profesional</span></td><td><span class="badge st-atendido"><i data-icon="circle-check"></i>Activo</span></td><td class="muted">Hoy, 07:51</td><td><button class="btn btn-ghost btn-icon btn-sm" aria-label="Opciones"><i data-icon="dots"></i></button></td></tr>
+            <tr><td><div class="cell-person"><span class="avatar">TI</span><div><b>Dr. Tomás Iriarte</b><span>tomas.iriarte@example.com</span></div></div></td><td><span class="tag">Profesional</span></td><td><span class="badge st-atendido"><i data-icon="circle-check"></i>Activo</span></td><td class="muted">Ayer, 18:40</td><td><button class="btn btn-ghost btn-icon btn-sm" aria-label="Opciones"><i data-icon="dots"></i></button></td></tr>
+            <tr><td><div class="cell-person"><span class="avatar">MN</span><div><b>Micaela Núñez</b><span>micaela.nunez@example.com</span></div></div></td><td><span class="tag">Recepción</span></td><td><span class="badge st-atendido"><i data-icon="circle-check"></i>Activo</span></td><td class="muted">Hoy, 07:58</td><td><button class="btn btn-ghost btn-icon btn-sm" aria-label="Opciones"><i data-icon="dots"></i></button></td></tr>
+            <tr><td><div class="cell-person"><span class="avatar" style="background:var(--color-muted);color:var(--color-text-subtle)">CF</span><div><b>carla.funes@example.com</b><span>Invitada el 24/11</span></div></div></td><td><span class="tag">Recepción</span></td><td><span class="badge st-reservado"><i data-icon="circle-dashed"></i>Invitación pendiente</span></td><td class="muted">Nunca</td><td><button class="btn btn-ghost btn-icon btn-sm" aria-label="Opciones"><i data-icon="dots"></i></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="help" style="margin-top:10px">No hay registro público. Solo el Administrador invita personas; cada invitación vence en 7 días.</p>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="invite" data-state="closed">
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="inv-t">
+    <div class="dialog-head"><h3 id="inv-t">Invitar al equipo</h3><p>Le llega un email para activar su cuenta.</p></div>
+    <div class="dialog-body stack" style="gap:16px">
+      <div class="field"><label class="label" for="inv-e">Email</label><input class="control is-focus" id="inv-e" value="esteban.lucero@example.com"></div>
+      <div class="field">
+        <span class="label">Rol</span>
+        <div class="stack" role="radiogroup" aria-label="Rol" style="gap:10px">
+          <label class="choice"><span class="box radio" data-state="unchecked"></span><span>Recepción<small>Pacientes y turnos.</small></span></label>
+          <label class="choice"><span class="box radio" data-state="checked"></span><span>Profesional<small>Su agenda y la asistencia de sus turnos.</small></span></label>
+          <label class="choice"><span class="box radio" data-state="unchecked"></span><span>Administrador<small>Todo, incluida la configuración y el equipo.</small></span></label>
+        </div>
+      </div>
+      <div class="field"><label class="label">Profesional vinculado</label><button class="control" type="button"><span>Dr. Esteban Lucero, MP 6218</span><i data-icon="chevron-down"></i></button><span class="help">Obligatorio para el rol Profesional.</span></div>
+    </div>
+    <div class="dialog-foot"><button class="btn btn-ghost btn-sm" data-close>Cancelar</button><button class="btn btn-primary btn-sm" data-close data-toast="success|Invitación enviada|esteban.lucero@example.com">Enviar invitación</button></div>
+  </div>
+</div>
+<script>if (location.hash === "#invitar") document.getElementById("invite").setAttribute("data-state", "open");</script>
+</body>
+</html>

@@ -43,7 +43,7 @@ Navegador ──► Next.js (Vercel)
 
 | Servicio | Propósito | Tipo |
 |---|---|---|
-| Supabase Auth | Sesiones y credenciales de los usuarios del consultorio | SDK (`@supabase/ssr`) |
+| Supabase Auth | Sesiones, credenciales e invitaciones por email (`inviteUserByEmail`) | SDK (`@supabase/ssr`, admin API solo en el servidor) |
 | Supabase PostgreSQL | Persistencia | Conexión Postgres vía Prisma (pooler) |
 | Vercel | Hosting y previews por PR | Integración con GitHub |
 
@@ -61,3 +61,5 @@ No se expone una API REST pública. Las operaciones son **Server Actions** agrup
 | `horarios` | ABM de franjas y bloqueos; calcular disponibilidad | C04 |
 | `turnos` (creación) | crear turno | C05 |
 | `turnos` (estados) | confirmar, cancelar, marcar atendido, marcar ausente | C06 |
+| `equipo` | invitar, reenviar o revocar invitación, cambiar rol, desactivar usuario, activar cuenta | C07 |
+| `estadisticas` | calcular indicadores del período (solo lectura) | C08 |

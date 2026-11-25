@@ -6,11 +6,21 @@ Cada regla tiene un código `RN-{DOMINIO}-{NN}`. Las specs y los tests de cada c
 
 ## Dominio: Acceso y permisos (RN-AU)
 
-- **RN-AU-01**: No hay registro público. Los usuarios los crea el administrador (en el MVP, el seed).
+- **RN-AU-01**: No hay registro público. El primer ADMIN lo crea el seed; el resto entra por invitación del ADMIN.
 - **RN-AU-02**: Cada usuario tiene un único rol: `ADMIN`, `RECEPCION` o `PROFESIONAL`.
 - **RN-AU-03**: Los permisos se controlan en el servidor en cada acción (`requireRol`), según la matriz de `03_actores_y_roles.md`. Ocultar un botón no alcanza.
 - **RN-AU-04**: Toda ruta del panel exige sesión válida; sin sesión se redirige a `/login`.
-- **RN-AU-05**: Un usuario inactivo no puede operar.
+- **RN-AU-05**: Solo un usuario `ACTIVO` puede operar; `INVITADO` e `INACTIVO` no.
+
+## Dominio: Equipo e invitaciones (RN-EQ) - C07
+
+- **RN-EQ-01**: Solo `ADMIN` invita, reenvía o revoca invitaciones, cambia roles y desactiva usuarios.
+- **RN-EQ-02**: Se invita con email y rol. El email no puede pertenecer a un usuario `ACTIVO` o `INVITADO`.
+- **RN-EQ-03**: Invitar con rol `PROFESIONAL` exige elegir el profesional vinculado, que no puede tener otro usuario.
+- **RN-EQ-04**: La invitación vence a los 7 días; vencida, solo sirve reenviarla.
+- **RN-EQ-05**: Al activar, el invitado define nombre y contraseña (mínimo 10 caracteres y al menos un número) y pasa a `ACTIVO`.
+- **RN-EQ-06**: Debe quedar siempre al menos un `ADMIN` activo: no se puede desactivar ni cambiar el rol del último.
+- **RN-EQ-07**: Desactivar no borra: los turnos y el historial conservan a su autor.
 
 ## Dominio: Pacientes (RN-PA) — C02
 
@@ -66,6 +76,16 @@ Mensajes de error acordados: "El profesional ya tiene un turno en ese horario", 
 - **RN-ES-06**: Cada transición inserta un `HistorialTurno` con usuario, fecha, estado anterior, estado nuevo y motivo (si lo hay).
 - **RN-ES-07**: Confirmar y cancelar: `ADMIN` y `RECEPCION`. Atendido/ausente: `ADMIN` y el `PROFESIONAL` vinculado al profesional del turno.
 - **RN-ES-08**: Reprogramar no es una operación del MVP: se cancela con motivo y se crea un turno nuevo.
+
+## Dominio: Estadísticas (RN-ST) - C08
+
+- **RN-ST-01**: Solo `ADMIN` ve estadísticas.
+- **RN-ST-02**: Turnos dados = turnos con inicio en el período, en cualquier estado.
+- **RN-ST-03**: Ocupación = minutos de turnos que ocupan agenda / minutos de atención de las franjas del período, descontando bloqueos.
+- **RN-ST-04**: Ausentismo = `AUSENTE` / (`ATENDIDO` + `AUSENTE`).
+- **RN-ST-05**: Cancelaciones = `CANCELADO` / turnos dados; los motivos se agrupan por texto normalizado.
+- **RN-ST-06**: Cada indicador se compara con el período anterior de igual duración.
+- **RN-ST-07**: El cálculo es una función pura en `src/domain/estadisticas/`, testeable sin base de datos. Solo lectura: no hay tablas nuevas.
 
 ## Dominio: Excepciones globales (RN-GL)
 

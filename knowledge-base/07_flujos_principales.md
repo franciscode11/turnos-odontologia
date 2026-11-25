@@ -69,7 +69,18 @@ Recepción → Form → crearTurno() → dominio (validaciones) → Prisma.$tran
 
 **Casos de error**: transición inválida, estado final, motivo vacío, turno futuro para asistencia, profesional ajeno, rol no permitido.
 
-## Flujo 6: Trabajo del equipo (OPSX por change)
+## Flujo 6: Invitar y activar una cuenta (C07)
+
+**Disparador**: el ADMIN invita desde `/equipo`. **Actor**: ADMIN, luego el invitado.
+
+1. La acción verifica rol ADMIN y valida email, rol y profesional vinculado (RN-EQ-02, 03).
+2. Crea el `Usuario` en `INVITADO` y llama a `inviteUserByEmail` de Supabase Auth desde el servidor (clave secreta solo en el servidor).
+3. El invitado abre el enlace y llega a `/activar-cuenta` con el token.
+4. Define nombre y contraseña (RN-EQ-05); el servidor actualiza el usuario a `ACTIVO` e inicia la sesión.
+
+**Casos de error**: token vencido o usado (ofrece pedir reenvío al ADMIN), email ya registrado, contraseña débil.
+
+## Flujo 7: Trabajo del equipo (OPSX por change)
 
 1. El líder mergea el C01 a `main`, crea las ramas `feat/c0X-…` y hace obligatorio el CI.
 2. Cada integrante, en su rama: explore → propose → (revisión y **Ajustar**) → apply → verify → archive, tocando solo su módulo.

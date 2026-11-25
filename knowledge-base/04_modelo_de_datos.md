@@ -6,7 +6,7 @@
 
 | Dominio | Entidades | Change que las usa |
 |---|---|---|
-| Acceso | `Usuario` | C01 |
+| Acceso | `Usuario` | C01, C07 |
 | Pacientes | `Paciente` | C02 |
 | Catálogo | `Profesional`, `Prestacion`, `Sillon` | C03 |
 | Agenda | `HorarioAtencion`, `Bloqueo` | C04 |
@@ -26,6 +26,7 @@ erDiagram
     Turno ||--o{ HistorialTurno : registra
     Usuario ||--o{ HistorialTurno : "realiza cambio"
     Usuario ||--o{ Turno : crea
+    Usuario |o--o{ Usuario : invita
 ```
 
 ## Convenciones
@@ -39,7 +40,8 @@ erDiagram
 ## Entidades
 
 ### Usuario
-- `id` uuid PK (Supabase Auth) · `email` texto único · `nombre` texto · `rol` enum `Rol` (`ADMIN | RECEPCION | PROFESIONAL`) · `activo` bool (true) · `profesionalId` uuid? único → `Profesional`.
+- `id` uuid PK (Supabase Auth) · `email` texto único · `nombre` texto? (lo completa al activar) · `rol` enum `Rol` (`ADMIN | RECEPCION | PROFESIONAL`) · `estado` enum `EstadoUsuario` (`INVITADO | ACTIVO | INACTIVO`) · `invitadoPorId` uuid? → `Usuario` · `invitadoEn` timestamptz? · `ultimoIngreso` timestamptz? · `profesionalId` uuid? único → `Profesional`.
+- Solo un usuario `ACTIVO` puede operar. Una invitación sin activar en 7 días vence (la valida Supabase Auth; el registro queda `INVITADO` hasta reenviarla o revocarla).
 - Constraint: `profesionalId` obligatorio si `rol = PROFESIONAL`; nulo en los demás (validado en código y seed).
 
 ### Paciente
@@ -95,7 +97,7 @@ Debe coincidir con el `WHERE (estado <> 'CANCELADO')` de las restricciones de ex
 
 | Entidad | Datos |
 |---|---|
-| Usuarios | 1 ADMIN, 1 RECEPCION, 2 PROFESIONAL (vinculados a los 2 profesionales). Emails en dominio de ejemplo (`@example.com`); contraseñas solo fuera del repo. |
+| Usuarios | 1 ADMIN (dueño), 1 RECEPCION, 2 PROFESIONAL (vinculados a los 2 profesionales), todos `ACTIVO`. Emails en dominio de ejemplo (`@example.com`); contraseñas solo fuera del repo. |
 | Profesionales | 2, con matrículas inventadas. |
 | Prestaciones | 3 (por ejemplo, Consulta 30 min, Limpieza 30 min, Extracción 60 min). |
 | Sillones | 2 (Sillón 1, Sillón 2). |

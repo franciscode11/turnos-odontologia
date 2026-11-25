@@ -12,15 +12,16 @@
 | Paciente | Persona atendida. | No tiene usuario en el MVP. |
 | Sistema | Base de datos y servidor. | Rechaza solapamientos aunque la interfaz falle; registra el historial. |
 
-Un usuario tiene **un solo rol**. Los usuarios los crea el administrador (en el MVP, el seed); no hay registro público.
+Un usuario tiene **un solo rol**. No hay registro público: el primer ADMIN (dueño) lo crea el seed y el resto del equipo entra por **invitación** del ADMIN desde Equipo.
 
-## RBAC — Matriz de permisos
+## RBAC: matriz de permisos
 
-C = crear · R = consultar · U = editar · D = desactivar/baja lógica · — = sin acceso. Se controla **en el servidor** (`requireRol` en cada Server Action), no solo ocultando botones.
+C = crear · R = consultar · U = editar · D = desactivar/baja lógica · - = sin acceso. Se controla **en el servidor** (`requireRol` en cada Server Action), no solo ocultando botones.
 
 | Recurso / acción | ADMIN | RECEPCION | PROFESIONAL |
 |---|---|---|---|
-| Usuarios | CRUD (seed en el MVP) | — | — |
+| Usuarios e invitaciones (Equipo) | CRUD (invitar, cambiar rol, desactivar) | - | - |
+| Estadísticas | R | - | - |
 | Pacientes | CRUD | CRUD | R |
 | Profesionales | CRUD | R | R |
 | Prestaciones | CRUD | R | R |
@@ -29,16 +30,17 @@ C = crear · R = consultar · U = editar · D = desactivar/baja lógica · — =
 | Bloqueos | CRUD | R | R |
 | Disponibilidad | R | R | R |
 | Turnos: listar y ver detalle | R | R | R |
-| Turnos: crear | C | C | — |
-| Turnos: confirmar | ✔ | ✔ | — |
-| Turnos: cancelar (con motivo) | ✔ | ✔ | — |
-| Turnos: marcar atendido / ausente | ✔ (cualquier turno) | — | ✔ (solo turnos propios) |
+| Turnos: crear | C | C | - |
+| Turnos: confirmar | ✔ | ✔ | - |
+| Turnos: cancelar (con motivo) | ✔ | ✔ | - |
+| Turnos: marcar atendido / ausente | ✔ (cualquier turno) | - | ✔ (solo turnos propios) |
 | Historial del turno | R | R | R |
 | Catálogo de componentes `/dev/componentes` | R | R | R |
 
 ## Rutas públicas
 
-- `/login` — inicio de sesión.
+- `/login`: inicio de sesión.
+- `/activar-cuenta`: activación desde el enlace de invitación (solo con un token válido).
 - Recursos estáticos de Next.js.
 
 Todo lo demás (grupo de rutas `(panel)`) exige sesión válida en el middleware/proxy y, además, rol en cada acción.
@@ -56,4 +58,6 @@ Todo lo demás (grupo de rutas `(panel)`) exige sesión válida en el middleware
 | `/turnos` | Turnos del día (solo lectura) | C01 |
 | `/turnos/nuevo` | Crear turno | C05 |
 | `/turnos/[id]` | Detalle, acciones de estado e historial | C06 |
+| `/equipo` | Miembros, roles e invitaciones (solo ADMIN) | C07 |
+| `/estadisticas` | Indicadores del consultorio (solo ADMIN) | C08 |
 | `/dev/componentes` | Catálogo del sistema de componentes | C01 |

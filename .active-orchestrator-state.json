@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "step": "visual-design",
+  "step": "roadmap",
   "owner": "active-orchestrator",
   "foundation": {
     "version": 1,
@@ -59,13 +59,14 @@
       },
       "visual-design": {
         "variant": "system-only",
-        "status": "pending",
+        "status": "done",
         "requires": [
           "kb"
         ],
         "outputs": [
           "design-system/README.md"
-        ]
+        ],
+        "notes": "Revision 2 aprobada; pantallas de referencia en design-system/screens"
       },
       "roadmap": {
         "variant": "local-markdown",
@@ -344,5 +345,12 @@
       "knowledge-base/10_preguntas_abiertas.md",
       "knowledge-base/README.md"
     ]
+  },
+  "visual_design": {
+    "created_by": "design-system",
+    "mode": "system-only",
+    "status": "approved",
+    "revision": 2,
+    "path": "design-system/README.md"
   }
 }

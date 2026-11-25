@@ -72,6 +72,17 @@
 **Decisión**: política de memoria `local` (Engram personal de cada integrante).
 **Justificación**: Engram Cloud requiere un servidor propio; no vale la pena para 3 días.
 
+### DD-15 - Un consultorio con invitaciones (no SaaS)
+**Decisión**: un único consultorio por instalación. El dueño es ADMIN (creado por el seed) e invita al equipo por email con un rol; el invitado activa su cuenta. Sin registro público. Respuesta del líder: "Un consultorio + invitaciones".
+**Alternativas consideradas**: solo seed sin pantalla; SaaS multi-consultorio con registro propio.
+**Justificación**: cumple "sin registro público" de las restricciones, es realista para un consultorio y suma poco trabajo. El SaaS obligaría a agregar el consultorio a todas las tablas.
+**Trade-offs aceptados**: depende del envío de emails de Supabase (límite bajo en el plan gratuito, ver P-06).
+
+### DD-16 - Estadísticas simples para el dueño
+**Decisión**: sección `/estadisticas` solo para ADMIN, calculada de los turnos existentes, sin tablas nuevas. Respuesta del líder: "Sí, versión simple".
+**Justificación**: el dueño necesita ver ocupación, ausentismo y cancelaciones; el historial de estados ya tiene los datos.
+**Trade-offs aceptados**: un change más (C08) a cargo del líder.
+
 ## Supuestos inferidos
 
 ### SU-01 — Un único consultorio
@@ -102,7 +113,5 @@
 **Origen**: regla "el PROFESIONAL dueño del turno" (guía del C06).
 **Riesgo si es falso**: no se podría saber qué turnos son propios.
 
-### SU-06 — Gestión de usuarios solo por seed
-**Supuesto**: en el MVP no hay pantalla de usuarios; el seed crea uno por rol.
-**Origen**: no hay change asignado a usuarios en el reparto.
-**Riesgo si es falso**: faltaría un change; queda como pregunta abierta.
+### SU-06 - Gestión de usuarios (resuelto)
+Resuelto por DD-15: pantalla Equipo con invitaciones (C07).

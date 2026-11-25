@@ -12,20 +12,21 @@ Los consultorios odontológicos argentinos chicos y medianos organizan la agenda
 
 | Actor | Objetivo principal | Objetivos secundarios |
 |---|---|---|
-| ADMIN | Configurar el consultorio: profesionales, prestaciones con duración, sillones, horarios de atención y bloqueos. | Dar de alta a los usuarios del sistema; tener las mismas capacidades operativas que recepción. |
+| ADMIN (dueño) | Configurar el consultorio: profesionales, prestaciones con duración, sillones, horarios de atención y bloqueos. | Invitar al equipo con un rol; ver estadísticas del consultorio; tener las mismas capacidades operativas que recepción. |
 | RECEPCION | Dar turnos sin superposiciones en pocos pasos. | Registrar y buscar pacientes; confirmar y cancelar turnos con motivo. |
 | PROFESIONAL | Ver su agenda del día. | Marcar sus turnos como atendido o ausente. |
 | Paciente | — (no usa el sistema en el MVP) | Recibe turnos dados por el consultorio. |
 
 ## Alcance v1.0 (MVP — entrega 26/11/2026 12:00)
 
-1. Acceso con usuarios y roles `ADMIN`, `RECEPCION`, `PROFESIONAL` (alta por el administrador, sin registro público).
+1. Acceso con usuarios y roles `ADMIN`, `RECEPCION`, `PROFESIONAL`. Sin registro público: el ADMIN invita por email desde **Equipo** y el invitado activa su cuenta (decisión del líder, 2026-11-25).
 2. Gestión de pacientes: alta, búsqueda, edición y baja lógica, con datos ficticios.
 3. Catálogo: profesionales, prestaciones con duración y sillones/boxes.
 4. Horarios de atención y bloqueos por profesional, con cálculo de disponibilidad.
 5. Crear turno evitando solapamientos por profesional y por sillón, garantizado también en la base de datos.
 6. Confirmar, cancelar (motivo obligatorio, libera el horario) y marcar atendido/ausente, con historial de cambios de estado.
 7. Listado de turnos del día (solo lectura) y detalle del turno.
+8. **Estadísticas** simples para el dueño (solo ADMIN): turnos del período, ocupación, ausentismo, cancelaciones y motivos, por profesional (decisión del líder, 2026-11-25).
 
 ## Fuera de alcance
 
@@ -39,7 +40,7 @@ Decisión del líder: **se construye solo lo que exige la consigna; nada que agr
 - Facturación electrónica ARCA.
 - Obras sociales y prepagas (más allá de guardar el nombre y n.º de afiliado como dato del paciente).
 - Liquidaciones a profesionales y reportes avanzados.
-- Multi-sucursal (el MVP modela un único consultorio) y API pública.
+- Multi-sucursal, multi-consultorio o modelo SaaS con registro propio (el MVP modela un único consultorio) y API pública.
 - Sobreturnos de cualquier tipo, ni siquiera con permiso de ADMIN.
 - Reprogramar un turno como operación propia: se cancela y se crea uno nuevo.
 

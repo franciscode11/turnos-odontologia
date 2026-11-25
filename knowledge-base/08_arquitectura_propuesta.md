@@ -33,6 +33,8 @@ turnos-odontologia/
 │   │   │   ├── configuracion/prestaciones/       # C03
 │   │   │   ├── configuracion/sillones/           # C03
 │   │   │   ├── configuracion/horarios/           # C04
+│   │   │   ├── equipo/                           # C07
+│   │   │   ├── estadisticas/                     # C08
 │   │   │   └── turnos/
 │   │   │       ├── page.tsx                      # C01 (listado del día)
 │   │   │       ├── nuevo/                        # C05
@@ -76,7 +78,7 @@ turnos-odontologia/
 | `DIRECT_URL` | Conexión directa para migraciones. **Solo el líder.** | `postgresql://…:5432/postgres` | Y |
 | `NEXT_PUBLIC_SUPABASE_URL` | URL del proyecto Supabase. | `https://<ref>.supabase.co` | N |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Clave pública (`sb_publishable_…`). | `sb_publishable_…` | N (pública, pero no se versiona) |
-| `SUPABASE_SECRET_KEY` | Clave secreta (`sb_secret_…`), solo para el seed de usuarios. **Solo el líder.** | `sb_secret_…` | Y |
+| `SUPABASE_SECRET_KEY` | Clave secreta (`sb_secret_…`) para el seed y para enviar invitaciones desde el servidor. Solo en el entorno de Vercel y en la máquina del líder; nunca en el cliente. | `sb_secret_…` | Y |
 
 ## Calidad y CI
 

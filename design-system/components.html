@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Componentes · {brand}</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="ui.css">
+<script src="brand.js"></script>
+<script src="icons.js"></script>
+<script src="shell.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" data-sidebar data-active="componentes"></aside>
+  <div class="main">
+    <div class="mobile-bar"><div class="sb-mark"><span class="mark"><i data-icon="dental"></i></span><span class="sb-name" data-brand-name></span></div><button class="btn btn-ghost btn-icon btn-sm" aria-label="Abrir menú"><i data-icon="layout-sidebar-left-expand" class="nav"></i></button></div>
+    <header class="page-head">
+      <div>
+        <h1 class="page-title">Componentes</h1>
+        <p class="page-sub">Revision 2. Se implementan una sola vez en <span class="mono">src/components/ui</span>.</p>
+      </div>
+      <div class="notice"><i data-icon="alert-triangle"></i>Nombre y logo provisionales</div>
+    </header>
+
+    <div class="page-body">
+
+      <!-- Fundamentos -->
+      <section class="section">
+        <h2 class="section-title">Color</h2>
+        <p class="section-desc">Neutros zinc y un único acento. Los colores de estado aparecen solo en badges y avisos, siempre con ícono y texto.</p>
+        <div class="swatch-row">
+          <div class="tok"><i style="background:var(--color-accent-600)"></i>Acento<code>accent-600</code></div>
+          <div class="tok"><i style="background:var(--color-accent-50)"></i>Acento tenue<code>accent-50</code></div>
+          <div class="tok"><i style="background:var(--color-text)"></i>Texto<code>text</code></div>
+          <div class="tok"><i style="background:var(--color-text-muted)"></i>Texto secundario<code>text-muted</code></div>
+          <div class="tok"><i style="background:var(--color-border)"></i>Borde<code>border</code></div>
+          <div class="tok"><i style="background:var(--color-muted)"></i>Superficie<code>muted</code></div>
+          <div class="tok"><i style="background:var(--color-bg-subtle)"></i>Sidebar<code>bg-subtle</code></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Tipografía</h2>
+        <p class="section-desc">Geist para toda la interfaz y Geist Mono para DNI, matrículas y códigos. Archivos locales con licencia OFL, sin depender de servicios externos.</p>
+        <div class="cat-block">
+          <div class="type-row"><code>xl 28/600</code><span style="font-size:var(--text-xl);font-weight:600;letter-spacing:-0.025em">Ingresá al consultorio</span></div>
+          <div class="type-row"><code>lg 20/600</code><span style="font-size:var(--text-lg);font-weight:600;letter-spacing:-0.02em">Agenda del miércoles</span></div>
+          <div class="type-row"><code>md 16/600</code><span style="font-size:var(--text-md);font-weight:600">Cancelar turno</span></div>
+          <div class="type-row"><code>base 14/400</code><span>El profesional ya tiene un turno en ese horario.</span></div>
+          <div class="type-row"><code>sm 13/400</code><span class="muted" style="font-size:var(--text-sm)">10:30-11:30, Extracción, Sillón 1</span></div>
+          <div class="type-row"><code>mono 13</code><span class="mono">DNI 31.482.907 · MP 4471</span></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Movimiento y tiempos de reacción</h2>
+        <p class="section-desc">Todo se anima con transform y opacity, en menos de 300 ms y con curva de salida fuerte. Lo que se usa cientos de veces por día (atajos, foco, navegación por teclado) no se anima.</p>
+        <div class="grid g-2">
+          <div class="table-wrap">
+            <table class="motion-table">
+              <thead><tr><th>Interacción</th><th>Duración</th><th>Cómo</th></tr></thead>
+              <tbody class="num">
+                <tr><td class="strong">Presionar botón</td><td>120 ms</td><td class="muted">scale 0,97, ease-out</td></tr>
+                <tr><td class="strong">Hover de color</td><td>150 ms</td><td class="muted">ease, solo en mouse</td></tr>
+                <tr><td class="strong">Tooltip</td><td>125 ms</td><td class="muted">aparece a los 400 ms; los siguientes, al instante</td></tr>
+                <tr><td class="strong">Select, calendario, menú</td><td>160 / 110 ms</td><td class="muted">scale 0,96 desde el disparador</td></tr>
+                <tr><td class="strong">Diálogo</td><td>220 / 150 ms</td><td class="muted">scale 0,96 centrado, fondo 180 ms</td></tr>
+                <tr><td class="strong">Toast</td><td>240 / 160 ms</td><td class="muted">sube 12 px; se puede interrumpir</td></tr>
+                <tr><td class="strong">Ítem activo del menú</td><td>200 ms</td><td class="muted">el fondo se desliza, ease-out</td></tr>
+                <tr><td class="strong">Colapsar sidebar</td><td>220 ms</td><td class="muted">ease-in-out</td></tr>
+                <tr><td class="strong">Entrada del login</td><td>450 ms</td><td class="muted">blur 8 px a 0, una vez por sesión</td></tr>
+                <tr><td class="strong">Foco con teclado</td><td>0 ms</td><td class="muted">anillo inmediato</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-wrap">
+            <table class="motion-table">
+              <thead><tr><th>Regla de reacción</th><th>Valor</th></tr></thead>
+              <tbody class="num">
+                <tr><td class="strong">Respuesta visual a un clic</td><td>Inmediata (estado presionado en el mismo cuadro)</td></tr>
+                <tr><td class="strong">Mostrar "Guardando"</td><td>Solo si tarda más de 150 ms</td></tr>
+                <tr><td class="strong">Tiempo mínimo del spinner</td><td>400 ms, para que no parpadee</td></tr>
+                <tr><td class="strong">Búsqueda mientras se escribe</td><td>Espera 250 ms sin teclear</td></tr>
+                <tr><td class="strong">Toast de éxito</td><td>4 s; se pausa con el mouse encima</td></tr>
+                <tr><td class="strong">Toast de error</td><td>6 s, con botón para cerrar</td></tr>
+                <tr><td class="strong">Movimiento reducido</td><td>Sin escalas ni desplazamientos; solo fundidos de 120 ms</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row" style="margin-top:16px">
+          <button class="btn btn-primary" data-loading-demo="900">Probar guardado lento</button>
+          <button class="btn btn-secondary" data-loading-demo="90">Probar guardado rápido</button>
+          <span class="help">El rápido no muestra spinner: responde antes de 150 ms.</span>
+        </div>
+      </section>
+
+      <!-- Botones -->
+      <section class="section">
+        <h2 class="section-title">Botones</h2>
+        <p class="section-desc">Una acción primaria por pantalla. Textos de una a tres palabras, siempre en una línea.</p>
+        <div class="row">
+          <button class="btn btn-primary" type="submit"><i data-icon="plus"></i>Nuevo turno</button>
+          <button class="btn btn-secondary" type="button">Exportar</button>
+          <button class="btn btn-ghost" type="reset">Limpiar</button>
+          <button class="btn btn-danger" type="button">Cancelar turno</button>
+          <button class="btn btn-danger-ghost" type="button">Dar de baja</button>
+          <button class="btn btn-primary" disabled data-loading="true"><i data-icon="loader-2" class="spin"></i>Guardando</button>
+          <button class="btn btn-secondary btn-icon tip" data-tip="Editar" aria-label="Editar"><i data-icon="pencil"></i></button>
+          <button class="btn btn-secondary btn-sm">Chico</button>
+          <button class="btn btn-primary" disabled>Deshabilitado</button>
+        </div>
+      </section>
+
+      <!-- Estados y toasts -->
+      <section class="section">
+        <h2 class="section-title">Estados del turno</h2>
+        <p class="section-desc">Fondo tenue, ícono y texto del mismo tono. Nunca solo color.</p>
+        <div class="row">
+          <span class="badge st-reservado"><i data-icon="circle-dashed"></i>Reservado</span>
+          <span class="badge st-confirmado"><i data-icon="circle-check"></i>Confirmado</span>
+          <span class="badge st-atendido"><i data-icon="user-check"></i>Atendido</span>
+          <span class="badge st-ausente"><i data-icon="alert-triangle"></i>Ausente</span>
+          <span class="badge st-cancelado"><i data-icon="circle-x"></i>Cancelado</span>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <span class="badge lg st-reservado"><i data-icon="circle-dashed"></i>Reservado</span>
+          <span class="badge lg st-confirmado"><i data-icon="circle-check"></i>Confirmado</span>
+          <span class="badge lg st-atendido"><i data-icon="user-check"></i>Atendido</span>
+          <span class="badge lg st-ausente"><i data-icon="alert-triangle"></i>Ausente</span>
+          <span class="badge lg st-cancelado"><i data-icon="circle-x"></i>Cancelado</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Toasts</h2>
+        <p class="section-desc">Mismo lenguaje que los estados. Aparecen abajo a la derecha y se apilan.</p>
+        <div class="grid g-2">
+          <div class="stack" style="gap:8px;align-items:flex-start">
+            <div class="toast static t-success"><i data-icon="circle-check"></i><div class="t-text"><b>Turno creado</b> <span>Martina Sosa, 10:30</span></div><button class="t-close" aria-label="Cerrar"><i data-icon="x" class="sm"></i></button></div>
+            <div class="toast static t-error"><i data-icon="circle-x"></i><div class="t-text"><b>El sillón ya está ocupado</b> <span>Sillón 1, 10:30-11:00</span></div><button class="t-close" aria-label="Cerrar"><i data-icon="x" class="sm"></i></button></div>
+            <div class="toast static t-warning"><i data-icon="alert-triangle"></i><div class="t-text"><b>Turno marcado ausente</b> <span>Ignacio Zabala</span></div><button class="t-close" aria-label="Cerrar"><i data-icon="x" class="sm"></i></button></div>
+            <div class="toast static t-info"><i data-icon="info-circle"></i><div class="t-text"><b>Horario liberado</b> <span>Se canceló el turno de las 9:30</span></div><button class="t-close" aria-label="Cerrar"><i data-icon="x" class="sm"></i></button></div>
+          </div>
+          <div class="row" style="align-content:flex-start">
+            <button class="btn btn-secondary btn-sm" data-toast="success|Turno creado|Rocío Gaitán, 11:00">Éxito</button>
+            <button class="btn btn-secondary btn-sm" data-toast="error|El profesional ya tiene un turno|10:00-10:30">Error</button>
+            <button class="btn btn-secondary btn-sm" data-toast="warning|Turno marcado ausente|Ignacio Zabala">Aviso</button>
+            <button class="btn btn-secondary btn-sm" data-toast="info|Horario liberado|Lunes 9:30">Info</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Texto -->
+      <section class="section">
+        <h2 class="section-title">Campos de texto</h2>
+        <p class="section-desc">Etiqueta arriba, ayuda o error abajo. El placeholder nunca reemplaza a la etiqueta.</p>
+        <div class="grid g-3">
+          <div class="field"><label class="label" for="t1">Apellido<span class="req">*</span></label><input class="control" id="t1" type="text" value="Gaitán"><span class="help">Como figura en el DNI.</span></div>
+          <div class="field"><label class="label" for="t2">Email <span class="opt">Opcional</span></label><input class="control" id="t2" type="email" placeholder="nombre@example.com"></div>
+          <div class="field"><label class="label" for="t3">DNI<span class="req">*</span></label><input class="control mono" id="t3" type="text" value="31.482.907" aria-invalid="true" aria-describedby="t3e"><span class="err" id="t3e"><i data-icon="circle-x" class="sm"></i>Ya existe un paciente con ese DNI</span></div>
+          <div class="field"><label class="label" for="t4">Contraseña</label><div class="input-wrap has-trail"><input class="control" id="t4" type="password" value="turnos-2026"><button type="button" class="trail-btn" data-reveal="t4" aria-label="Mostrar contraseña"><i data-icon="eye"></i></button></div></div>
+          <div class="field"><label class="label" for="t5">Teléfono<span class="req">*</span></label><div class="addon"><span>+54</span><input class="control num" id="t5" type="tel" value="261 486 2093"></div></div>
+          <div class="field"><label class="label" for="t6">Sitio web <span class="opt">Opcional</span></label><div class="addon"><span>https://</span><input class="control" id="t6" type="url" placeholder="consultorio.example.com"></div></div>
+          <div class="field"><label class="label" for="t7">Buscar paciente</label><div class="input-wrap has-lead has-trail"><i data-icon="search" class="lead"></i><input class="control is-focus" id="t7" type="search" value="Gait"><button type="button" class="trail-btn" data-clear="t7" aria-label="Limpiar"><i data-icon="x"></i></button></div><span class="help">Por apellido o DNI. Estado con foco.</span></div>
+          <div class="field"><label class="label" for="t8">Matrícula</label><input class="control mono" id="t8" value="MP 4471" disabled><span class="help">Deshabilitado.</span></div>
+          <div class="field"><label class="label" for="t9">Motivo de cancelación<span class="req">*</span></label><textarea class="control" id="t9" placeholder="Por ejemplo, avisó que no puede venir"></textarea></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Números y rangos</h2>
+        <div class="grid g-3">
+          <div class="field"><span class="label">Duración<span class="opt">minutos</span></span><div class="stepper"><button aria-label="Restar 5 minutos"><i data-icon="minus"></i></button><span>45</span><button aria-label="Sumar 5 minutos"><i data-icon="plus"></i></button></div><span class="help">Múltiplo de 5, entre 10 y 240.</span></div>
+          <div class="field"><label class="label" for="n2">Precio de referencia <span class="opt">Opcional</span></label><div class="addon"><span>$</span><input class="control num" id="n2" value="38.500"></div></div>
+          <div class="field"><span class="label">Paso de la agenda<span class="opt num">15 min</span></span><div class="slider" role="slider" aria-valuemin="5" aria-valuemax="60" aria-valuenow="15" tabindex="0"><span class="track"></span><span class="fill" style="width:18.2%"></span><span class="thumb" style="left:18.2%"></span></div><div class="slider-scale"><span>5</span><span>60</span></div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Fecha y hora</h2>
+        <p class="section-desc">Selectores propios, iguales en todos los navegadores. Lo ocupado o bloqueado aparece tachado.</p>
+        <div class="grid g-3">
+          <div class="field"><span class="label">Fecha (date)</span>
+            <button class="control is-focus" type="button"><span class="num">Mié 25 nov 2026</span><i data-icon="calendar-event"></i></button>
+            <div class="popover inline cal">
+              <div class="cal-head"><button class="btn btn-ghost btn-icon btn-sm" aria-label="Mes anterior"><i data-icon="chevron-left"></i></button>Noviembre 2026<button class="btn btn-ghost btn-icon btn-sm" aria-label="Mes siguiente"><i data-icon="chevron-right"></i></button></div>
+              <div class="cal-grid"><span class="dow">lu</span><span class="dow">ma</span><span class="dow">mi</span><span class="dow">ju</span><span class="dow">vi</span><span class="dow">sá</span><span class="dow">do</span>
+              <span class="d out">26</span><span class="d out">27</span><span class="d out">28</span><span class="d out">29</span><span class="d out">30</span><span class="d out">31</span><span class="d off">1</span>
+              <span class="d">2</span><span class="d">3</span><span class="d">4</span><span class="d">5</span><span class="d">6</span><span class="d off">7</span><span class="d off">8</span>
+              <span class="d">9</span><span class="d">10</span><span class="d">11</span><span class="d">12</span><span class="d">13</span><span class="d off">14</span><span class="d off">15</span>
+              <span class="d">16</span><span class="d">17</span><span class="d">18</span><span class="d">19</span><span class="d">20</span><span class="d off">21</span><span class="d off">22</span>
+              <span class="d off">23</span><span class="d today">24</span><span class="d sel">25</span><span class="d">26</span><span class="d">27</span><span class="d off">28</span><span class="d off">29</span></div>
+            </div>
+          </div>
+          <div class="stack" style="gap:24px">
+            <div class="field"><span class="label">Hora (time)</span>
+              <button class="control" type="button"><span class="num">10:30</span><i data-icon="clock"></i></button>
+              <div class="popover inline"><div class="slots"><span class="slot">09:00</span><span class="slot off">09:30</span><span class="slot">10:00</span><span class="slot sel">10:30</span><span class="slot">11:00</span><span class="slot off">11:30</span><span class="slot">12:00</span><span class="slot">12:30</span></div></div>
+            </div>
+            <div class="field"><span class="label">Fecha y hora (datetime-local)</span><button class="control" type="button"><span class="num">25/11/2026, 10:30</span><i data-icon="calendar-event"></i></button></div>
+          </div>
+          <div class="stack" style="gap:24px">
+            <div class="field"><span class="label">Mes (month)</span>
+              <div class="popover inline" style="margin-top:0"><div class="cal-head" style="padding:6px 8px 0">2026</div><div class="months"><span class="slot">ene</span><span class="slot">feb</span><span class="slot">mar</span><span class="slot">abr</span><span class="slot">may</span><span class="slot">jun</span><span class="slot">jul</span><span class="slot">ago</span><span class="slot">sep</span><span class="slot">oct</span><span class="slot sel">nov</span><span class="slot">dic</span></div></div>
+            </div>
+            <div class="field"><span class="label">Semana (week)</span><button class="control" type="button"><span class="num">Semana 48, del 23 al 29 nov</span><i data-icon="calendar-week"></i></button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Selección</h2>
+        <div class="grid g-3">
+          <div class="field pop-anchor"><span class="label">Prestación (select con grupos)</span>
+            <button class="control" type="button" data-pop="sel1" aria-expanded="true"><span>Limpieza</span><i data-icon="selector"></i></button>
+            <div class="popover inline" id="sel1" role="listbox" data-state="open">
+              <div class="lb-group">Generales</div>
+              <div class="lb-opt" role="option"><span class="chk"></span>Consulta<span class="meta">30 min</span></div>
+              <div class="lb-opt" role="option" aria-selected="true" data-highlighted><span class="chk"><i data-icon="check"></i></span>Limpieza<span class="meta">30 min</span></div>
+              <div class="lb-sep"></div>
+              <div class="lb-group">Cirugía</div>
+              <div class="lb-opt" role="option"><span class="chk"></span>Extracción<span class="meta">60 min</span></div>
+              <div class="lb-opt" role="option" aria-disabled="true"><span class="chk"></span>Implante, inactiva<span class="meta">120 min</span></div>
+            </div>
+          </div>
+          <div class="stack" style="gap:24px">
+            <div class="field"><span class="label">Sillones (select múltiple)</span><div class="control chips" style="position:relative"><span class="chip">Sillón 1<button aria-label="Quitar Sillón 1"><i data-icon="x" class="sm"></i></button></span><span class="chip">Sillón 3<button aria-label="Quitar Sillón 3"><i data-icon="x" class="sm"></i></button></span><i data-icon="selector" style="position:absolute;right:12px;top:50%;margin-top:-8px;color:var(--color-text-subtle)"></i></div></div>
+            <div class="field"><span class="label">Paciente (combobox, reemplaza datalist)</span>
+              <div class="input-wrap has-lead"><i data-icon="search" class="lead"></i><input class="control" value="gai" aria-label="Paciente"></div>
+              <div class="popover inline"><div class="lb-opt" data-highlighted><span><mark>Gai</mark>tán, Rocío</span><span class="meta mono">31.482.907</span></div><div class="lb-opt"><span><mark>Gai</mark>do, Marcelo</span><span class="meta mono">27.903.115</span></div></div>
+            </div>
+          </div>
+          <div class="stack" style="gap:20px">
+            <div class="field"><span class="label">Días de atención (checkbox)</span>
+              <div class="stack" style="gap:10px">
+                <label class="choice"><span class="box" data-state="checked"><i data-icon="check"></i></span>Lunes</label>
+                <label class="choice"><span class="box" data-state="unchecked"></span>Martes</label>
+                <label class="choice"><span class="box" data-state="mixed"></span>Toda la semana</label>
+              </div>
+            </div>
+            <div class="field"><span class="label">Vista (radio)</span>
+              <div class="stack" role="radiogroup" aria-label="Vista" style="gap:10px">
+                <label class="choice"><span class="box radio" data-state="checked"></span>Por profesional</label>
+                <label class="choice"><span class="box radio" data-state="unchecked"></span>Por sillón</label>
+              </div>
+            </div>
+            <label class="choice"><span class="switch" data-state="checked"></span><span>Prestación activa<small>Se ofrece en turnos nuevos.</small></span></label>
+            <div class="segmented" role="group" aria-label="Período"><button aria-pressed="true">Día</button><button aria-pressed="false">Semana</button><button aria-pressed="false">Mes</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Archivos, color y campo oculto</h2>
+        <div class="grid g-3">
+          <div class="field"><span class="label">Adjunto (file)</span>
+            <div class="dropzone" role="button" tabindex="0"><div class="dz-icon"><i data-icon="upload"></i></div><b>Arrastrá un archivo</b> o hacé clic para elegirlo<div class="help" style="margin-top:4px">PDF o imagen, hasta 5 MB.</div></div>
+            <div class="file"><i data-icon="file-text" class="subtle"></i><div class="f-meta">consentimiento.pdf<span class="num">1,2 MB de 1,8 MB</span><div class="progress"><i style="width:66%"></i></div></div><button class="btn btn-ghost btn-icon btn-sm" aria-label="Quitar archivo"><i data-icon="x"></i></button></div>
+          </div>
+          <div class="field"><span class="label">Color en la agenda (color)</span>
+            <div class="swatches" role="radiogroup" aria-label="Color"><button class="swatch" role="radio" aria-checked="true" style="background:#0e7a6b;color:#0e7a6b" aria-label="Verde azulado"></button><button class="swatch" role="radio" aria-checked="false" style="background:#1d64b5;color:#1d64b5" aria-label="Azul"></button><button class="swatch" role="radio" aria-checked="false" style="background:#925708;color:#925708" aria-label="Ámbar"></button><button class="swatch" role="radio" aria-checked="false" style="background:#52525b;color:#52525b" aria-label="Gris"></button></div>
+            <span class="help">Paleta cerrada de 4 tonos; sin selector libre.</span>
+          </div>
+          <div class="field"><span class="label">Campo oculto (hidden)</span><p class="help" style="margin:0;font-size:13px">No se ve. <span class="mono">HiddenField</span> registra un valor en el formulario (por ejemplo, el id del turno) sin usar un input crudo.</p></div>
+        </div>
+      </section>
+
+      <!-- Contenedores -->
+      <section class="section">
+        <h2 class="section-title">Card, tabla, vacío y carga</h2>
+        <div class="grid g-21">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Hora</th><th>Paciente</th><th>Profesional</th><th>Sillón</th><th>Estado</th></tr></thead>
+              <tbody class="num">
+                <tr><td class="time strong">09:00</td><td><div class="cell-person"><div><b>Federico Albornoz</b><span class="mono">DNI 28.774.310</span></div></div></td><td class="muted">Dr. Tomás Iriarte</td><td class="muted">Sillón 2</td><td><span class="badge st-atendido"><i data-icon="user-check"></i>Atendido</span></td></tr>
+                <tr><td class="time strong">09:30</td><td><div class="cell-person"><div><b>Ignacio Zabala</b><span class="mono">DNI 40.118.552</span></div></div></td><td class="muted">Dra. Lucía Bertolotti</td><td class="muted">Sillón 1</td><td><span class="badge st-ausente"><i data-icon="alert-triangle"></i>Ausente</span></td></tr>
+                <tr class="is-cancel"><td class="time">09:30</td><td><div class="cell-person"><div><b style="color:inherit">Nahuel Paz</b><span class="mono">DNI 36.205.871</span></div></div></td><td>Dra. Paula Quiroga</td><td>Sillón 3</td><td><span class="badge st-cancelado"><i data-icon="circle-x"></i>Cancelado</span></td></tr>
+                <tr><td class="time strong">10:00</td><td><div class="cell-person"><div><b>Agustina Molina</b><span class="mono">DNI 33.690.024</span></div></div></td><td class="muted">Dr. Tomás Iriarte</td><td class="muted">Sillón 2</td><td><span class="badge st-confirmado"><i data-icon="circle-check"></i>Confirmado</span></td></tr>
+                <tr><td class="time strong">12:00</td><td><div class="cell-person"><div><b>Camila Ledesma</b><span class="mono">DNI 42.307.618</span></div></div></td><td class="muted">Dra. Lucía Bertolotti</td><td class="muted">Sillón 1</td><td><span class="badge st-reservado"><i data-icon="circle-dashed"></i>Reservado</span></td></tr>
+              </tbody>
+            </table>
+            <div class="table-foot"><span class="num">5 de 18 turnos</span><div class="row" style="gap:4px"><button class="btn btn-secondary btn-icon btn-sm" aria-label="Anterior" disabled><i data-icon="chevron-left"></i></button><button class="btn btn-secondary btn-icon btn-sm" aria-label="Siguiente"><i data-icon="chevron-right"></i></button></div></div>
+          </div>
+          <div class="stack" style="gap:24px">
+            <section class="card">
+              <div class="card-head"><h3 class="card-title">Historial del turno</h3><span class="badge st-confirmado"><i data-icon="circle-check"></i>Confirmado</span></div>
+              <div class="card-body stack num" style="gap:14px;font-size:13px">
+                <div><b style="font-weight:500">Confirmado</b> <span class="muted">por Micaela Núñez</span><div class="help">25/11/2026, 08:41</div></div>
+                <div><b style="font-weight:500">Reservado</b> <span class="muted">por Micaela Núñez</span><div class="help">24/11/2026, 17:02</div></div>
+              </div>
+              <div class="card-foot"><button class="btn btn-ghost btn-sm">Marcar atendido</button><button class="btn btn-danger-ghost btn-sm" data-open="cancel">Cancelar turno</button></div>
+            </section>
+            <div class="card empty"><div class="e-icon"><i data-icon="calendar-off"></i></div><h4>Sin turnos este día</h4><p>Elegí otra fecha o creá el primer turno del día.</p><button class="btn btn-secondary btn-sm"><i data-icon="plus"></i>Nuevo turno</button></div>
+            <div class="card card-body stack" aria-busy="true" aria-label="Cargando" style="gap:10px"><div class="sk" style="height:12px;width:40%"></div><div class="sk" style="height:12px;width:85%"></div><div class="sk" style="height:12px;width:65%"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Diálogo</h2>
+        <p class="section-desc">Para confirmar acciones con consecuencias. Escape o clic afuera lo cierra.</p>
+        <div class="dialog-static">
+          <div class="dialog" role="dialog" aria-labelledby="dlg-t">
+            <div class="dialog-head"><h3 id="dlg-t">Cancelar turno</h3><p>El horario queda libre y la cancelación se guarda en el historial.</p></div>
+            <div class="dialog-body"><div class="field"><label class="label" for="dm">Motivo<span class="req">*</span></label><textarea class="control" id="dm" aria-invalid="true" aria-describedby="dme"></textarea><span class="err" id="dme"><i data-icon="circle-x" class="sm"></i>Escribí el motivo de la cancelación</span></div></div>
+            <div class="dialog-foot"><button class="btn btn-ghost btn-sm">Volver</button><button class="btn btn-danger btn-sm">Cancelar turno</button></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="cancel" data-state="closed">
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="c-t">
+    <div class="dialog-head"><h3 id="c-t">Cancelar turno</h3><p>Rocío Gaitán, miércoles 25 a las 10:30.</p></div>
+    <div class="dialog-body"><div class="field"><label class="label" for="cm">Motivo<span class="req">*</span></label><textarea class="control" id="cm" placeholder="Por ejemplo, avisó que no puede venir"></textarea></div></div>
+    <div class="dialog-foot"><button class="btn btn-ghost btn-sm" data-close>Volver</button><button class="btn btn-danger btn-sm" data-close data-toast="info|Turno cancelado|El horario de las 10:30 quedó libre">Cancelar turno</button></div>
+  </div>
+</div>
+</body>
+</html>

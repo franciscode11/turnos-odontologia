@@ -115,3 +115,29 @@
 - [ ] El detalle muestra solo las acciones permitidas para el estado y el rol, y el historial completo.
 
 **Reglas**: RN-ES-01 a RN-ES-08.
+
+## Épica 7: Equipo e invitaciones (C07 · líder)
+
+### US-060 - Invitar al equipo
+**Como** admin **quiero** invitar personas por email con un rol **para** que usen el sistema sin registro público.
+
+**Criterios de aceptación**:
+- [ ] **Feliz:** invitar a un email nuevo como Recepción lo deja `INVITADO` y envía el email de activación.
+- [ ] **Error:** invitar como Profesional sin elegir profesional vinculado se rechaza.
+- [ ] **Borde:** no se puede desactivar ni cambiar el rol del último ADMIN activo.
+- [ ] Activar la cuenta con una contraseña válida deja al usuario `ACTIVO` y lo lleva a la agenda.
+
+**Reglas**: RN-EQ-01 a RN-EQ-07, RN-AU-01, RN-AU-05.
+
+## Épica 8: Estadísticas (C08 · líder)
+
+### US-070 - Ver estadísticas del consultorio
+**Como** dueño (ADMIN) **quiero** ver turnos, ocupación, ausentismo y cancelaciones del período **para** tomar decisiones sobre el consultorio.
+
+**Criterios de aceptación**:
+- [ ] **Feliz:** con 10 atendidos y 2 ausentes en el mes, el ausentismo es 16,7%.
+- [ ] **Borde:** sin turnos atendidos ni ausentes, el ausentismo se muestra como "Sin datos", no como 0%.
+- [ ] **Permisos:** RECEPCION y PROFESIONAL no acceden a `/estadisticas`.
+- [ ] Cada indicador muestra la variación contra el período anterior.
+
+**Reglas**: RN-ST-01 a RN-ST-07.

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Activar cuenta · {brand}</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../ui.css">
+<script src="../brand.js"></script>
+<script src="../icons.js"></script>
+<script src="../shell.js"></script>
+<script src="../smoke.js"></script>
+</head>
+<body>
+<main class="auth">
+  <section class="auth-art" aria-hidden="true">
+    <canvas data-smoke></canvas>
+    <div class="art-top"><span class="mark"><i data-icon="dental"></i></span><span class="sb-name" data-brand-name></span></div>
+    <p class="art-quote">Tu lugar en el equipo ya está listo.<span>Elegí una contraseña y entrás directo a la agenda.</span></p>
+  </section>
+  <section class="auth-panel">
+    <div class="ap-top"></div>
+    <form class="auth-form" onsubmit="return false" novalidate>
+      <h1>Activá tu cuenta</h1>
+      <p class="lead">Completá tus datos para terminar la invitación.</p>
+      <div class="invite-card"><span class="avatar lg">VR</span><div><b style="font-weight:600">Valeria Ríos</b> te invitó como <span class="tag">Recepción</span></div></div>
+      <div class="stack-lg">
+        <div class="field"><label class="label" for="n">Nombre y apellido</label><input class="control" id="n" value="Carla Funes" autocomplete="name"></div>
+        <div class="field"><label class="label" for="e">Email</label><input class="control" id="e" value="carla.funes@example.com" disabled></div>
+        <div class="field">
+          <label class="label" for="p1">Contraseña</label>
+          <div class="input-wrap has-trail"><input class="control is-focus" id="p1" type="password" value="consultorio" autocomplete="new-password"><button type="button" class="trail-btn" data-reveal="p1" aria-label="Mostrar contraseña"><i data-icon="eye"></i></button></div>
+          <ul class="rules" aria-live="polite"><li class="ok"><i data-icon="check" class="sm"></i>Al menos 10 caracteres</li><li><i data-icon="circle-dashed" class="sm"></i>Un número</li></ul>
+        </div>
+        <button class="btn btn-primary btn-block" style="height:40px;margin-top:4px" type="submit">Activar cuenta <i data-icon="arrow-right" class="arrow"></i></button>
+      </div>
+    </form>
+    <p class="auth-foot">La invitación vence en 7 días.</p>
+  </section>
+</main>
+</body>
+</html>

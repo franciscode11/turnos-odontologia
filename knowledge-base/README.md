@@ -16,7 +16,7 @@ Base de conocimiento generada por `kb-creator` (modo import) a partir del Discov
 | [06_funcionalidades.md](06_funcionalidades.md) | Historias de usuario por change con escenarios mínimos |
 | [07_flujos_principales.md](07_flujos_principales.md) | Login, patrón de acción, crear turno, disponibilidad, estados, flujo del equipo |
 | [08_arquitectura_propuesta.md](08_arquitectura_propuesta.md) | Patrones, carpetas por módulo, seguridad, variables de entorno, CI |
-| [09_decisiones_y_supuestos.md](09_decisiones_y_supuestos.md) | 14 decisiones (DD) y 6 supuestos (SU) |
+| [09_decisiones_y_supuestos.md](09_decisiones_y_supuestos.md) | 16 decisiones (DD) y 6 supuestos (SU) |
 | [10_preguntas_abiertas.md](10_preguntas_abiertas.md) | 5 inconsistencias, preguntas priorizadas y puntos "No evidenciado" |
 
 ## Quick Start para Desarrolladores
@@ -36,7 +36,9 @@ Base de conocimiento generada por `kb-creator` (modo import) a partir del Discov
 | C04 Horarios y disponibilidad | Lautaro | RN-HO, US-030/031, flujo 4 |
 | C05 Crear turno | Joaquín E. | RN-TU, US-040, flujo 3, IN-02 |
 | C06 Estados del turno | Ulises | RN-ES, US-050, flujo 5 |
+| C07 Equipo e invitaciones | Francisco (líder) | RN-EQ, US-060, flujo 6 |
+| C08 Estadísticas | Francisco (líder) | RN-ST, US-070 |
 
 ## Resumen Ejecutivo
 
-Agenda de turnos para consultorios odontológicos argentinos, cargada solo por el consultorio, con tres roles controlados en el servidor. Su diferencial, respaldado por el Discovery, es que **nunca permite turnos superpuestos por profesional ni por sillón** (validado en el dominio y garantizado por la base de datos) y que **todo cambio de estado queda en un historial**, con cancelación siempre motivada. El MVP son 6 changes: una base técnica secuencial y 5 módulos en paralelo, uno por integrante.
+Agenda de turnos para consultorios odontológicos argentinos, cargada solo por el consultorio, con tres roles controlados en el servidor. Su diferencial, respaldado por el Discovery, es que **nunca permite turnos superpuestos por profesional ni por sillón** (validado en el dominio y garantizado por la base de datos) y que **todo cambio de estado queda en un historial**, con cancelación siempre motivada. El MVP son 8 changes: una base técnica secuencial, 5 módulos en paralelo (uno por integrante) y 2 del líder (equipo con invitaciones y estadísticas para el dueño).

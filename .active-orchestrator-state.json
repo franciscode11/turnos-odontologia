@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "step": "roadmap",
+  "step": "team-mode",
   "owner": "active-orchestrator",
   "foundation": {
     "version": 1,
@@ -70,17 +70,18 @@
       },
       "roadmap": {
         "variant": "local-markdown",
-        "status": "pending",
+        "status": "done",
         "requires": [
           "kb"
         ],
         "outputs": [
           "CHANGES.md"
-        ]
+        ],
+        "notes": "8 fichas; verificador fichas.sh ok sin errores ni avisos"
       },
       "task-management": {
         "variant": "local",
-        "status": "pending",
+        "status": "done",
         "requires": [
           "roadmap"
         ],
@@ -352,5 +353,20 @@
     "status": "approved",
     "revision": 2,
     "path": "design-system/README.md"
+  },
+  "roadmap": {
+    "created_by": "roadmap-generator",
+    "source": "CHANGES.md",
+    "changes_file": "CHANGES.md",
+    "changes": [
+      "C-01",
+      "C-02",
+      "C-03",
+      "C-04",
+      "C-05",
+      "C-06",
+      "C-07",
+      "C-08"
+    ]
   }
 }

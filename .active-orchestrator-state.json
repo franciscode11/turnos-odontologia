@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "step": "find-skill",
+  "step": "agents",
   "owner": "active-orchestrator",
   "foundation": {
     "version": 1,
@@ -123,15 +123,20 @@
       },
       "find-skill": {
         "variant": "install-selected",
-        "status": "pending",
+        "status": "done",
         "requires": [
           "kb"
         ],
-        "outputs": []
+        "outputs": [
+          "skills-lock.json",
+          ".agents/skills/",
+          ".claude/skills/",
+          "docs/decisiones-skills.md"
+        ]
       },
       "registry": {
         "variant": "index",
-        "status": "pending",
+        "status": "done",
         "requires": [
           "find-skill"
         ],
@@ -380,5 +385,26 @@
       "C-07",
       "C-08"
     ]
+  },
+  "skills": {
+    "created_by": "find-skill",
+    "mode": "install-selected",
+    "installed": [
+      "supabase",
+      "supabase-postgres-best-practices",
+      "prisma-cli",
+      "prisma-client-api",
+      "shadcn",
+      "nextjs-app-router-patterns",
+      "vitest"
+    ],
+    "scope": "project",
+    "lockfile": "skills-lock.json",
+    "decisions": "docs/decisiones-skills.md"
+  },
+  "registry": {
+    "created_by": "skill-registry",
+    "path": ".atl/skill-registry.md",
+    "engram": "no disponible en esta sesión"
   }
 }

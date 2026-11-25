@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "step": "team-mode",
+  "step": "find-skill",
   "owner": "active-orchestrator",
   "foundation": {
     "version": 1,
@@ -91,23 +91,35 @@
       },
       "team-mode": {
         "variant": "new",
-        "status": "pending",
+        "status": "done",
         "requires": [
           "task-management"
         ],
         "outputs": [
           ".active-stack/team.json",
           ".github/pull_request_template.md",
-          ".github/CODEOWNERS"
-        ]
+          ".github/CODEOWNERS",
+          ".gitignore"
+        ],
+        "size": 6,
+        "names_versioned": true,
+        "tracking": "local",
+        "reviewers": {
+          "primary": "franciscode11",
+          "backup": null
+        },
+        "codeowners": "existente conservado (* @franciscode11)",
+        "main_protection": "ya aplicada: PR + 1 aprobación de code owner, sin force-push; check de CI se agrega después de C-01"
       },
       "memory-policy": {
         "variant": "local",
-        "status": "pending",
+        "status": "done",
         "requires": [
           "team-mode"
         ],
-        "outputs": []
+        "outputs": [],
+        "choice": "local",
+        "notes": "Engram personal de cada integrante; no se ejecutó active-stack memory init ni se escribió .engram/"
       },
       "find-skill": {
         "variant": "install-selected",

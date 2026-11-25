@@ -92,6 +92,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
 - **Zona**: `package.json`, `prisma/`, `src/app/layout.tsx`, `src/app/login/`, `src/app/activar-cuenta/`, `src/app/(panel)/layout.tsx`, `src/app/(panel)/turnos/page.tsx`, `src/app/dev/`, `src/components/ui/`, `src/domain/shared/`, `src/server/auth/`, `src/server/db.ts`, `src/middleware.ts`, `src/config/`, `.github/workflows/`, `eslint.config.mjs`, `README.md`, `.env.example`
 - **Requiere**: claude · macos
 - **Modo**: sdd
+- **Responsable**: francisco-valles
 - **Governance**: CRITICO
 - **Scope**:
   - Scaffold Next.js App Router + TypeScript estricto + npm + Tailwind + ESLint; scripts `dev`, `build`, `lint`, `typecheck`, `test` (Vitest).
@@ -126,6 +127,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
 - **Zona**: `src/app/(panel)/pacientes/`, `src/domain/pacientes/`, `src/server/pacientes/`, `tests/pacientes/`
 - **Requiere**: claude o codex · macos o windows
 - **Modo**: sdd
+- **Responsable**: octavio-crescini
 - **Governance**: MEDIO
 - **Scope**:
   - Dominio: `normalizarDni`, esquema Zod del paciente (obligatorios y fecha de nacimiento no futura).
@@ -145,6 +147,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
 - **Zona**: `src/app/(panel)/configuracion/profesionales/`, `src/app/(panel)/configuracion/prestaciones/`, `src/app/(panel)/configuracion/sillones/`, `src/domain/catalogo/`, `src/server/catalogo/`, `tests/catalogo/`
 - **Requiere**: claude o codex · macos o windows
 - **Modo**: sdd
+- **Responsable**: joaquin-cortez
 - **Governance**: BAJO
 - **Scope**:
   - Dominio: validación de duración (múltiplo de 5, entre 10 y 240), unicidad de matrícula y de nombre de sillón.
@@ -163,6 +166,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
 - **Zona**: `src/app/(panel)/configuracion/horarios/`, `src/domain/horarios/`, `src/server/horarios/`, `tests/horarios/`
 - **Requiere**: claude o codex · macos o windows
 - **Modo**: sdd
+- **Responsable**: lautaro-de-coninck
 - **Governance**: MEDIO
 - **Scope**:
   - Dominio puro: `validarFranja`, `franjasSeSuperponen`, `calcularDisponibilidad(franjas, bloqueos, turnos, fecha, duracion)` usando `seSuperponen` y `ESTADOS_QUE_OCUPAN_AGENDA` de `src/domain/shared/`.
@@ -182,6 +186,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
 - **Zona**: `src/app/(panel)/turnos/nuevo/`, `src/domain/turnos/crear-*`, `src/domain/turnos/solapamiento*`, `src/server/turnos/crear-turno.ts`, `tests/turnos/crear-turno.test.ts`
 - **Requiere**: claude o codex · macos o windows
 - **Modo**: sdd
+- **Responsable**: joaquin-echenagorria
 - **Governance**: ALTO
 - **Scope**:
   - Dominio puro: `validarNuevoTurno` (fin = inicio + duración, activos, no pasado, dentro de franja, fuera de bloqueo, sin solapamiento de profesional ni de sillón).
@@ -201,6 +206,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
 - **Zona**: `src/app/(panel)/turnos/[id]/`, `src/domain/turnos/estados*`, `src/server/turnos/estados-turno.ts`, `tests/turnos/estados-turno.test.ts`
 - **Requiere**: claude o codex · macos o windows
 - **Modo**: sdd
+- **Responsable**: ulises-lucato
 - **Governance**: ALTO
 - **Scope**:
   - Dominio puro: máquina de estados (`transicionValida`, `accionesDisponibles(estado, rol, esPropio, ahora)`), motivo obligatorio y `inicio ≤ ahora` para asistencia.
@@ -220,6 +226,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
 - **Zona**: `src/app/(panel)/equipo/`, `src/app/activar-cuenta/`, `src/domain/equipo/`, `src/server/equipo/`, `tests/equipo/`
 - **Requiere**: claude · macos
 - **Modo**: sdd
+- **Responsable**: francisco-valles
 - **Governance**: CRITICO
 - **Scope**:
   - Dominio: validación de invitación, regla del último ADMIN y política de contraseña.
@@ -239,6 +246,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
 - **Zona**: `src/app/(panel)/estadisticas/`, `src/domain/estadisticas/`, `src/server/estadisticas/`, `tests/estadisticas/`
 - **Requiere**: claude · macos
 - **Modo**: sdd
+- **Responsable**: francisco-valles
 - **Governance**: BAJO
 - **Scope**:
   - Dominio puro: `calcularIndicadores(turnos, franjas, bloqueos, periodo)` con las fórmulas de RN-ST-02 a RN-ST-06 y "Sin datos" cuando el denominador es 0.

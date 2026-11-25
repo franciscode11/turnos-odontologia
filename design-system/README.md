@@ -18,8 +18,8 @@ Una sola base visual para todas las pantallas. Los integrantes no diseñan: usan
 | `components.html` | Catálogo de todos los componentes y estados (en la app: `/dev/componentes`). |
 | `screens/panel-turnos.html` | Agenda del día con el sidebar (pantalla principal). |
 | `screens/login.html`, `screens/activar-cuenta.html` | Ingreso y activación de una invitación. |
-| `screens/estadisticas.html` | Estadísticas para el dueño del consultorio (pendiente de aprobación de alcance). |
-| `screens/equipo.html` | Equipo e invitaciones (pendiente de aprobación de alcance). |
+| `screens/estadisticas.html` | Estadísticas para el dueño del consultorio (C-08, DD-16). |
+| `screens/equipo.html` | Equipo e invitaciones (C-07, DD-15). |
 | `shell.js`, `icons.js`, `smoke.js`, `brand.js` | Solo para las vistas HTML: menú, íconos, fondo animado del login y nombre del producto. |
 | `brand.md` | Nombre, tono, logo e imágenes. |
 | `assets/fonts/` | Geist y Geist Mono (variables, woff2) con su licencia OFL. |
@@ -79,7 +79,6 @@ Solo se animan `transform` y `opacity` (la única excepción es el ancho del sid
 | Nombre comercial | (TBD): se usa "Turnos Odontología" | Cambiar `BRAND_NAME` en `brand.js` y en `src/config/brand.ts` (C01). |
 | Logo | (TBD): provisional, dice "LOGO PROVISIONAL" | Reemplazar `assets/logo.svg` (mismo nombre) y `public/logo.svg` en la app; la marca del menú es el ícono `dental` de Tabler sobre el acento. |
 | Modo oscuro | Fuera del MVP | Agregar valores bajo `@media (prefers-color-scheme: dark)` en `tokens.css` y subir Revision. |
-| Pantallas Equipo y Estadísticas | Diseñadas, alcance a confirmar por el líder | Si se aprueban, se agregan a la knowledge base y al roadmap. |
 
 ## Cambios futuros
 

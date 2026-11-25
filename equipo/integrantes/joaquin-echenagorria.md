@@ -119,14 +119,14 @@ git fetch origin
 ```
 
 ```bash
-git checkout feat/c05-crear-turno
+git checkout C-05-crear-turno
 ```
 
 ```bash
 git merge main
 ```
 
-La rama `feat/c05-crear-turno` **ya la creó el líder** en GitHub (la consigna pide que el líder cree una rama por integrante). Si `git checkout` dice que no existe, avisale al líder.
+La rama `C-05-crear-turno` **ya la creó el líder** en GitHub (la consigna pide que el líder cree una rama por integrante). Si `git checkout` dice que no existe, avisale al líder.
 
 ```bash
 npm install
@@ -265,7 +265,7 @@ git add . && git commit -m "chore(openspec): archivar change turnos-reserva"
 ### Paso 9 — Pull Request
 
 ```bash
-git push -u origin feat/c05-crear-turno
+git push -u origin C-05-crear-turno
 ```
 
 ```bash
@@ -312,5 +312,5 @@ Mandáselo al líder por WhatsApp o agregalo en tu PR.
 | El agente quiere modificar `schema.prisma` | Decile que no, y pasale al líder qué campo necesitás. |
 | El agente no conoce `/sdd-orchestrator` | Revisá que Active Stack se haya instalado en modo Full (`openspec --version`, `engram version`) y abrí una sesión nueva. |
 | Conflicto al hacer `git merge main` | Seguí la sección de conflictos de [`../02-git-y-prs.md`](../02-git-y-prs.md). |
-| El agente propone crear un *worktree* u otra rama | Decile: "Trabajo en la rama actual (feat/c05-crear-turno), no crees worktrees ni ramas nuevas". |
+| El agente propone crear un *worktree* u otra rama | Decile: "Trabajo en la rama actual (C-05-crear-turno), no crees worktrees ni ramas nuevas". |
 | No sabés qué contestarle al agente | Copiá su pregunta y mandala al grupo. **No improvises.** |

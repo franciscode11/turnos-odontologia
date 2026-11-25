@@ -82,7 +82,7 @@ Recepción → Form → crearTurno() → dominio (validaciones) → Prisma.$tran
 
 ## Flujo 7: Trabajo del equipo (OPSX por change)
 
-1. El líder mergea el C01 a `main`, crea las ramas `feat/c0X-…` y hace obligatorio el CI.
+1. El líder mergea el C01 a `main`, actualiza con `main` las ramas `C-0X-…` (creadas al mergear la fundación) y hace obligatorio el CI.
 2. Cada integrante, en su rama: explore → propose → (revisión y **Ajustar**) → apply → verify → archive, tocando solo su módulo.
 3. Abre PR; CI corre lint + typecheck + test.
 4. El líder revisa con la checklist de `equipo/04-plan-lider.md` y mergea con merge commit.

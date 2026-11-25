@@ -24,7 +24,7 @@ Un **sistema de turnos para consultorios odontológicos** (agenda, pacientes, pr
 ## ¿Cómo nos organizamos?
 
 - Hay **un solo repositorio** en GitHub. La rama `main` es la versión oficial y **solo el líder (Francisco) la mergea**.
-- **Cada uno trabaja en su propia rama** (por ejemplo `feat/c02-pacientes`), hace su change ahí y abre un **Pull Request (PR)**.
+- **Cada uno trabaja en su propia rama** (por ejemplo `C-02-pacientes`), hace su change ahí y abre un **Pull Request (PR)**.
 - El líder revisa el PR, y si los tests dan verde, lo mergea a `main`.
 - Así GitHub muestra los commits de cada uno (la cátedra lo exige: *cada integrante con sus propios commits*).
 

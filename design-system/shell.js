@@ -4,6 +4,7 @@
      contraseña, checkboxes, switches, chips, segmentado y botón con estado de carga.
    Los tiempos salen de tokens.css (se leen con getComputedStyle). */
 (function () {
+  var DS_BASE = (document.currentScript && document.currentScript.src || '').replace(/shell\.js(\?.*)?$/, '');
   var NAV = [
     { items: [
       { id: "turnos", label: "Agenda", icon: "calendar-event", count: "18", href: "panel-turnos.html" },
@@ -40,7 +41,7 @@
       });
       html += "</ul>";
     });
-    html += '</nav><div class="sb-foot"><button class="user-btn" type="button"><span class="avatar">VR</span><span class="user-meta"><b>Valeria Ríos</b><span>Administradora</span></span>' + icon("selector", "sm subtle") + '</button></div>';
+    html += '</nav><div class="sb-foot"><button class="user-btn" type="button"><span class="avatar lg"><img src="' + DS_BASE + 'assets/avatars/avatar-01-remera-naranja.webp" alt=""></span><span class="user-meta"><b>Francisco Valles</b><span>Administrador</span></span>' + icon("selector", "sm subtle") + '</button></div>';
     aside.innerHTML = html;
 
     // Indicador animado del ítem activo (transform, 200ms ease-out)

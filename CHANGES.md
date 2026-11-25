@@ -87,9 +87,9 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
 
 ### [C-01] `base-tecnica`
 - **Estado**: `[ ]` pendiente
-- **Resultado**: en un clon limpio `npm install && npm test` pasa sin credenciales; con el `.env` del líder la app inicia sesión con los 3 usuarios ficticios del seed y cada uno ve solo el menú de su rol; `/dev/componentes` muestra todos los componentes; el CI corre lint, typecheck y tests en cada PR.
+- **Resultado**: en un clon limpio `npm install && npm test` pasa sin credenciales; con el `.env` del líder la app inicia sesión con un usuario del seed por rol y cada uno ve solo el menú de su rol; `/dev/componentes` muestra todos los componentes; el CI corre lint, typecheck y tests en cada PR.
 - **Depende de**: ninguna
-- **Zona**: `package.json`, `prisma/`, `src/app/layout.tsx`, `src/app/login/`, `src/app/activar-cuenta/`, `src/app/(panel)/layout.tsx`, `src/app/(panel)/turnos/page.tsx`, `src/app/dev/`, `src/components/ui/`, `src/domain/shared/`, `src/server/auth/`, `src/server/db.ts`, `src/middleware.ts`, `src/config/`, `.github/workflows/`, `eslint.config.mjs`, `README.md`, `.env.example`
+- **Zona**: `package.json`, `package-lock.json`, `prisma/`, `prisma.config.ts`, `tsconfig.json`, `next.config.ts`, `vitest.config.ts`, `postcss.config.mjs`, `components.json`, `public/`, `src/app/globals.css`, `src/app/page.tsx`, `src/app/(panel)/page.tsx`, páginas placeholder de cada módulo en `src/app/(panel)/`, `.gitkeep` de `src/domain/*`, `src/server/*` y `tests/*`, `tests/shared/`, `src/app/layout.tsx`, `src/app/login/`, `src/app/activar-cuenta/`, `src/app/(panel)/layout.tsx`, `src/app/(panel)/turnos/page.tsx`, `src/app/dev/`, `src/components/ui/`, `src/domain/shared/`, `src/server/auth/`, `src/server/db.ts`, `src/server/resultado.ts`, `scripts/`, `.gitignore`, `src/proxy.ts`, `src/config/`, `.github/workflows/`, `eslint.config.mjs`, `README.md`, `.env.example`
 - **Requiere**: claude · macos
 - **Modo**: sdd
 - **Responsable**: francisco-valles
@@ -99,12 +99,12 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
   - `prisma/schema.prisma` con todo el modelo del MVP: `Usuario` (rol, estado, invitación, `profesionalId`), `Paciente`, `Profesional`, `Prestacion`, `Sillon`, `HorarioAtencion`, `Bloqueo`, `Turno`, `HistorialTurno`; enums `Rol`, `EstadoUsuario`, `EstadoTurno`.
   - Migración inicial + migración SQL manual: `btree_gist`, `EXCLUDE` por profesional y por sillón sobre `tstzrange(inicio, fin, '[)')` donde `estado <> 'CANCELADO'`, `CHECK (fin > inicio)`, `CHECK` de motivo al cancelar, `CHECK` de duración de prestación e índice único parcial de DNI activo.
   - `src/domain/shared/`: `ESTADOS_QUE_OCUPAN_AGENDA`, `ESTADOS_FINALES`, `seSuperponen(a, b)` para `[inicio, fin)` y utilidades de fecha en `America/Argentina/Buenos_Aires`, con tests.
-  - Supabase Auth con `@supabase/ssr`: login por email y contraseña, middleware que exige sesión en `(panel)`, helper `requireRol([...])` y matriz de permisos de `03_actores_y_roles.md`.
-  - Sistema de componentes en `src/components/ui` según `design-system/` (Revision 2): los 22 tipos de input, Select con grupos y múltiple, Combobox, Textarea, botones, Card, Table, Dialog, Badge de estado, Toast, Tooltip, Skeleton y estados vacíos, con `FormField` integrado a Zod y react-hook-form; Geist con `geist/font`; tokens de `design-system/tokens.css` en `globals.css`.
+  - Supabase Auth con `@supabase/ssr`: login por email y contraseña, proxy de Next 16 (`src/proxy.ts`) que exige sesión en `(panel)`, helper `requireRol([...])` y matriz de permisos de `03_actores_y_roles.md`.
+  - Sistema de componentes en `src/components/ui` según `design-system/` (Revision 3, con avatares 3D en `public/avatars/` y componente `Avatar` sin iniciales): los 22 tipos de input, Select con grupos y múltiple, Combobox, Textarea, botones, Card, Table, Dialog, Badge de estado, Toast, Tooltip, Skeleton y estados vacíos, con `FormField` integrado a Zod y react-hook-form; Geist con `geist/font`; tokens de `design-system/tokens.css` en `globals.css`.
   - Página `/dev/componentes` (catálogo) y layout del panel con el sidebar de `design-system/screens/panel-turnos.html`; páginas placeholder de cada módulo y carpetas con `.gitkeep` en `src/domain/<modulo>`, `src/server/<modulo>` y `tests/<modulo>`.
   - ESLint `no-restricted-syntax` que prohíbe `<input>`, `<select>`, `<textarea>` y `<button>` crudos fuera de `src/components/ui`.
   - `/turnos`: listado de turnos del día, solo lectura.
-  - Seed ficticio: 1 ADMIN, 1 RECEPCION, 2 PROFESIONAL activos; 2 profesionales, 3 prestaciones, 2 sillones, franjas de lunes a viernes, 5 pacientes inventados y turnos de ejemplo con historial.
+  - Seed (DD-17): 6 usuarios con los nombres del equipo y avatar (1 ADMIN, 2 RECEPCION, 3 PROFESIONAL); 3 profesionales, 3 prestaciones, 3 sillones, franjas de lunes a viernes, 5 pacientes inventados y turnos de ejemplo con historial.
   - GitHub Actions (lint + typecheck + test), `.env.example` vacío y README con instalación y tests.
   - Tests: `seSuperponen` (borde que empieza justo al terminar), `requireRol`, utilidades de fecha.
 - **Leer antes**:

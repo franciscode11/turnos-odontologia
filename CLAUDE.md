@@ -82,7 +82,7 @@ El plan completo está en [CHANGES.md](CHANGES.md). Resumen:
 > Reglas globales ya definidas en el archivo global de instrucciones del cliente activo (orquestador, governance, TDD, engram): el proyecto las hereda. Acá viven solo las reglas **específicas de este proyecto** + las universales que el global no cubra.
 
 **Datos y secretos**
-- NUNCA usar datos reales de personas en código, seeds, tests, ejemplos o capturas → solo datos ficticios.
+- NUNCA usar datos reales de pacientes en código, seeds, tests, ejemplos o capturas → pacientes, DNI y teléfonos inventados. El personal usa los nombres del equipo con emails `@example.com` (DD-17), sin otros datos personales.
 - NUNCA leer, escribir, mostrar ni commitear `.env` ni claves → usar `.env.example` vacío y pedir los valores al líder por privado.
 - NUNCA poner la clave secreta de Supabase en el cliente ni en variables `NEXT_PUBLIC_*` → usarla solo en el servidor.
 

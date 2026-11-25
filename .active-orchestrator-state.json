@@ -1,0 +1,24 @@
+{
+  "version": 5,
+  "step": "discovery",
+  "owner": "active-orchestrator",
+  "foundation": {
+    "version": 1,
+    "approved_on": "2026-11-25",
+    "route": "foundation",
+    "order": ["openspec-init", "discovery", "kb", "visual-design", "roadmap", "task-management", "team-mode", "memory-policy", "find-skill", "registry", "agents"],
+    "phases": {
+      "openspec-init": {"variant": "init", "status": "done", "requires": [], "outputs": ["openspec/config.yaml", "openspec/specs/", "openspec/changes/archive/", ".claude/skills/", ".agents/skills/"], "notes": "openspec init --tools claude,codex --language es --scope project; perfil custom con verify"},
+      "discovery": {"variant": "competitors+existing-sources", "status": "in_progress", "requires": ["openspec-init"], "outputs": ["docs/discovery/checklist-discovery.md", "docs/discovery/informe-discovery.md", "docs/discovery/informe-discovery.pdf"]},
+      "kb": {"variant": "import", "status": "pending", "requires": ["discovery"], "outputs": ["knowledge-base/"]},
+      "visual-design": {"variant": "system-only", "status": "pending", "requires": ["kb"], "outputs": ["design-system/README.md"]},
+      "roadmap": {"variant": "local-markdown", "status": "pending", "requires": ["kb"], "outputs": ["CHANGES.md"]},
+      "task-management": {"variant": "local", "status": "pending", "requires": ["roadmap"], "outputs": [".active-stack/roadmap.json"]},
+      "team-mode": {"variant": "new", "status": "pending", "requires": ["task-management"], "outputs": [".active-stack/team.json", ".github/pull_request_template.md", ".github/CODEOWNERS"]},
+      "memory-policy": {"variant": "local", "status": "pending", "requires": ["team-mode"], "outputs": []},
+      "find-skill": {"variant": "install-selected", "status": "pending", "requires": ["kb"], "outputs": []},
+      "registry": {"variant": "index", "status": "pending", "requires": ["find-skill"], "outputs": [".atl/skill-registry.md"]},
+      "agents": {"variant": "generate", "status": "pending", "requires": ["kb", "roadmap", "registry", "team-mode", "memory-policy"], "outputs": ["AGENTS.md", "CLAUDE.md"]}
+    }
+  }
+}

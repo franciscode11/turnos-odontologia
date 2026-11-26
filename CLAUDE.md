@@ -18,7 +18,7 @@ Agenda de turnos para consultorios odontológicos argentinos, cargada solo por e
 | Estilos | Tailwind CSS + tokens de `design-system/tokens.css` | 4.x |
 | Componentes de UI | Sistema propio en `src/components/ui` (shadcn/ui + Radix) | Único permitido |
 | Formularios y validación | react-hook-form + Zod | Mismo esquema en cliente y servidor |
-| Base de datos | PostgreSQL en Supabase (São Paulo) con `btree_gist` | Postgres 15+ |
+| Base de datos | PostgreSQL en Supabase (us-west-2) con `btree_gist` | Postgres 15+ |
 | ORM y migraciones | Prisma | `prisma/migrations/` |
 | Autenticación | Supabase Auth (email y contraseña, sin registro público, invitaciones) | `@supabase/ssr` |
 | Tests | Vitest (dominio puro, sin base de datos) | - |

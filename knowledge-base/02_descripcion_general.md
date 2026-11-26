@@ -12,7 +12,7 @@
 | Estilos | Tailwind CSS + tokens de `design-system/tokens.css` | 4.x |
 | Componentes de UI | Sistema propio en `src/components/ui` (base shadcn/ui + Radix) | Único permitido |
 | Formularios y validación | react-hook-form + Zod (mismo esquema en cliente y servidor) | — |
-| Base de datos | PostgreSQL gestionado en Supabase (región São Paulo) con extensión `btree_gist` | Postgres 15+ |
+| Base de datos | PostgreSQL gestionado en Supabase (región us-west-2, Oregón; se planificó São Paulo y el proyecto quedó creado en esa región) con extensión `btree_gist` | Postgres 15+ |
 | ORM y migraciones | Prisma | Migraciones versionadas en `prisma/migrations/` |
 | Autenticación | Supabase Auth (email + contraseña, registro público desactivado) | `@supabase/ssr` |
 | Archivos | Supabase Storage (buckets privados) | Sin uso funcional en el MVP |

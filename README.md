@@ -6,6 +6,8 @@ Trabajo Global de **Desarrollo de Software** (UTN FRM), comisión **3K09**. Lo c
 
 **Aplicación publicada:** https://turnos-odontologia-beige.vercel.app (datos ficticios; los usuarios de prueba los reparte el líder por privado).
 
+**Video del trabajo:** https://www.youtube.com/watch?v=PIBwSXwy9kg
+
 ## Dónde está cada entregable de la consigna
 
 | Etapa de la consigna | Dónde está |

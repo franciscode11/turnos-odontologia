@@ -220,7 +220,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
   - `knowledge-base/09_decisiones_y_supuestos.md` §DD-09
 
 ### [C-07] `equipo-e-invitaciones`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` terminado (2026-11-26, archivado en la rama; pendiente de revisión y merge del líder)
 - **Resultado**: el ADMIN invita por email con un rol desde `/equipo`; el invitado activa su cuenta en `/activar-cuenta` y entra a la agenda; invitar como Profesional sin profesional vinculado se rechaza; no se puede desactivar al último ADMIN; los tests pasan.
 - **Depende de**: C-01
 - **Zona**: `src/app/(panel)/equipo/`, `src/app/activar-cuenta/`, `src/domain/equipo/`, `src/server/equipo/`, `tests/equipo/`

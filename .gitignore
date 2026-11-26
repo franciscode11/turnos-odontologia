@@ -90,3 +90,6 @@ tmp/
 .active-stack/team.local.json
 .active-stack/me.local.json
 # /active-stack:team-mode
+
+# --- Worktrees locales de agentes ---------------------------------------------
+.claude/worktrees/

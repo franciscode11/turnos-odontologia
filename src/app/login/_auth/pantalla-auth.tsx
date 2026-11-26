@@ -1,25 +1,21 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
-import { Icono } from "@/components/ui";
 import { BRAND_NAME } from "@/config/brand";
-import { FondoHumo } from "./fondo-humo";
 
-/** Pantalla partida de login y activación (design-system/screens/login.html). */
-export function PantallaAuth({ frase, detalle, pie, children }: { frase: string; detalle: string; pie?: ReactNode; children: ReactNode }) {
+/** Pantalla partida de login y activación (design system Revision 4: panel ilustrado). */
+export function PantallaAuth({ frase, detalle, pie, children }: { frase: ReactNode; detalle: string; pie?: ReactNode; children: ReactNode }) {
   return (
     <main className="auth">
-      <section className="auth-art" aria-hidden="true">
-        <FondoHumo />
-        <div className="art-top">
-          <span className="mark"><Icono nombre="dental" /></span>
-          <span className="sb-name">{BRAND_NAME}</span>
+      <aside className="auth-art">
+        <Image className="auth-foto" src="/ilustracion-dental.webp" alt="" fill priority sizes="(max-width: 899px) 0px, 52vw" />
+        <Image className="auth-logo" src="/logo.svg" alt={BRAND_NAME} width={250} height={60} priority />
+        <div className="art-quote">
+          <h2>{frase}</h2>
+          <p>{detalle}</p>
         </div>
-        <p className="art-quote">
-          {frase}
-          <span>{detalle}</span>
-        </p>
-      </section>
+      </aside>
       <section className="auth-panel">
-        <div className="ap-top" />
+        <Image className="auth-logo-movil" src="/logo.svg" alt={BRAND_NAME} width={210} height={50} />
         {children}
         {pie ? <p className="auth-foot">{pie}</p> : null}
       </section>

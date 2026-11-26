@@ -6,6 +6,7 @@ import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { Dialog, DropdownMenu } from "radix-ui";
 import { Avatar } from "./avatar";
 import { Icono, type NombreIcono } from "./icono";
+import { SimboloMarca } from "./marca";
 import { COOKIE_COLAPSADO } from "./shell-constantes";
 import { ProveedorToast } from "./toast";
 import { ProveedorTooltip } from "./tooltip";
@@ -33,7 +34,7 @@ const TITULO_GRUPO: Record<SeccionMenu["grupo"], string | null> = {
 type Props = {
   marca: string;
   secciones: SeccionMenu[];
-  usuario: { nombre: string; rol: string; avatar: string | null };
+  usuario: { nombre: string; email: string; rol: string; avatar: string | null };
   /** Estado guardado en la cookie `panel-colapsado` (lo lee el layout en el servidor). */
   colapsadoInicial?: boolean;
   children: ReactNode;
@@ -97,10 +98,11 @@ function GrupoMenu({ titulo, items, pathname, alNavegar }: { titulo: string | nu
 }
 
 function MenuUsuario({ usuario }: { usuario: Props["usuario"] }) {
+  const formulario = useRef<HTMLFormElement>(null);
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button className="user-btn" type="button" aria-label={`Menú de ${usuario.nombre}`}>
+        <button className="user-btn" type="button" aria-label={`Menú de ${usuario.nombre}`} title={usuario.nombre}>
           <Avatar avatar={usuario.avatar} tamano="lg" />
           <span className="user-meta">
             <b>{usuario.nombre}</b>
@@ -110,10 +112,26 @@ function MenuUsuario({ usuario }: { usuario: Props["usuario"] }) {
         </button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className="popover menu-usuario" side="top" align="start" sideOffset={6}>
-          <form action={cerrarSesion}>
-            <DropdownMenu.Item asChild>
-              <button type="submit" className="lb-opt menu-item">
+        <DropdownMenu.Content className="menu-usuario" side="top" align="start" sideOffset={8} collisionPadding={12}>
+          <div className="mu-cabecera">
+            <Avatar avatar={usuario.avatar} tamano="lg" />
+            <div className="mu-datos">
+              <b>{usuario.nombre}</b>
+              <span>{usuario.email}</span>
+            </div>
+          </div>
+          <div className="mu-rol"><span className="tag">{usuario.rol}</span></div>
+          <DropdownMenu.Separator className="mu-sep" />
+          <form action={cerrarSesion} ref={formulario}>
+            <DropdownMenu.Item
+              asChild
+              onSelect={(evento) => {
+                // Sin esto Radix cierra y desmonta el menú antes de que el formulario se envíe.
+                evento.preventDefault();
+                formulario.current?.requestSubmit();
+              }}
+            >
+              <button type="submit" className="mu-item mu-peligro">
                 <Icono nombre="logout" />
                 Cerrar sesión
               </button>
@@ -128,7 +146,7 @@ function MenuUsuario({ usuario }: { usuario: Props["usuario"] }) {
 function Marca({ marca }: { marca: string }) {
   return (
     <div className="sb-mark">
-      <span className="mark"><Icono nombre="dental" /></span>
+      <span className="mark"><SimboloMarca /></span>
       <span className="sb-name">{marca}</span>
     </div>
   );
@@ -149,10 +167,19 @@ export function ShellPanel({ marca, secciones, usuario, colapsadoInicial = false
     <div className="app" data-collapsed={colapsado || undefined}>
       <aside className="sidebar" aria-label="Menú">
         <div className="sb-head">
-          <Marca marca={marca} />
-          <button className="sb-toggle" type="button" onClick={alternar} aria-label={colapsado ? "Expandir menú" : "Contraer menú"} aria-expanded={!colapsado}>
-            <Icono nombre={colapsado ? "sidebar-expand" : "sidebar-collapse"} tamano="nav" />
-          </button>
+          {colapsado ? (
+            <button className="sb-expandir" type="button" onClick={alternar} aria-label="Expandir menú" aria-expanded={false} title="Expandir menú">
+              <span className="mark"><SimboloMarca /></span>
+              <span className="sb-expandir-icono"><Icono nombre="sidebar-expand" tamano="nav" /></span>
+            </button>
+          ) : (
+            <>
+              <Marca marca={marca} />
+              <button className="sb-toggle" type="button" onClick={alternar} aria-label="Contraer menú" aria-expanded={true}>
+                <Icono nombre="sidebar-collapse" tamano="nav" />
+              </button>
+            </>
+          )}
         </div>
         <ListaSecciones secciones={secciones} pathname={pathname} />
         <div className="sb-foot"><MenuUsuario usuario={usuario} /></div>

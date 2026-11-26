@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "../components/ui/estilos/tokens.css";
-@import "../components/ui/estilos/componentes.css";
+/* En la capa components: las utilidades de Tailwind (layout en los módulos) le ganan. */
+@import "../components/ui/estilos/componentes.css" layer(components);
 
 /* Tokens del design system expuestos a Tailwind para layout en los módulos
    (gap-*, p-*, text-*, rounded-*). Colores semánticos, nunca valores crudos. */
@@ -23,9 +24,19 @@
 /* Panel lateral en mobile y menú del usuario (complementan componentes.css). */
 .sheet-overlay { position: fixed; inset: 0; z-index: 40; background: var(--color-overlay); animation: fadeIn var(--dur-dialog) var(--ease-out); }
 .sidebar.sheet-sidebar { display: flex; position: fixed; z-index: 41; top: 0; left: 0; bottom: 0; width: min(var(--sidebar-width), 86vw); height: 100dvh; box-shadow: var(--shadow-lg); animation: entrarIzquierda var(--dur-sidebar) var(--ease-out); }
-.menu-usuario { position: static; min-width: 200px; padding: 4px; }
-.menu-item { width: 100%; border: 0; background: transparent; font: inherit; color: var(--color-text); }
-.menu-item:focus-visible, .menu-item[data-highlighted] { outline: none; background: var(--color-muted); box-shadow: none; }
+.menu-usuario { z-index: 50; width: 232px; padding: 6px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); transform-origin: var(--radix-dropdown-menu-content-transform-origin); animation: menuEntra var(--dur-popover) var(--ease-out); }
+.mu-cabecera { display: flex; align-items: center; gap: var(--space-2-5); padding: 8px 8px 4px; }
+.mu-datos { min-width: 0; }
+.mu-datos b { display: block; font-size: var(--text-sm); font-weight: var(--weight-semibold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mu-datos span { display: block; font-size: var(--text-xs); color: var(--color-text-subtle); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mu-rol { padding: 4px 8px 8px 54px; }
+.mu-sep { height: 1px; margin: 2px -6px 6px; background: var(--color-border); }
+.mu-item { width: 100%; display: flex; align-items: center; gap: var(--space-2); height: 34px; padding: 0 8px; border: 0; border-radius: var(--radius-sm); background: transparent; font: inherit; font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--color-text); cursor: pointer; transition: background-color var(--dur-hover) var(--ease-hover); }
+.mu-peligro { color: var(--color-danger); }
+.mu-item:focus-visible, .mu-item[data-highlighted] { outline: none; box-shadow: none; background: var(--color-muted); }
+.mu-peligro:focus-visible, .mu-peligro[data-highlighted] { background: var(--estado-cancelado-bg); }
+@keyframes menuEntra { from { opacity: 0; transform: scale(0.97) translateY(4px); } }
+@media (prefers-reduced-motion: reduce) { .menu-usuario { animation: fadeIn 120ms var(--ease-out); } }
 @keyframes fadeIn { from { opacity: 0; } }
 @keyframes entrarIzquierda { from { transform: translateX(-100%); } }
 @media (prefers-reduced-motion: reduce) { .sidebar.sheet-sidebar { animation: fadeIn 120ms var(--ease-out); } }

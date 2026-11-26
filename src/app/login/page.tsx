@@ -10,9 +10,9 @@ export default async function PaginaLogin({ searchParams }: PageProps<"/login">)
   const { error } = await searchParams;
   return (
     <PantallaAuth
-      frase="La agenda que no se superpone."
-      detalle="Turnos por profesional y por sillón, con el historial de cada cambio."
-      pie="¿No tenés cuenta? La crea el administrador del consultorio desde Equipo."
+      frase={<>La agenda que no<br />se superpone.</>}
+      detalle="Organizá los turnos por profesional y por sillón, con el historial de cada cambio."
+      pie={<>¿No tenés cuenta? El administrador la crea desde <strong>Equipo</strong>.</>}
     >
       <FormularioLogin errorInicial={error === "inactivo" ? MENSAJE_INACTIVO : undefined} />
     </PantallaAuth>

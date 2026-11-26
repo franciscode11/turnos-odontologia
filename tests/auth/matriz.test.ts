@@ -33,16 +33,16 @@ describe("matriz de permisos (RN-AU-02, RN-AU-03, knowledge-base/03)", () => {
     for (const roles of Object.values(PERMISOS)) expect(roles.length).toBeGreaterThan(0);
   });
 
-  it("menú: ADMIN ve las 9 secciones; RECEPCION y PROFESIONAL no ven Equipo ni Estadísticas", () => {
+  it("menú: ADMIN ve las 8 secciones (Componentes no va en el menú); RECEPCION y PROFESIONAL no ven Equipo ni Estadísticas", () => {
     expect(seccionesParaRol("ADMIN").map((s) => s.etiqueta)).toEqual([
-      "Agenda", "Pacientes", "Estadísticas", "Profesionales", "Prestaciones", "Sillones", "Horarios", "Equipo", "Componentes",
+      "Agenda", "Pacientes", "Estadísticas", "Profesionales", "Prestaciones", "Sillones", "Horarios", "Equipo",
     ]);
     for (const rol of ["RECEPCION", "PROFESIONAL"] as const) {
       const etiquetas = seccionesParaRol(rol).map((s) => s.etiqueta);
       expect(etiquetas).not.toContain("Equipo");
       expect(etiquetas).not.toContain("Estadísticas");
       expect(etiquetas).toContain("Agenda");
-      expect(etiquetas).toContain("Componentes");
+      expect(etiquetas).not.toContain("Componentes");
     }
   });
 });

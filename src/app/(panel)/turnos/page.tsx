@@ -9,6 +9,8 @@ import { SinPermiso } from "../_shell/sin-permiso";
 import { cargarAgenda } from "./_agenda/datos";
 import { GrillaDia } from "./_agenda/grilla-dia";
 import { ListaDia } from "./_agenda/lista-dia";
+import { ResumenDia } from "./_agenda/resumen-dia";
+import { SelectorDia } from "./_agenda/selector-dia";
 
 export const metadata: Metadata = { title: "Agenda" };
 
@@ -38,6 +40,7 @@ export default async function PaginaAgenda({ searchParams }: PageProps<"/turnos"
             <div className="row" style={{ gap: 4 }}>
               <BotonEnlace href={enlace(sumarDias(fecha, -1))} tamano="sm" icono="chevron-left" etiqueta="Día anterior" />
               <BotonEnlace href={enlace(hoy(ahora))} tamano="sm">Hoy</BotonEnlace>
+              <SelectorDia fecha={fecha} vista={vista} />
               <BotonEnlace href={enlace(sumarDias(fecha, 1))} tamano="sm" icono="chevron-right" etiqueta="Día siguiente" />
             </div>
             <div className="segmented" role="group" aria-label="Vista">
@@ -51,14 +54,15 @@ export default async function PaginaAgenda({ searchParams }: PageProps<"/turnos"
         }
       />
       <CuerpoPagina>
+        {columnas.length > 0 ? <ResumenDia turnos={turnos} /> : null}
         {columnas.length === 0 ? (
           <EstadoVacio icono="stethoscope" titulo="No hay profesionales activos" descripcion="Cargá profesionales desde Configuración para ver la agenda." />
         ) : vista === "lista" ? (
           <ListaDia turnos={turnos} />
         ) : (
           <>
+            {turnos.length === 0 ? <p className="ag-aviso">No hay turnos para este día.</p> : null}
             <GrillaDia columnas={columnas} fecha={fecha} ahora={ahora} />
-            {turnos.length === 0 ? <p className="help" style={{ marginTop: 12 }}>No hay turnos para este día.</p> : null}
             <p className="help" style={{ marginTop: 12 }}>
               Las franjas rayadas están fuera del horario de atención. Los turnos cancelados no aparecen: liberan el horario.
             </p>

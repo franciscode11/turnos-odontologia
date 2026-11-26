@@ -77,7 +77,6 @@ export const SECCIONES_MENU: readonly SeccionMenu[] = [
   { href: "/configuracion/sillones", etiqueta: "Sillones", icono: "sillones", grupo: "configuracion", permiso: "sillones.ver" },
   { href: "/configuracion/horarios", etiqueta: "Horarios", icono: "horarios", grupo: "configuracion", permiso: "horarios.ver" },
   { href: "/equipo", etiqueta: "Equipo", icono: "equipo", grupo: "consultorio", permiso: "equipo.gestionar" },
-  { href: "/dev/componentes", etiqueta: "Componentes", icono: "componentes", grupo: "consultorio", permiso: "componentes.ver" },
 ];
 
 export function seccionesParaRol(rol: Rol): SeccionMenu[] {

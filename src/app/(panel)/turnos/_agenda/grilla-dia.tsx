@@ -42,6 +42,7 @@ export function GrillaDia({ columnas, fecha, ahora }: { columnas: ColumnaAgenda[
             <b>{c.nombre}</b>
             <span>{c.especialidad ?? "Profesional"}</span>
           </div>
+          <span className="ag-cuenta num" title="Turnos que ocupan agenda">{c.turnos.filter((t) => ocupaAgenda(t.estado)).length}</span>
         </div>
       ))}
       <div className="ag-times">
@@ -87,11 +88,9 @@ export function GrillaDia({ columnas, fecha, ahora }: { columnas: ColumnaAgenda[
                 return (
                   <Link key={t.id} href={`/turnos/${t.id}`} className={`appt a-${t.estado.toLowerCase()}`} style={{ top: y(a) + 2, height: altoTurno }}>
                     <BadgeEstado estado={t.estado} soloIcono />
+                    <span className="a-hora num">{horaLocal(t.inicio)} – {horaLocal(t.fin)}</span>
                     <b>{t.paciente.nombre} {t.paciente.apellido}</b>
-                    <span className="a-meta">
-                      {horaLocal(t.inicio)}-{horaLocal(t.fin)}, {t.prestacion}
-                      {altoTurno > 60 ? <><br />{t.sillon}</> : null}
-                    </span>
+                    {altoTurno > 50 ? <span className="a-meta">{t.prestacion} · {t.sillon}</span> : null}
                   </Link>
                 );
               })}

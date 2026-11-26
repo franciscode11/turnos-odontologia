@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { puede } from "@/server/auth/matriz";
 import { accesoPagina } from "@/server/auth/pagina";
-import { PaginaPendiente } from "../_shell/pagina-pendiente";
+import { buscarPacientes } from "@/server/pacientes/acciones";
 import { SinPermiso } from "../_shell/sin-permiso";
+import { ListaPacientes } from "./lista-pacientes";
 
 export const metadata: Metadata = { title: "Pacientes" };
 
-// Placeholder del C-01. Lo reemplaza el C-02.
 export default async function PaginaPacientes() {
-  const { permitido } = await accesoPagina("pacientes.ver");
+  const { permitido, usuario } = await accesoPagina("pacientes.ver");
   if (!permitido) return <SinPermiso />;
-  return <PaginaPendiente titulo="Pacientes" descripcion="Listado, búsqueda, alta y edición de pacientes." change="C-02" icono="users" />;
+  const inicial = await buscarPacientes({ consulta: "", pagina: 1 });
+  return <ListaPacientes inicial={inicial} puedeEditar={puede(usuario.rol, "pacientes.editar")} />;
 }

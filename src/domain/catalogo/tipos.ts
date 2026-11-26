@@ -6,6 +6,8 @@ export type Profesional = {
   apellido: string;
   matricula: string;
   especialidad: string | null;
+  /** Archivo de public/avatars (puede faltar: se muestra un ícono). */
+  avatar?: string | null;
   activo: boolean;
 };
 

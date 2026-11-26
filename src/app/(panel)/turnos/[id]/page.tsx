@@ -91,7 +91,7 @@ export default async function PaginaTurnosDetalle({ params }: { params: Promise<
           {acciones.length > 0 ? <AccionesDelTurno id={turno.id} acciones={acciones} /> : null}
         </Tarjeta>
 
-        <Tarjeta titulo="Historial de estados">
+        <Tarjeta titulo="Historial de estados" className="mt-6">
           <Tabla titulo="Cambios de estado del turno">
             <TablaEncabezado>
               <TablaFila>

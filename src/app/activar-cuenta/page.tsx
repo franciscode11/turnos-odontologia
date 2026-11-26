@@ -29,7 +29,7 @@ export default async function PaginaActivarCuenta({ searchParams }: PageProps<"/
   const valida = invitacion?.estado === "INVITADO";
 
   return (
-    <PantallaAuth frase="Tu lugar en el equipo ya está listo." detalle="Elegí una contraseña y entrás directo a la agenda." pie="La invitación vence en 7 días.">
+    <PantallaAuth frase="Tu lugar en el equipo ya está listo." detalle="Elegí una contraseña y entrás directo a la agenda." pie="Si el enlace venció, pedile al administrador que te reenvíe la invitación.">
       <div className="auth-form">
         <h1>Activá tu cuenta</h1>
         <p className="lead">Completá tus datos para terminar la invitación.</p>

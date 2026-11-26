@@ -14,6 +14,7 @@ import {
   FormField,
   Interruptor,
   Tabla,
+  CeldaPersona,
   TablaCelda,
   TablaCeldaEncabezado,
   TablaCuerpo,
@@ -104,8 +105,8 @@ export function ListaProfesionales({ profesionales, puedeEditar }: Props) {
             ) : (
               profesionales.map((p) => (
                 <TablaFila key={p.id}>
-                  <TablaCelda destacada>
-                    {p.apellido}, {p.nombre}
+                  <TablaCelda>
+                    <CeldaPersona nombre={`${p.apellido}, ${p.nombre}`} avatar={p.avatar ?? null} />
                   </TablaCelda>
                   <TablaCelda className="num">{p.matricula}</TablaCelda>
                   <TablaCelda apagada={!p.especialidad}>{p.especialidad ?? "—"}</TablaCelda>

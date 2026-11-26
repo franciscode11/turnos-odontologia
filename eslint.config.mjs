@@ -23,7 +23,7 @@ const eslintConfig = defineConfig([
     files: ["src/components/ui/**/*.{ts,tsx}"],
     rules: { "no-restricted-syntax": "off" },
   },
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "src/generated/**", "design-system/**", "coverage/**"]),
+  globalIgnores([".claude/**", ".next/**", "out/**", "build/**", "next-env.d.ts", "src/generated/**", "design-system/**", "coverage/**"]),
 ]);
 
 export default eslintConfig;

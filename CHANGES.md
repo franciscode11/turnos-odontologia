@@ -240,7 +240,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
   - `knowledge-base/08_arquitectura_propuesta.md` §Seguridad, §Variables de entorno
 
 ### [C-08] `estadisticas-del-consultorio`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` terminado (2026-11-26, archivado en `openspec/changes/archive/2026-11-26-estadisticas-del-consultorio`; pendiente de PR)
 - **Resultado**: el ADMIN ve en `/estadisticas` turnos dados, ocupación, ausentismo y cancelaciones del período con variación contra el anterior, turnos por día, motivos de cancelación y tabla por profesional; los demás roles no acceden; los cálculos tienen tests con datos ficticios.
 - **Depende de**: C-01
 - **Zona**: `src/app/(panel)/estadisticas/`, `src/domain/estadisticas/`, `src/server/estadisticas/`, `tests/estadisticas/`

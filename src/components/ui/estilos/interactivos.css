@@ -5,7 +5,8 @@
 
 /* ---------- Contenido flotante (select, popover, calendario, combobox) ---------- */
 .popover.ui-flotante {
-  position: relative; top: auto; left: auto;
+  /* Por encima del diálogo (.overlay, 50) y debajo de los avisos (.toaster, 60). */
+  position: relative; top: auto; left: auto; z-index: 55;
   min-width: var(--radix-popover-trigger-width, var(--radix-select-trigger-width, 0px));
   max-height: var(--radix-popover-content-available-height, var(--radix-select-content-available-height, 360px));
   overflow-y: auto;

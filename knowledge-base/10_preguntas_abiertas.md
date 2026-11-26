@@ -39,7 +39,7 @@
 | Prioridad | Pregunta | Bloquea | Decisor |
 |---|---|---|---|
 | Alta | ¿El seed debe cargar franjas de atención para que C05 pueda probarse sin esperar al C04? (propuesta: sí, IN-02) | C01 | Líder |
-| Alta | Resultado de las 5 verificaciones de fuentes de la sección E del informe (Órbita, AgendaPro, Odonthia, DENTIDESK, Bilog): hoy están "Pendiente". | Informe final | Integrantes (Tarea 0) |
+| Resuelta (2026-11-26) | Verificación de las 5 fuentes de la sección E del informe: 3 respaldadas y 2 parciales (Odonthia y DENTIDESK), con los ajustes aplicados en el informe. | Informe final | Integrantes (Tarea 0) |
 | Media | ¿La disponibilidad debe ofrecerse en pasos de 5 o de 15 minutos? (SU-03) | C04 | Lautaro + líder |
 | Media | P-04: ¿la disponibilidad debería filtrar también por sillón libre? (IN-05) | C04 / C05 | Líder |
 | Media | P-06: el envío de emails de Supabase en el plan gratuito tiene un límite bajo por hora. ¿Alcanza para la demo o configuramos un SMTP propio? | C07 | Líder |

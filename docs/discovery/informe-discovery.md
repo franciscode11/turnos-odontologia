@@ -1,5 +1,38 @@
 # Informe de Discovery: sistemas de gestión de turnos y agenda odontológica
 
+**Trabajo Global · Desarrollo de Software**
+
+UTN · Facultad Regional Mendoza · Comisión 3K09
+
+**Integrantes**
+
+- Francisco Diego Valles Adad (líder)
+- Octavio Crescini
+- Joaquín Cortez Badaloni
+- Lautaro de Coninck
+- Joaquín Echenagorria
+- Ulises Iván Lucato Flores
+
+**Fecha:** 25 de noviembre de 2026 (verificación de fuentes: 25 y 26 de noviembre de 2026)
+
+<div style="page-break-after: always"></div>
+
+## Resumen ejecutivo
+
+**Qué se investigó.** 20 sistemas de gestión de turnos y agenda odontológica: 8 de proveedores argentinos, 6 latinoamericanos, 5 referentes internacionales y Doctoralia, que opera en el país. Cada dato tiene su URL y su fecha de consulta, y se distingue lo comprobado (C) de lo que el proveedor solo afirma (AC). Lo que no tiene respaldo público figura como «No evidenciado».
+
+**Principales hallazgos.**
+
+- La agenda básica es estándar, pero la **prevención de turnos superpuestos casi no está demostrada**: solo 4 de 20 sistemas la comprueban, solo 2 con bloqueo real, y ninguno garantiza a la vez el profesional y el sillón. El resto la resuelve como alerta que se puede aceptar o no la documenta.
+- La **trazabilidad de cambios en los turnos** está comprobada en 5 sistemas, pero en ningún proveedor argentino (solo como afirmación comercial).
+- La **agenda por sillón** aparece comprobada en 6 de 20 sistemas y, entre los argentinos, solo en Odonthia.
+- En la matriz ponderada lideran Odonthia (3,29), Dentalink (2,73) y Open Dental (2,69). Muchos puntajes son bajos por falta de evidencia pública, no necesariamente por falta de funciones.
+- La verificación humana de 5 fuentes confirmó 3 y encontró 2 parciales (Odonthia y DENTIDESK). Los ajustes se aplicaron en el informe.
+
+**MVP recomendado.** Seis funciones imprescindibles: acceso con roles sin registro público, gestión de pacientes, catálogo (profesionales, prestaciones con duración y sillones), horarios y bloqueos con disponibilidad, creación de turnos sin superposiciones por profesional y por sillón garantizada también en la base de datos, y cancelación con motivo y estados de asistencia con historial. Los diferenciadores son la garantía doble contra superposiciones, la trazabilidad completa del turno, el sillón como recurso de primera clase y las reglas de negocio testeadas. Reserva online, WhatsApp, ficha clínica, cobros, facturación y obras sociales quedan para etapas posteriores.
+
+<div style="page-break-after: always"></div>
+
 - **Proyecto**: Sistema de gestión de turnos y agenda de pacientes para consultorios odontológicos (mercado argentino). Trabajo Global de Desarrollo de Software, UTN FRM.
 - **Fecha del informe y de consulta de todas las fuentes**: 2026-11-25
 - **Insumos**: 20 notas de relevamiento en `docs/discovery/sources/*.md` y `docs/restricciones-equipo.md`. Este informe no incorpora datos externos a esas notas.
@@ -232,162 +265,7 @@ La numeración (#) coincide con la tabla A.1.
 
 ### A.3 Fuentes por sistema
 
-Todas las fuentes fueron consultadas el 2026-11-25 y son las citadas en la nota correspondiente de `docs/discovery/sources/`.
-
-1. **Bilog**:
-   - https://bilog.com.ar/
-   - https://docs.bilog.com.ar
-   - https://docs.bilog.com.ar/schedule/appointments
-   - https://docs.bilog.com.ar/initial-guide/installation-access
-   - https://bilog.com.ar/llms.txt
-   - https://bilog.com.ar/soluciones/clinicas
-   - https://bilog.com.ar/soluciones/auditoria-odontologica
-   - https://bilog.com.ar/clientes/
-   - https://apps.apple.com/ar/app/bilog-gesti%C3%B3n-odontol%C3%B3gica/id1554140449
-2. **Odonthia**:
-   - https://odonthia.com/
-   - https://odonthia.com/planes
-   - https://odonthia.com/docs
-   - https://odonthia.com/docs/agenda-y-turnos
-   - https://odonthia.com/docs/reserva-online
-   - https://odonthia.com/docs/odontograma
-   - https://odonthia.com/docs/tratamientos-y-especialidades
-   - https://odonthia.com/docs/presupuestos-y-cobros
-   - https://odonthia.com/seguridad
-3. **Dentalink**:
-   - https://www.softwaredentalink.com/ar
-   - https://www.softwaredentalink.com/ar/planes
-   - https://www.softwaredentalink.com/ar/soporte
-   - https://www.softwaredentalink.com/ar/politica-de-privacidad
-   - https://ayuda.softwaredentalink.com/es/articles/9488188-agenda-la-primera-cita
-   - https://ayuda.softwaredentalink.com/es/articles/9493114-termina-de-configurar-tu-agenda
-   - https://ayuda.softwaredentalink.com/es/articles/9493127-box-sillon
-   - https://ayuda.softwaredentalink.com/es/articles/9493201-notificaciones-automaticas-por-whatsapp
-   - https://ayuda.softwaredentalink.com/es/articles/9493218-como-usar-el-odontograma
-   - https://ayuda.softwaredentalink.com/es/articles/9493220-como-usar-el-periodontograma
-   - https://ayuda.softwaredentalink.com/es/articles/9493280-configura-los-permisos-de-tus-usuarios
-   - https://ayuda.softwaredentalink.com/es/collections/19196578-modulo-exclusivo-para-argentina
-   - https://ayuda.softwaredentalink.com/es/collections/9620066-conoce-todos-los-modulos-de-dentalink
-   - https://ayuda.softwaredentalink.com/es/collections/9620069-facturacion-electronica
-4. **Reservo**:
-   - https://reservo.cl/ar/
-   - https://reservo.cl/precios/
-   - https://reservo.cl/salud/centro-dental/
-   - https://intercom.help/reservo/es/articles/10273489-como-escoger-la-vista-adecuada-de-la-agenda-para-trabajar
-   - https://intercom.help/reservo/es/articles/3603616-diferencia-entre-agendas-por-box-y-agendas-por-profesional
-   - https://intercom.help/reservo/es/collections/2082408-modulo-de-agenda
-   - https://intercom.help/reservo/es/articles/2965555-como-conocer-la-trazabilidad-de-una-cita
-   - https://intercom.help/reservo/es/collections/16452140-argentina
-   - https://intercom.help/reservo/es/articles/12768328-como-completar-el-odontograma-argentina
-   - https://intercom.help/reservo/es/articles/12738616-como-emitir-una-factura-electronica-en-argentina
-   - https://intercom.help/reservo/es/articles/13704209-como-integrar-mercadopago-para-pasarela-de-pago-online-argentina
-   - https://intercom.help/reservo/es/articles/11002520-compra-de-whatsapp-mensajes-para-confirmacion-y-recordatorio-automatico
-5. **AgendaPro**:
-   - https://agendapro.com/ar/dental/software-odontologico
-   - https://agendapro.com/ar/planes
-   - https://ayuda.agendapro.com/es/collections/969562-agenda-reservas-y-bloqueos
-   - https://ayuda.agendapro.com/es/articles/6500344-como-agendar-un-sobrecupo
-   - https://ayuda.agendapro.com/es/articles/6496960-como-se-quien-modifico-una-cita
-   - https://ayuda.agendapro.com/es/articles/5837664-como-programar-y-gestionar-bloqueos-de-horario-de-mis-profesionales
-   - https://ayuda.agendapro.com/es/articles/8129545-como-vender-con-agendapro-y-mercado-pago
-   - https://ayuda.agendapro.com/es/collections/969520-integraciones
-   - https://ayuda.agendapro.com/es/articles/6541935-api-publica-para-que-y-como-usarla
-6. **DentalSoft**:
-   - https://dentalsoft.com.ar/
-   - https://www.dentalsoft.com.ar/funcionalidades
-   - https://www.dentalsoft.com.ar/privacidad
-   - https://search.google.com/local/reviews?placeid=ChIJdQaKm4DsuA8RpY_BWaWdZuw
-7. **OdontoClinIA**:
-   - https://www.clinia.com.ar/odontologia
-   - https://www.clinia.com.ar/faq
-   - https://www.clinia.com.ar/catalogo-funcional.pdf
-   - https://www.clinia.com.ar/seguridad
-   - https://www.clinia.com.ar/sobre-clinia
-8. **Órbita**:
-   - https://hiorbita.com/
-   - https://hiorbita.com/erp
-   - https://hiorbita.com/precios
-   - https://hiorbita.com/ayuda
-9. **DentalTec**:
-   - https://web.dentaltec.com.ar/funcionalidades
-   - https://web.dentaltec.com.ar/preguntas-frecuentes
-   - https://web.dentaltec.com.ar/casos-de-exito
-   - https://web.dentaltec.com.ar/software-odontologos-argentina
-10. **DentalCore**:
-    - https://dentalcore.app/
-    - https://dentalcore.app/pricing
-    - https://dentalcore.app/faq
-11. **Odonto.ar**:
-    - https://odonto.ar/
-    - https://odonto.ar/demo
-    - https://odonto.ar/privacidad
-    - https://odonto.ar/terminos
-12. **Doctoralia**:
-    - https://pro.doctoralia.com/ar
-    - https://pro.doctoralia.com/ar/agenda-doctoralia-para-especialistas
-    - https://pro.doctoralia.com/ar/precio
-    - https://www.doctoraliar.com/ecommerce-terms
-    - https://www.doctoraliar.com/
-    - https://apps.apple.com/ar/app/doctoralia-para-especialistas/id1237598188
-13. **Doctocliq**:
-    - https://www.doctocliq.com/
-    - https://www.doctocliq.com/software-dental
-    - https://www.doctocliq.com/planes-y-precios
-    - https://www.doctocliq.com/soporte-tecnico-de-doctocliq
-14. **DENTIDESK**:
-    - https://www.dentidesk.com/
-    - https://www.dentidesk.com/dentidesk/feature
-    - https://www.youtube.com/@dentideskcanaloficialsoftw2220
-15. **Clinicorp**:
-    - https://www.clinicorp.com/
-    - https://www.clinicorp.com/faq
-16. **Dentrix Ascend**:
-    - https://www.dentrixascend.com/
-    - https://learn.dentrixascend.com/appointment-time-patterns/
-    - https://learn.dentrixascend.com/topic/online-booking-overview/
-    - https://learn.dentrixascend.com/tag/exporting/
-    - https://dentrixascend.com/how-to-purchase
-    - https://www.henryscheinone.com/about-us/press-release/ascend-by-dentrix-launches-ascend-starter/
-17. **Dentally**:
-    - https://dentally.com/
-    - https://dentally.com/pricing
-    - https://dentally.com/dental-software-features
-    - https://dentally.com/security
-    - https://help.dentally.com/en/articles/3551725-how-to-book-appointments
-    - https://www.dentally.com/en-gb/insights-hub/the-appointment-book
-    - https://help.dentally.com/en/articles/3565932-charting-overview
-    - https://help.dentally.com/en/articles/3565934-charting-a-perio-exam-periodontal-charting
-    - https://help.dentally.com/en/articles/11950461-requesting-detailed-user-session-audits
-    - https://developer.dentally.co/
-    - https://www.dentally.com/en-gb/stories
-18. **Open Dental**:
-    - https://www.opendental.com/
-    - https://www.opendental.com/site/fees.html
-    - https://www.opendental.com/site/trial.html
-    - https://opendental.com/site/license.html
-    - https://opendental.com/site/countries.html
-    - https://opendental.com/manual/appointments.html
-    - https://opendental.com/manual/blockouts.html
-    - https://opendental.com/manual/asaplist.html
-    - https://opendental.com/site/websched.html
-    - https://opendental.com/manual/perio.html
-    - https://opendental.com/manual/permissions.html
-    - https://opendental.com/manual/audittrail.html
-    - https://opendental.com/site/apispecification.html
-19. **Curve Dental**:
-    - https://www.curvedental.com/
-    - https://www.curvedental.com/pricing
-    - https://www.curvedental.com/dental-scheduling-software
-    - https://www.curvedental.com/dental-patient-engagement-software
-    - https://www.curvedental.com/dental-charting-software
-    - https://www.curvedental.com/data-policy
-    - https://curvedental.com/fast-facts
-20. **Clinic Cloud**:
-    - https://clinic-cloud.com/
-    - https://clinic-cloud.com/tarifas
-    - https://clinic-cloud.com/faq
-
----
+La lista completa de fuentes de cada sistema, con su fecha de consulta, está en **Referencias completas**, al final del informe.
 
 ## B. Matriz de puntuación (0 a 5)
 
@@ -600,7 +478,7 @@ Alternativas si alguno no concede demo: Órbita (agenda por sillón "sin choques
 
 | # | Producto | Evidencia que lo justifica |
 |---|---|---|
-| 1 | **Odonthia** | Documentación pública detallada de la agenda (columnas por profesional, mensaje "Ese horario está ocupado", sobreturno forzable con advertencia, bloqueos por rango) y plan gratuito para explorar la interfaz real. Referente directo en español y para el contexto argentino. |
+| 1 | **Odonthia** | Documentación pública detallada de la agenda (columnas por profesional, mensaje "Ese horario está ocupado" (al reprogramar un turno, según la verificación E.3), sobreturno forzable con advertencia, bloqueos por rango) y plan gratuito para explorar la interfaz real. Referente directo en español y para el contexto argentino. |
 | 2 | **Dentrix Ascend** | Centro de aprendizaje público (learn.dentrixascend.com) con patrones de tiempo por turno (asistente/profesional/sillón) y advertencias de doble reserva configurables. Referencia para el diseño de disponibilidad y de mensajes de conflicto. |
 | 3 | **Open Dental** | Manual público exhaustivo (agenda por sillón, blockouts, overlap, audit trail) y prueba descargable sin vencimiento (C). Referencia para estados de turno, bloqueos y auditoría. |
 
@@ -649,7 +527,7 @@ En el MVP, **los turnos los carga solo el consultorio**: no hay reserva online d
 | Facturación ARCA | Requiere certificados y punto de venta (como documenta Reservo) e implica obligación fiscal. Comprobada solo en 1 de 20 sistemas. |
 | Obras sociales y prepagas | Implica nomencladores, convenios, débitos y padrones (PUCO). Es un dominio propio, como muestran DentalTec y Bilog. |
 | Liquidaciones a profesionales | Dependen de cobros y prestaciones realizadas. |
-| Reportes avanzados | Requieren historial acumulado. En el MVP alcanza con listados de agenda por día, profesional y sillón. |
+| Reportes avanzados | Requieren historial acumulado. En el MVP alcanza con listados de agenda por día, profesional y sillón. **Ajustar** (2026-11-25, decisión DD-16 de la knowledge base): el líder sumó estadísticas simples para el dueño (turnos, ocupación, ausentismo y cancelaciones) calculadas sobre los turnos existentes, sin tablas nuevas; los reportes avanzados siguen fuera del MVP. |
 | Multi-sucursal | Multiplica horarios, sillones y permisos. El MVP modela un único consultorio. |
 | API pública | Sin consumidores en el MVP. Solo 3 de 20 sistemas la tienen comprobada. |
 
@@ -689,6 +567,175 @@ Las cinco fuentes se verificaron abriéndolas personalmente (la de Odonthia, con
 | 2026-11-26 | Ulises Lucato Flores | Bilog, App Store | Respaldado | A.2.5: se fecha la calificación (3,4/5, 17 calificaciones, al 2026-11-26). |
 
 **Lectura del resultado:** el agente no inventó ninguna de las cinco afirmaciones, pero en dos casos exageró o generalizó (un aviso que existe en otro contexto y una función mostrada en video que no incluía la parte de los intervalos). Por eso la verificación humana era necesaria.
+
+---
+
+## Referencias completas
+
+Fuentes del relevamiento por sistema. Todas las fuentes fueron consultadas el 2026-11-25 y son las citadas en la nota correspondiente de `docs/discovery/sources/`.
+
+1. **Bilog**:
+   - https://bilog.com.ar/
+   - https://docs.bilog.com.ar
+   - https://docs.bilog.com.ar/schedule/appointments
+   - https://docs.bilog.com.ar/initial-guide/installation-access
+   - https://bilog.com.ar/llms.txt
+   - https://bilog.com.ar/soluciones/clinicas
+   - https://bilog.com.ar/soluciones/auditoria-odontologica
+   - https://bilog.com.ar/clientes/
+   - https://apps.apple.com/ar/app/bilog-gesti%C3%B3n-odontol%C3%B3gica/id1554140449
+2. **Odonthia**:
+   - https://odonthia.com/
+   - https://odonthia.com/planes
+   - https://odonthia.com/docs
+   - https://odonthia.com/docs/agenda-y-turnos
+   - https://odonthia.com/docs/reserva-online
+   - https://odonthia.com/docs/odontograma
+   - https://odonthia.com/docs/tratamientos-y-especialidades
+   - https://odonthia.com/docs/presupuestos-y-cobros
+   - https://odonthia.com/seguridad
+3. **Dentalink**:
+   - https://www.softwaredentalink.com/ar
+   - https://www.softwaredentalink.com/ar/planes
+   - https://www.softwaredentalink.com/ar/soporte
+   - https://www.softwaredentalink.com/ar/politica-de-privacidad
+   - https://ayuda.softwaredentalink.com/es/articles/9488188-agenda-la-primera-cita
+   - https://ayuda.softwaredentalink.com/es/articles/9493114-termina-de-configurar-tu-agenda
+   - https://ayuda.softwaredentalink.com/es/articles/9493127-box-sillon
+   - https://ayuda.softwaredentalink.com/es/articles/9493201-notificaciones-automaticas-por-whatsapp
+   - https://ayuda.softwaredentalink.com/es/articles/9493218-como-usar-el-odontograma
+   - https://ayuda.softwaredentalink.com/es/articles/9493220-como-usar-el-periodontograma
+   - https://ayuda.softwaredentalink.com/es/articles/9493280-configura-los-permisos-de-tus-usuarios
+   - https://ayuda.softwaredentalink.com/es/collections/19196578-modulo-exclusivo-para-argentina
+   - https://ayuda.softwaredentalink.com/es/collections/9620066-conoce-todos-los-modulos-de-dentalink
+   - https://ayuda.softwaredentalink.com/es/collections/9620069-facturacion-electronica
+4. **Reservo**:
+   - https://reservo.cl/ar/
+   - https://reservo.cl/precios/
+   - https://reservo.cl/salud/centro-dental/
+   - https://intercom.help/reservo/es/articles/10273489-como-escoger-la-vista-adecuada-de-la-agenda-para-trabajar
+   - https://intercom.help/reservo/es/articles/3603616-diferencia-entre-agendas-por-box-y-agendas-por-profesional
+   - https://intercom.help/reservo/es/collections/2082408-modulo-de-agenda
+   - https://intercom.help/reservo/es/articles/2965555-como-conocer-la-trazabilidad-de-una-cita
+   - https://intercom.help/reservo/es/collections/16452140-argentina
+   - https://intercom.help/reservo/es/articles/12768328-como-completar-el-odontograma-argentina
+   - https://intercom.help/reservo/es/articles/12738616-como-emitir-una-factura-electronica-en-argentina
+   - https://intercom.help/reservo/es/articles/13704209-como-integrar-mercadopago-para-pasarela-de-pago-online-argentina
+   - https://intercom.help/reservo/es/articles/11002520-compra-de-whatsapp-mensajes-para-confirmacion-y-recordatorio-automatico
+5. **AgendaPro**:
+   - https://agendapro.com/ar/dental/software-odontologico
+   - https://agendapro.com/ar/planes
+   - https://ayuda.agendapro.com/es/collections/969562-agenda-reservas-y-bloqueos
+   - https://ayuda.agendapro.com/es/articles/6500344-como-agendar-un-sobrecupo
+   - https://ayuda.agendapro.com/es/articles/6496960-como-se-quien-modifico-una-cita
+   - https://ayuda.agendapro.com/es/articles/5837664-como-programar-y-gestionar-bloqueos-de-horario-de-mis-profesionales
+   - https://ayuda.agendapro.com/es/articles/8129545-como-vender-con-agendapro-y-mercado-pago
+   - https://ayuda.agendapro.com/es/collections/969520-integraciones
+   - https://ayuda.agendapro.com/es/articles/6541935-api-publica-para-que-y-como-usarla
+6. **DentalSoft**:
+   - https://dentalsoft.com.ar/
+   - https://www.dentalsoft.com.ar/funcionalidades
+   - https://www.dentalsoft.com.ar/privacidad
+   - https://search.google.com/local/reviews?placeid=ChIJdQaKm4DsuA8RpY_BWaWdZuw
+7. **OdontoClinIA**:
+   - https://www.clinia.com.ar/odontologia
+   - https://www.clinia.com.ar/faq
+   - https://www.clinia.com.ar/catalogo-funcional.pdf
+   - https://www.clinia.com.ar/seguridad
+   - https://www.clinia.com.ar/sobre-clinia
+8. **Órbita**:
+   - https://hiorbita.com/
+   - https://hiorbita.com/erp
+   - https://hiorbita.com/precios
+   - https://hiorbita.com/ayuda
+9. **DentalTec**:
+   - https://web.dentaltec.com.ar/funcionalidades
+   - https://web.dentaltec.com.ar/preguntas-frecuentes
+   - https://web.dentaltec.com.ar/casos-de-exito
+   - https://web.dentaltec.com.ar/software-odontologos-argentina
+10. **DentalCore**:
+    - https://dentalcore.app/
+    - https://dentalcore.app/pricing
+    - https://dentalcore.app/faq
+11. **Odonto.ar**:
+    - https://odonto.ar/
+    - https://odonto.ar/demo
+    - https://odonto.ar/privacidad
+    - https://odonto.ar/terminos
+12. **Doctoralia**:
+    - https://pro.doctoralia.com/ar
+    - https://pro.doctoralia.com/ar/agenda-doctoralia-para-especialistas
+    - https://pro.doctoralia.com/ar/precio
+    - https://www.doctoraliar.com/ecommerce-terms
+    - https://www.doctoraliar.com/
+    - https://apps.apple.com/ar/app/doctoralia-para-especialistas/id1237598188
+13. **Doctocliq**:
+    - https://www.doctocliq.com/
+    - https://www.doctocliq.com/software-dental
+    - https://www.doctocliq.com/planes-y-precios
+    - https://www.doctocliq.com/soporte-tecnico-de-doctocliq
+14. **DENTIDESK**:
+    - https://www.dentidesk.com/
+    - https://www.dentidesk.com/dentidesk/feature
+    - https://www.youtube.com/@dentideskcanaloficialsoftw2220
+15. **Clinicorp**:
+    - https://www.clinicorp.com/
+    - https://www.clinicorp.com/faq
+16. **Dentrix Ascend**:
+    - https://www.dentrixascend.com/
+    - https://learn.dentrixascend.com/appointment-time-patterns/
+    - https://learn.dentrixascend.com/topic/online-booking-overview/
+    - https://learn.dentrixascend.com/tag/exporting/
+    - https://dentrixascend.com/how-to-purchase
+    - https://www.henryscheinone.com/about-us/press-release/ascend-by-dentrix-launches-ascend-starter/
+17. **Dentally**:
+    - https://dentally.com/
+    - https://dentally.com/pricing
+    - https://dentally.com/dental-software-features
+    - https://dentally.com/security
+    - https://help.dentally.com/en/articles/3551725-how-to-book-appointments
+    - https://www.dentally.com/en-gb/insights-hub/the-appointment-book
+    - https://help.dentally.com/en/articles/3565932-charting-overview
+    - https://help.dentally.com/en/articles/3565934-charting-a-perio-exam-periodontal-charting
+    - https://help.dentally.com/en/articles/11950461-requesting-detailed-user-session-audits
+    - https://developer.dentally.co/
+    - https://www.dentally.com/en-gb/stories
+18. **Open Dental**:
+    - https://www.opendental.com/
+    - https://www.opendental.com/site/fees.html
+    - https://www.opendental.com/site/trial.html
+    - https://opendental.com/site/license.html
+    - https://opendental.com/site/countries.html
+    - https://opendental.com/manual/appointments.html
+    - https://opendental.com/manual/blockouts.html
+    - https://opendental.com/manual/asaplist.html
+    - https://opendental.com/site/websched.html
+    - https://opendental.com/manual/perio.html
+    - https://opendental.com/manual/permissions.html
+    - https://opendental.com/manual/audittrail.html
+    - https://opendental.com/site/apispecification.html
+19. **Curve Dental**:
+    - https://www.curvedental.com/
+    - https://www.curvedental.com/pricing
+    - https://www.curvedental.com/dental-scheduling-software
+    - https://www.curvedental.com/dental-patient-engagement-software
+    - https://www.curvedental.com/dental-charting-software
+    - https://www.curvedental.com/data-policy
+    - https://curvedental.com/fast-facts
+20. **Clinic Cloud**:
+    - https://clinic-cloud.com/
+    - https://clinic-cloud.com/tarifas
+    - https://clinic-cloud.com/faq
+
+---
+
+**Fuentes de la verificación (sección E):**
+
+- https://hiorbita.com/erp (consultada el 2026-11-25)
+- https://agendapro.com/ar/planes (consultada el 2026-11-25)
+- https://odonthia.com/docs/agenda-y-turnos (consultada el 2026-11-26)
+- https://www.youtube.com/@dentideskcanaloficialsoftw2220 (consultada el 2026-11-26)
+- https://apps.apple.com/ar/app/bilog-gesti%C3%B3n-odontol%C3%B3gica/id1554140449 (consultada el 2026-11-26)
 
 ---
 

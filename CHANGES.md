@@ -86,7 +86,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
 > Secuencial. Nadie arranca la fase 2 hasta que C-01 esté en `main`, el CI sea obligatorio y existan las ramas de cada integrante.
 
 ### [C-01] `base-tecnica`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` terminado (2026-11-25, mergeado a main)
 - **Resultado**: en un clon limpio `npm install && npm test` pasa sin credenciales; con el `.env` del líder la app inicia sesión con un usuario del seed por rol y cada uno ve solo el menú de su rol; `/dev/componentes` muestra todos los componentes; el CI corre lint, typecheck y tests en cada PR.
 - **Depende de**: ninguna
 - **Zona**: `package.json`, `package-lock.json`, `prisma/`, `prisma.config.ts`, `tsconfig.json`, `next.config.ts`, `vitest.config.ts`, `postcss.config.mjs`, `components.json`, `public/`, `src/app/globals.css`, `src/app/page.tsx`, `src/app/(panel)/page.tsx`, páginas placeholder de cada módulo en `src/app/(panel)/`, `.gitkeep` de `src/domain/*`, `src/server/*` y `tests/*`, `tests/shared/`, `src/app/layout.tsx`, `src/app/login/`, `src/app/activar-cuenta/`, `src/app/(panel)/layout.tsx`, `src/app/(panel)/turnos/page.tsx`, `src/app/(panel)/dev/`, `src/app/(panel)/_shell/`, `src/app/salir/`, `src/app/activar-cuenta/verificar/`, `src/components/ui/`, `src/domain/shared/`, `src/server/auth/`, `src/server/db.ts`, `src/server/resultado.ts`, `scripts/`, `.gitignore`, `src/proxy.ts`, `src/config/`, `.github/workflows/`, `eslint.config.mjs`, `README.md`, `.env.example`
@@ -141,7 +141,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
   - `knowledge-base/10_preguntas_abiertas.md` §IN-01
 
 ### [C-03] `catalogo-consultorio`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` terminado (2026-11-25, mergeado a main)
 - **Resultado**: el ADMIN crea, edita y desactiva profesionales, prestaciones y sillones en `/configuracion/*`; una prestación de 7 minutos se rechaza y una de 240 se acepta; una matrícula repetida se rechaza; los demás roles solo consultan; los tests pasan.
 - **Depende de**: C-01
 - **Zona**: `src/app/(panel)/configuracion/profesionales/`, `src/app/(panel)/configuracion/prestaciones/`, `src/app/(panel)/configuracion/sillones/`, `src/domain/catalogo/`, `src/server/catalogo/`, `tests/catalogo/`
@@ -180,7 +180,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
   - `knowledge-base/10_preguntas_abiertas.md` §IN-05
 
 ### [C-05] `crear-turno-sin-solapamientos`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` terminado (2026-11-25, mergeado a main)
 - **Resultado**: recepción crea un turno en `/turnos/nuevo` con fin calculado por la prestación; se rechazan solapamientos por profesional y por sillón con mensajes claros, también cuando los frena la restricción de la base; un turno que empieza justo al terminar otro y uno sobre un horario cancelado se aceptan; fuera de franja, en un bloqueo o en el pasado se rechaza; los tests pasan.
 - **Depende de**: C-01
 - **Zona**: `src/app/(panel)/turnos/nuevo/`, `src/domain/turnos/crear-*`, `src/domain/turnos/solapamiento*`, `src/server/turnos/crear-turno.ts`, `tests/turnos/crear-turno.test.ts`
@@ -200,7 +200,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
   - `knowledge-base/10_preguntas_abiertas.md` §IN-02
 
 ### [C-06] `estados-del-turno`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` terminado (2026-11-25, mergeado a main)
 - **Resultado**: en `/turnos/[id]` se confirma, cancela con motivo obligatorio y marca atendido o ausente según estado y rol; los estados finales no cambian; cancelar libera el horario; cada transición queda en el historial con usuario y fecha; los tests pasan.
 - **Depende de**: C-01
 - **Zona**: `src/app/(panel)/turnos/[id]/`, `src/domain/turnos/estados*`, `src/server/turnos/estados-turno.ts`, `tests/turnos/estados-turno.test.ts`

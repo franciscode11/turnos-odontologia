@@ -31,6 +31,8 @@ export const Selector = forwardRef<HTMLButtonElement, SelectorProps>(function Se
   { opciones, valor, alCambiar, placeholder = "Elegí una opción", name, disabled, cargando, onBlur, className, required, ...aria },
   ref,
 ) {
+  // Etiqueta explícita: el valor elegido se ve también antes de que Radix monte las opciones.
+  const elegida = valor ? opciones.flatMap((item) => (esGrupo(item) ? item.opciones : [item])).find((o) => o.valor === valor) : undefined;
   return (
     <Select.Root
       value={valor === undefined ? undefined : (valor ?? "")}
@@ -40,7 +42,7 @@ export const Selector = forwardRef<HTMLButtonElement, SelectorProps>(function Se
       required={required}
     >
       <Select.Trigger ref={ref} className={cn("control", className)} onBlur={onBlur} aria-busy={cargando || undefined} {...aria}>
-        <Select.Value placeholder={cargando ? "Cargando…" : placeholder} />
+        <Select.Value placeholder={cargando ? "Cargando…" : placeholder}>{elegida?.etiqueta}</Select.Value>
         <Select.Icon className="ui-icono-control">
           {cargando ? <Icono nombre="loader" className="spin" /> : <Icono nombre="selector" />}
         </Select.Icon>

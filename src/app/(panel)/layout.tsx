@@ -20,7 +20,7 @@ export default async function LayoutPanel({ children }: LayoutProps<"/">) {
       marca={BRAND_NAME}
       colapsadoInicial={colapsado}
       secciones={seccionesParaRol(usuario.rol)}
-      usuario={{ nombre: usuario.nombre ?? usuario.email, rol: ETIQUETA_ROL[usuario.rol], avatar: usuario.avatar }}
+      usuario={{ nombre: usuario.nombre ?? usuario.email, email: usuario.email, rol: ETIQUETA_ROL[usuario.rol], avatar: usuario.avatar }}
     >
       {children}
     </ShellPanel>

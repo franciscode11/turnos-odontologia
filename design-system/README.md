@@ -1,8 +1,8 @@
 # Design system: Turnos Odontología
 
 - **Mode:** system-only (decisión del líder, 2026-11-25: sistema visual sí, mockups por change no)
-- **Revision:** 3 (2026-11-25: avatares 3D en lugar de iniciales y nombres del equipo para el personal). Revision 2: tipografía, minimalismo, proporciones del panel, referencias de 21st.dev, microanimaciones medidas.
-- **Approval:** approved (2026-11-25, by user)
+- **Revision:** 4 (2026-11-26, pedido del líder: login con panel ilustrado del molar, logo y favicons definitivos, sidebar colapsado centrado y sin scroll, menú de usuario con cerrar sesión en rojo, agenda con resumen del día). Revision 3: avatares 3D y nombres del equipo. Revision 2: tipografía, minimalismo, proporciones del panel, referencias de 21st.dev, microanimaciones medidas.
+- **Approval:** approved (2026-11-26, by user: el líder pidió y entregó la ilustración y el logo)
 - **Preview:** rendered (2026-11-25), capturas en `previews/` a 390×844 y 1440×900
 
 ## Propósito
@@ -23,7 +23,8 @@ Una sola base visual para todas las pantallas. Los integrantes no diseñan: usan
 | `shell.js`, `icons.js`, `smoke.js`, `brand.js` | Solo para las vistas HTML: menú, íconos, fondo animado del login y nombre del producto. |
 | `brand.md` | Nombre, tono, logo e imágenes. |
 | `assets/fonts/` | Geist y Geist Mono (variables, woff2) con su licencia OFL. |
-| `assets/logo.svg` | Logo **provisional**, rotulado como tal. |
+| `assets/logo.svg`, `assets/logo-claro.svg`, `assets/simbolo.svg` | Logo definitivo (fondo claro y oscuro) y símbolo del molar. En la app: `public/` y `src/app/icon.svg`. |
+| `assets/ilustracion-dental.webp` | Ilustración del panel izquierdo del login. |
 | `assets/avatars/` | 15 avatares 3D (WebP, 256 px). En la app se copian a `public/avatars/`. |
 | `previews/` | Capturas mobile y desktop de cada vista. |
 
@@ -36,6 +37,14 @@ Una sola base visual para todas las pantallas. Los integrantes no diseñan: usan
 | Login | 21st.dev `@aakashmehra/components/smoke-login` | Pantalla partida: humo en WebGL que reacciona al puntero, con un hilo del color de acento (en lugar del verde ácido), y formulario sobre fondo liso con entrada desenfocada. Sin botones de Apple o Google: el MVP solo usa email y contraseña. Sin selector claro/oscuro: el MVP es claro. |
 
 Skills aplicadas: `design-taste-frontend` (Leonxlnx/taste-skill) para tipografía, color y reglas anti-plantilla, y `emil-design-eng` para animaciones y tiempos.
+
+## Revision 4 (implementada en la app)
+
+- **Login:** pantalla partida con el panel ilustrado (`ilustracion-dental.webp` sobre `--color-brand-soft`), logo arriba y frase abajo; formulario a la derecha. Reemplaza el humo en WebGL. La referencia viva es la app (`src/app/login/`); `screens/login.html` queda como la versión de la Revision 3.
+- **Marca:** símbolo del molar en blanco sobre `--color-brand` (`#175344`), el verde del logo.
+- **Sidebar colapsado:** riel de 60 px con marca, íconos y avatar centrados; los títulos de sección se vuelven una línea divisoria; sin scroll horizontal.
+- **Menú de usuario:** tarjeta con avatar, nombre, email y rol; "Cerrar sesión" en `--color-danger`.
+- **Agenda:** franja de resumen por estado, selector de fecha, contador por profesional, barra de color por estado en cada turno y grilla con encabezados fijos.
 
 ## Decisiones visuales
 
@@ -79,7 +88,6 @@ Solo se animan `transform` y `opacity` (la única excepción es el ancho del sid
 | Tema | Estado | Cómo reemplazarlo |
 |---|---|---|
 | Nombre comercial | (TBD): se usa "Turnos Odontología" | Cambiar `BRAND_NAME` en `brand.js` y en `src/config/brand.ts` (C01). |
-| Logo | (TBD): provisional, dice "LOGO PROVISIONAL" | Reemplazar `assets/logo.svg` (mismo nombre) y `public/logo.svg` en la app; la marca del menú es el ícono `dental` de Tabler sobre el acento. |
 | Modo oscuro | Fuera del MVP | Agregar valores bajo `@media (prefers-color-scheme: dark)` en `tokens.css` y subir Revision. |
 
 ## Cambios futuros

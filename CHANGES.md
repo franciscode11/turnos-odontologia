@@ -121,7 +121,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
 > En paralelo, una persona por change, cada uno en su propia carpeta de módulo. Nadie modifica `prisma/schema.prisma`, `src/components/ui/` ni el layout: si falta algo, se le pide al líder.
 
 ### [C-02] `gestion-pacientes`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` terminado (2026-11-26, mergeado a main)
 - **Resultado**: recepción da de alta, busca por apellido o DNI, edita y da de baja lógica pacientes en `/pacientes`; un DNI repetido (también con puntos) se rechaza con "Ya existe un paciente con ese DNI"; un PROFESIONAL no puede crear; los tests de los escenarios pasan.
 - **Depende de**: C-01
 - **Zona**: `src/app/(panel)/pacientes/`, `src/domain/pacientes/`, `src/server/pacientes/`, `tests/pacientes/`
@@ -160,7 +160,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
   - `knowledge-base/04_modelo_de_datos.md` §Profesional, §Prestacion, §Sillon
 
 ### [C-04] `horarios-bloqueos-disponibilidad`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` terminado (2026-11-26, mergeado a main)
 - **Resultado**: el ADMIN carga franjas semanales y bloqueos por profesional en `/configuracion/horarios`; una franja superpuesta se rechaza y una contigua se acepta; la disponibilidad de un lunes 09:00-12:00 para 30 minutos devuelve inicios de 09:00 a 11:30 y excluye bloqueos y turnos que ocupan agenda; los tests pasan.
 - **Depende de**: C-01
 - **Zona**: `src/app/(panel)/configuracion/horarios/`, `src/domain/horarios/`, `src/server/horarios/`, `tests/horarios/`
@@ -220,7 +220,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
   - `knowledge-base/09_decisiones_y_supuestos.md` §DD-09
 
 ### [C-07] `equipo-e-invitaciones`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` terminado (2026-11-26, mergeado a main)
 - **Resultado**: el ADMIN invita por email con un rol desde `/equipo`; el invitado activa su cuenta en `/activar-cuenta` y entra a la agenda; invitar como Profesional sin profesional vinculado se rechaza; no se puede desactivar al último ADMIN; los tests pasan.
 - **Depende de**: C-01
 - **Zona**: `src/app/(panel)/equipo/`, `src/app/activar-cuenta/`, `src/domain/equipo/`, `src/server/equipo/`, `tests/equipo/`
@@ -240,7 +240,7 @@ C-01 base-tecnica → C-05 crear-turno-sin-solapamientos*
   - `knowledge-base/08_arquitectura_propuesta.md` §Seguridad, §Variables de entorno
 
 ### [C-08] `estadisticas-del-consultorio`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` terminado (2026-11-26, mergeado a main)
 - **Resultado**: el ADMIN ve en `/estadisticas` turnos dados, ocupación, ausentismo y cancelaciones del período con variación contra el anterior, turnos por día, motivos de cancelación y tabla por profesional; los demás roles no acceden; los cálculos tienen tests con datos ficticios.
 - **Depende de**: C-01
 - **Zona**: `src/app/(panel)/estadisticas/`, `src/domain/estadisticas/`, `src/server/estadisticas/`, `tests/estadisticas/`

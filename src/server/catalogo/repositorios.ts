@@ -8,7 +8,7 @@ import type { RepositorioSillones } from "./sillones";
 
 /** Implementaciones con Prisma de los repositorios del catálogo. */
 
-const camposProfesional = { id: true, nombre: true, apellido: true, matricula: true, especialidad: true, activo: true } as const;
+const camposProfesional = { id: true, nombre: true, apellido: true, matricula: true, especialidad: true, avatar: true, activo: true } as const;
 const camposSillon = { id: true, nombre: true, activo: true } as const;
 const camposPrestacion = { id: true, nombre: true, duracionMinutos: true, precioReferencia: true, activo: true } as const;
 

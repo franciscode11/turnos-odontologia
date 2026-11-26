@@ -25,6 +25,9 @@
   --color-accent-600: #0e7a6b;     /* acción primaria: 5.4:1 con texto blanco */
   --color-accent-700: #0b6157;     /* hover de la primaria, texto de acento */
   --color-on-accent:  #ffffff;
+  --color-brand:      #175344;     /* verde del logo (Revision 4): marca, login */
+  --color-brand-soft: #e5f2e9;     /* fondo del panel ilustrado del login */
+  --color-danger:     var(--estado-cancelado-fg); /* acciones destructivas: cerrar sesión, eliminar */
 
   /* Estados del turno (fondo tenue + texto e ícono saturados, contraste AA) */
   --estado-reservado-bg:  #f4f4f5; --estado-reservado-fg:  #52525b;   /* círculo punteado */

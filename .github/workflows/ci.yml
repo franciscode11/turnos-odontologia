@@ -31,7 +31,7 @@ jobs:
         run: npm test
         env:
           TZ: UTC
-      - name: Tests (otra zona: las fechas no dependen del servidor)
+      - name: "Tests (otra zona: las fechas no dependen del servidor)"
         run: npm test
         env:
           TZ: Europe/Madrid

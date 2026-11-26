@@ -60,7 +60,7 @@
 - [ ] 9.1 El líder completa su `.env`, corre `npx prisma migrate deploy` y `npx prisma db seed`. Verificación: Supabase muestra las 9 tablas y 6 usuarios; Advisors → Security sin alertas críticas; `npx prisma migrate diff` sin diferencias.
 - [ ] 9.2 Correr `scripts/verificar-restricciones.sql` en Supabase. Verificación: todos los casos dan el resultado esperado; salida guardada en `docs/evidencias/c01-restricciones.md`.
 - [ ] 9.3 Probar en `npm run dev` login de un usuario por rol, credenciales inválidas, menú por rol, cierre de sesión, `/turnos` y `/dev/componentes`. Verificación: capturas mobile y desktop en `docs/evidencias/c01/`.
-- [ ] 9.4 Clon limpio: `npm ci && npm test` sin `.env`. Verificación: todos los tests en verde.
+- [x] 9.4 Clon limpio: `npm ci && npm test` sin `.env`. Verificación: todos los tests en verde.
 - [x] 9.5 README con requisitos, instalación, variables, tests, cómo levantar la app y estructura de carpetas. Verificación: los enlaces y comandos del README funcionan.
 
 ## Workflow follow-up

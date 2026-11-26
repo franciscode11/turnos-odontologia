@@ -4,6 +4,23 @@ Sistema de gestión de turnos y agenda de pacientes para consultorios odontológ
 
 Trabajo Global de **Desarrollo de Software** (UTN FRM), comisión **3K09**. Lo construimos con **Spec-Driven Development**: OpenSpec, Active Stack (fundación con `/active-orchestrator` y ciclo OPSX) y Engram como memoria del agente. **No escribimos código a mano**: cada funcionalidad se especifica, se aprueba y recién después la implementa un agente de IA contra esa especificación.
 
+**Aplicación publicada:** https://turnos-odontologia-beige.vercel.app (datos ficticios; los usuarios de prueba los reparte el líder por privado).
+
+## Dónde está cada entregable de la consigna
+
+| Etapa de la consigna | Dónde está |
+|---|---|
+| 0 · Entorno y Active Stack Full | Capturas en [`docs/evidencias/instalacion/`](docs/evidencias/instalacion/) |
+| 1 · `/active-orchestrator` y `openspec init` | [`.active-orchestrator-state.json`](.active-orchestrator-state.json) y [`openspec/`](openspec/) |
+| 2 · Discovery | [`docs/discovery/informe-discovery.md`](docs/discovery/informe-discovery.md), su [PDF](docs/discovery/informe-discovery.pdf), el [checklist de 11 puntos](docs/discovery/checklist-discovery.md), las [notas por sistema](docs/discovery/sources/) y la [verificación de 5 fuentes](docs/discovery/verificacion/) |
+| 3 · Base de conocimiento | [`knowledge-base/`](knowledge-base/) (10 archivos canónicos) |
+| 4 · Roadmap | [`CHANGES.md`](CHANGES.md) |
+| 5 · Skills y reglas del agente | [`docs/decisiones-skills.md`](docs/decisiones-skills.md), [`.atl/skill-registry.md`](.atl/skill-registry.md), [`AGENTS.md`](AGENTS.md) y [`CLAUDE.md`](CLAUDE.md) |
+| 6 · Ciclo OPSX | Changes archivados en [`openspec/changes/archive/`](openspec/changes/archive/), specs vigentes en [`openspec/specs/`](openspec/specs/), relevamientos en [`docs/explore/`](docs/explore/), tests en [`tests/`](tests/) y evidencias de Ajustar y verify en [`docs/evidencias/`](docs/evidencias/) |
+| 7 · Memoria (Engram) | Consulta en vivo en el video (decisiones guardadas en el proyecto `turnos-odontologia` de Engram) |
+| Bitácora de decisiones | [`docs/evidencias/bitacora-fundacion.md`](docs/evidencias/bitacora-fundacion.md) |
+| Reflexión escrita | [`docs/reflexion.md`](docs/reflexion.md) |
+
 ## Equipo
 
 | Integrante | Legajo | Rol |
@@ -62,6 +79,7 @@ El CI (`.github/workflows/ci.yml`) corre lint, typecheck y tests en cada PR.
 ```bash
 npx prisma migrate deploy   # aplica prisma/migrations con DIRECT_URL
 npx prisma db seed          # 6 usuarios del equipo, catálogo, pacientes inventados y turnos de ejemplo
+npx tsx scripts/datos-demo.ts   # opcional: 5 semanas de turnos ficticios para estadísticas
 ```
 
 - La migración inicial incluye SQL manual que Prisma no modela: restricciones `EXCLUDE` por profesional y por sillón, `CHECK`, índice único parcial de DNI, historial de solo inserción, RLS y cierre de la Data API.
@@ -80,7 +98,7 @@ src/
     (panel)/                           layout con menú por rol y páginas de cada módulo
       turnos/                          agenda del día (C-01); nuevo/ (C-05); [id]/ (C-06)
       pacientes/ configuracion/ equipo/ estadisticas/
-    dev/componentes/                   catálogo del sistema de componentes
+      dev/componentes/                 catálogo del sistema de componentes (no aparece en el menú)
   components/ui/          sistema de componentes (solo el líder lo modifica)
   domain/<modulo>/        reglas de negocio puras con tests (shared/: estados, solapamiento, fechas)
   server/<modulo>/        Server Actions (sesión + requireRol + Zod); auth/ y db.ts del C-01

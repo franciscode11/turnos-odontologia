@@ -1,4 +1,4 @@
-# Explore: C-04 horarios-bloqueos-disponibilidad
+≤# Explore: C-04 horarios-bloqueos-disponibilidad
 
 - **Fecha:** 2026-11-25
 - **Responsable:** lautaro-de-coninck (legajo 51954). Relevamiento preparado con IA para que Lautaro lo revise.

@@ -1,0 +1,41 @@
+// Sistema de componentes del proyecto (RN-GL-04). Los módulos importan SOLO desde acá:
+//   import { Boton, Campo, Entrada } from "@/components/ui";
+// Lo mantiene el líder. Si falta algo, pedíselo; no crees componentes propios.
+export { cn } from "./cn";
+export { Icono, type NombreIcono } from "./icono";
+export { Boton, type BotonProps } from "./boton";
+export { useCargandoVisible, DEMORA_SPINNER_MS, MINIMO_SPINNER_MS } from "./use-cargando-visible";
+export { Avatar, AVATARES } from "./avatar";
+export { BadgeEstado, Etiqueta } from "./badge-estado";
+export { Tarjeta } from "./tarjeta";
+export { Campo, type CampoProps } from "./campo";
+export { Entrada, type EntradaProps } from "./entrada";
+export { EstadoVacio } from "./estado-vacio";
+export { Esqueleto } from "./esqueleto";
+export { EncabezadoPagina, CuerpoPagina } from "./encabezado-pagina";
+// Controles y presentación (C-01 grupos 5 y 8)
+export type { PropsAccesibles, Opcion, GrupoOpciones } from "./tipos";
+export { AreaTexto, type AreaTextoProps } from "./area-texto";
+export { EntradaNumero, type EntradaNumeroProps } from "./entrada-numero";
+export { Casilla, type CasillaProps, type EstadoCasilla } from "./casilla";
+export { Interruptor, type InterruptorProps } from "./interruptor";
+export { GrupoRadio, type GrupoRadioProps, type OpcionRadio } from "./grupo-radio";
+export { ControlSegmentado, type ControlSegmentadoProps, type OpcionSegmento } from "./control-segmentado";
+export { Selector, SelectorMultiple, type SelectorProps, type SelectorMultipleProps } from "./selector";
+export { Combobox, type ComboboxProps } from "./combobox";
+export { Calendario, ListaHorarios, type CalendarioProps, type ListaHorariosProps } from "./calendario";
+export { SelectorFecha, type SelectorFechaProps } from "./selector-fecha";
+export { SelectorHora, type SelectorHoraProps } from "./selector-hora";
+export { SelectorFechaHora, separarFechaHora, instanteDeFechaHora, type SelectorFechaHoraProps } from "./selector-fecha-hora";
+export { SelectorMes, type SelectorMesProps } from "./selector-mes";
+export { SelectorSemana, type SelectorSemanaProps } from "./selector-semana";
+export { Dialogo, CerrarDialogo, type DialogoProps } from "./dialogo";
+export { Tooltip, ProveedorTooltip, type TooltipProps } from "./tooltip";
+export { Tabla, TablaEncabezado, TablaCuerpo, TablaFila, TablaCeldaEncabezado, TablaCelda, CeldaPersona, TablaVacia } from "./tabla";
+export { ProveedorToast, useToast, ToastEstatico, DURACION_TOAST_MS, type VarianteToast, type OpcionesToast, type ApiToast } from "./toast";
+export { FormField, type FormFieldProps, type PropsControlFormulario } from "./form-field";
+export { Deslizador, type DeslizadorProps } from "./deslizador";
+export { SelectorColor, COLORES_AGENDA, type ColorAgenda, type SelectorColorProps } from "./selector-color";
+export { ZonaArchivos, type ZonaArchivosProps } from "./zona-archivos";
+export { CampoOculto, type CampoOcultoProps } from "./campo-oculto";
+export { BotonEnlace } from "./boton-enlace";

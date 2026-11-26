@@ -27,6 +27,8 @@ Agenda de turnos para consultorios odontológicos argentinos, cargada solo por e
 
 Detalle completo: [knowledge-base/02_descripcion_general.md](knowledge-base/02_descripcion_general.md). Diseño visual: [design-system/README.md](design-system/README.md).
 
+> **Next.js 16 no es el que conocés:** cambió APIs y convenciones (`proxy.ts` en lugar de `middleware.ts`, `params` y `searchParams` son Promises, `cookies()` es async, `next lint` no existe). Antes de escribir código de Next, leé la guía que corresponda en `node_modules/next/dist/docs/`. Este proyecto tiene `cacheComponents` apagado: las páginas son dinámicas y pueden leer la sesión directamente.
+
 ---
 
 ## Base de Conocimiento

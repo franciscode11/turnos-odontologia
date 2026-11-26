@@ -20,17 +20,19 @@ Repo sin código (ver proposal.md, Why). Las fuentes de verdad son `knowledge-ba
 
 ### 1. Estructura y herramientas
 Next.js 16 App Router con `src/`, TypeScript 5.9 estricto (`strict`, `noUncheckedIndexedAccess`), Tailwind 4 configurado en `globals.css` con `@theme` a partir de `design-system/tokens.css`, ESLint 10 flat config, Vitest 5 con entorno `node` para el dominio. Versiones exactas en `package.json` y `package-lock.json` versionado.
-*Alternativas:* TypeScript 7 (descartado por compatibilidad no comprobada con el plazo, DD-18).
+`next.config.ts` deja `cacheComponents` y `partialPrefetching` en `false` (el generador de Next 16.4 los trae activados): con Cache Components, leer cookies o la base fuera de un `<Suspense>` rompe el build, y los agentes de los integrantes no conocen esas reglas. Con renderizado dinámico clásico cada página puede leer la sesión directamente. El script `typecheck` corre `next typegen` antes de `tsc` para generar `PageProps`/`LayoutProps`.
+*Alternativas:* TypeScript 7 (descartado por compatibilidad no comprobada con el plazo, DD-18); Cache Components activado (descartado por el riesgo para el equipo).
 
 ### 2. Prisma 7 con Supabase
 - `prisma.config.ts` en la raíz toma `DIRECT_URL` (conexión directa, puerto 5432) para migrar. Si la variable no existe, usa una URL vacía de relleno para que `prisma generate` funcione en el CI sin secretos.
 - Generador `prisma-client` con salida en `src/generated/prisma` (ignorada por git; se genera en `postinstall`).
 - En runtime, `src/server/db.ts` crea un único cliente con `@prisma/adapter-pg` sobre `DATABASE_URL` (pooler de transacciones, 6543) y lo reutiliza en desarrollo con `globalThis`.
 - Tablas y columnas en `snake_case` con `@@map`/`@map`; modelos en PascalCase como en la KB.
+- Los ids se generan en la base (`@default(dbgenerated("gen_random_uuid()"))`), así el SQL manual y los scripts pueden insertar sin pasar por Prisma. `Usuario.id` no tiene default: es el id de Supabase Auth.
 *Alternativas:* Supabase JS para datos (descartado: la KB fija acceso solo vía Prisma y Data API cerrada).
 
 ### 3. SQL que Prisma no modela
-La primera migración se crea con `prisma migrate dev --create-only` y se le agrega a mano: `CREATE EXTENSION IF NOT EXISTS btree_gist`, las dos restricciones `EXCLUDE USING gist (... WITH =, tstzrange(inicio, fin, '[)') WITH &&) WHERE (estado <> 'CANCELADO')`, los `CHECK` de intervalos, motivo y duración, el índice único parcial `(dni) WHERE activo` y los `REVOKE` de `anon` y `authenticated` sobre el esquema `public`. Después de aplicarla, `prisma migrate diff` debe quedar sin diferencias.
+La primera migración se crea con `prisma migrate dev --create-only` y se le agrega a mano: `CREATE EXTENSION IF NOT EXISTS btree_gist`, las dos restricciones `EXCLUDE USING gist (... WITH =, tstzrange(inicio, fin, '[)') WITH &&) WHERE (estado <> 'CANCELADO')`, los `CHECK` de intervalos, motivo, duración, formato de DNI, horas de franja y vínculo rol/profesional, el índice único parcial `(dni) WHERE activo`, un trigger que impide editar o borrar el historial, los `REVOKE` de `anon` y `authenticated` sobre el esquema `public`, y RLS activado en todas las tablas (Supabase Advisors lo marca como error si falta) con una política para el rol `equipo_dev` de los integrantes (`scripts/permisos-equipo-dev.sql` la vuelve a aplicar). Verificado contra PostgreSQL 17 local: la migración aplica sin errores, `scripts/verificar-restricciones.sql` da los 13 casos OK y `prisma migrate diff` queda vacío. Después de aplicarla, `prisma migrate diff` debe quedar sin diferencias.
 *Alternativa:* validar solo en código (descartado, RN-TU-06).
 
 ### 4. Dominio compartido
@@ -42,11 +44,13 @@ La primera migración se crea con `prisma migrate dev --create-only` y se le agr
 - `src/server/auth/sesion.ts`: `obtenerUsuarioActual()` lee el id verificado y carga la fila de `Usuario`; si falta o no es `ACTIVO`, cierra sesión.
 - `src/server/auth/permisos.ts`: `requireRol(roles)` devuelve el usuario o lanza un error tipado (`NoAutenticado` / `SinPermisos`); la matriz de 03 vive en `src/server/auth/matriz.ts` y también alimenta el menú. La parte pura (decidir si un rol puede) se testea sin base.
 - Resultado estándar de las acciones: `{ ok: true, data } | { ok: false, error, campos? }` en `src/server/resultado.ts`.
-- Activación: el enlace de invitación de Supabase llega a `/activar-cuenta` con `token_hash` y `type=invite`; la página verifica el token (`verifyOtp`), pide nombre y contraseña (Zod: 10 caracteres y un número), llama a `updateUser({ password })` y marca el `Usuario` como `ACTIVO`. C-07 solo agrega el envío.
+- Activación: el enlace de invitación apunta a `/activar-cuenta/verificar?token_hash=…&type=invite` (Route Handler, porque un Server Component no puede escribir cookies): verifica el token con `verifyOtp`, crea la sesión y redirige a `/activar-cuenta`. La página muestra quién invitó y con qué rol, pide nombre y contraseña (Zod: 10 caracteres y un número), llama a `updateUser({ password })` y marca el `Usuario` como `ACTIVO`. C-07 configura la plantilla del email y envía las invitaciones.
+- Usuario autenticado pero no `ACTIVO`: el layout lo manda a `/salir?motivo=inactivo` (Route Handler que cierra la sesión) y el login muestra el aviso.
 *Alternativa:* RLS de Supabase (descartado: el acceso es solo por Prisma desde el servidor).
 
 ### 6. Sistema de componentes
 Componentes de shadcn/ui (Radix) copiados a `src/components/ui` y reescritos con las clases y tokens de `design-system/ui.css`; Geist con `geist/font`. `FormField` une react-hook-form, Zod y el control. Los pickers de fecha y hora son propios (popover + grilla), no los nativos. `Avatar` recibe el nombre de archivo y cae a un ícono neutro si falta o falla la carga. Los avatares se copian de `design-system/assets/avatars/` a `public/avatars/`. Orden de entrega por D4 (DD-18): primero lo que usan C-02 a C-08; `range`, `color`, `file`, `month`, `week`, `url` y `hidden` al final.
+Los estilos de `design-system/ui.css` se portan tal cual a `src/components/ui/estilos/` y los componentes usan esas clases, para que la app sea idéntica a la referencia aprobada; Tailwind queda para layout en los módulos (`@theme` con los tokens).
 La regla de ESLint `no-restricted-syntax` con selectores `JSXOpeningElement[name.name=/^(input|select|textarea|button)$/]` aplica a `src/**` y se desactiva en `src/components/ui/**`.
 
 ### 7. Layout, rutas y carpetas por módulo

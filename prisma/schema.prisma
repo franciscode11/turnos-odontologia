@@ -1,0 +1,209 @@
+// Esquema completo del MVP (knowledge-base/04_modelo_de_datos.md).
+// SOLO el líder modifica este archivo y migra la base compartida.
+// Las restricciones que Prisma no modela (EXCLUDE, CHECK, índice parcial de DNI)
+// viven en SQL manual dentro de prisma/migrations/.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Rol {
+  ADMIN
+  RECEPCION
+  PROFESIONAL
+
+  @@map("rol")
+}
+
+enum EstadoUsuario {
+  INVITADO
+  ACTIVO
+  INACTIVO
+
+  @@map("estado_usuario")
+}
+
+enum EstadoTurno {
+  RESERVADO
+  CONFIRMADO
+  CANCELADO
+  ATENDIDO
+  AUSENTE
+
+  @@map("estado_turno")
+}
+
+/// Usuario del consultorio. El id es el del usuario de Supabase Auth.
+model Usuario {
+  id            String        @id @db.Uuid
+  email         String        @unique
+  nombre        String?
+  rol           Rol
+  estado        EstadoUsuario @default(INVITADO)
+  invitadoPorId String?       @map("invitado_por_id") @db.Uuid
+  invitadoEn    DateTime?     @map("invitado_en") @db.Timestamptz(3)
+  ultimoIngreso DateTime?     @map("ultimo_ingreso") @db.Timestamptz(3)
+  profesionalId String?       @unique @map("profesional_id") @db.Uuid
+  avatar        String?
+  createdAt     DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  invitadoPor    Usuario?         @relation("Invitaciones", fields: [invitadoPorId], references: [id])
+  invitados      Usuario[]        @relation("Invitaciones")
+  profesional    Profesional?     @relation(fields: [profesionalId], references: [id])
+  turnosCreados  Turno[]
+  cambiosDeTurno HistorialTurno[]
+
+  @@map("usuario")
+}
+
+model Paciente {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nombre          String
+  apellido        String
+  /// Solo dígitos, 7 u 8. Único entre pacientes activos (índice parcial en SQL).
+  dni             String
+  fechaNacimiento DateTime @map("fecha_nacimiento") @db.Date
+  telefono        String
+  email           String?
+  obraSocial      String?  @map("obra_social")
+  numeroAfiliado  String?  @map("numero_afiliado")
+  avatar          String?
+  activo          Boolean  @default(true)
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  turnos Turno[]
+
+  @@index([apellido])
+  @@index([dni])
+  @@map("paciente")
+}
+
+model Profesional {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nombre       String
+  apellido     String
+  matricula    String   @unique
+  especialidad String?
+  avatar       String?
+  activo       Boolean  @default(true)
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  usuario  Usuario?
+  horarios HorarioAtencion[]
+  bloqueos Bloqueo[]
+  turnos   Turno[]
+
+  @@map("profesional")
+}
+
+model Prestacion {
+  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nombre           String
+  /// Entre 10 y 240, múltiplo de 5 (CHECK en SQL).
+  duracionMinutos  Int      @map("duracion_minutos")
+  precioReferencia Decimal? @map("precio_referencia") @db.Decimal(12, 2)
+  activo           Boolean  @default(true)
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  turnos Turno[]
+
+  @@map("prestacion")
+}
+
+model Sillon {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nombre    String   @unique
+  activo    Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  turnos Turno[]
+
+  @@map("sillon")
+}
+
+/// Franja semanal de atención. Horas "HH:mm" en hora local del consultorio.
+model HorarioAtencion {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  profesionalId String   @map("profesional_id") @db.Uuid
+  /// 1 = lunes ... 7 = domingo (ISO).
+  diaSemana     Int      @map("dia_semana")
+  horaDesde     String   @map("hora_desde")
+  horaHasta     String   @map("hora_hasta")
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  profesional Profesional @relation(fields: [profesionalId], references: [id])
+
+  @@index([profesionalId, diaSemana])
+  @@map("horario_atencion")
+}
+
+model Bloqueo {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  profesionalId String   @map("profesional_id") @db.Uuid
+  desde         DateTime @db.Timestamptz(3)
+  hasta         DateTime @db.Timestamptz(3)
+  motivo        String
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  profesional Profesional @relation(fields: [profesionalId], references: [id])
+
+  @@index([profesionalId, desde])
+  @@map("bloqueo")
+}
+
+model Turno {
+  id                String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  pacienteId        String      @map("paciente_id") @db.Uuid
+  profesionalId     String      @map("profesional_id") @db.Uuid
+  prestacionId      String      @map("prestacion_id") @db.Uuid
+  sillonId          String      @map("sillon_id") @db.Uuid
+  inicio            DateTime    @db.Timestamptz(3)
+  fin               DateTime    @db.Timestamptz(3)
+  estado            EstadoTurno @default(RESERVADO)
+  motivoCancelacion String?     @map("motivo_cancelacion")
+  creadoPorId       String      @map("creado_por_id") @db.Uuid
+  createdAt         DateTime    @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt         DateTime    @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  paciente    Paciente         @relation(fields: [pacienteId], references: [id])
+  profesional Profesional      @relation(fields: [profesionalId], references: [id])
+  prestacion  Prestacion       @relation(fields: [prestacionId], references: [id])
+  sillon      Sillon           @relation(fields: [sillonId], references: [id])
+  creadoPor   Usuario          @relation(fields: [creadoPorId], references: [id])
+  historial   HistorialTurno[]
+
+  @@index([profesionalId, inicio])
+  @@index([sillonId, inicio])
+  @@index([inicio])
+  @@index([pacienteId])
+  @@map("turno")
+}
+
+/// Historial append-only: solo se inserta.
+model HistorialTurno {
+  id             String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  turnoId        String       @map("turno_id") @db.Uuid
+  estadoAnterior EstadoTurno? @map("estado_anterior")
+  estadoNuevo    EstadoTurno  @map("estado_nuevo")
+  motivo         String?
+  usuarioId      String       @map("usuario_id") @db.Uuid
+  fecha          DateTime     @default(now()) @db.Timestamptz(3)
+
+  turno   Turno   @relation(fields: [turnoId], references: [id])
+  usuario Usuario @relation(fields: [usuarioId], references: [id])
+
+  @@index([turnoId, fecha])
+  @@map("historial_turno")
+}

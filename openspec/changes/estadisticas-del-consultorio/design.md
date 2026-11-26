@@ -36,6 +36,7 @@ Toda proporción con denominador 0 devuelve `null`. La variación de una tasa es
 - Denominador: para cada fecha del período y cada franja del profesional con ese día ISO, el intervalo `[aInstante(fecha, desde), aInstante(fecha, hasta))` menos la unión de los bloqueos del mismo profesional que se superponen (recortados al intervalo).
 - Numerador: suma de `fin - inicio` de los turnos que ocupan agenda (`ocupaAgenda`) con inicio en el período.
 - Se reutiliza `seSuperponen` para detectar bloqueos que tocan la franja.
+- Se toman las franjas y bloqueos de los profesionales activos: un inactivo no ofrece agenda (RN-CA-05), pero sus turnos del período sí cuentan en los totales.
 
 ### D4. Período anterior (RN-ST-06)
 Semana → 7 días antes; rango → la misma cantidad de días inmediatamente antes; mes → mes calendario anterior. Para el mes se elige la unidad calendario porque la referencia aprobada compara "vs. octubre" y las tasas no dependen de la cantidad de días. Queda anotado para que el líder lo confirme.

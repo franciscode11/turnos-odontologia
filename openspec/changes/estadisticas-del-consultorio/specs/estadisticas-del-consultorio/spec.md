@@ -65,17 +65,17 @@ El sistema SHALL contar como turnos dados todos los turnos cuyo inicio cae dentr
 
 ### Requirement: Tasa de ausentismo
 
-El sistema SHALL calcular el ausentismo como AUSENTE / (ATENDIDO + AUSENTE), con un decimal. Si no hay turnos atendidos ni ausentes MUST mostrar "Sin datos" y no 0 % (RN-ST-04, US-070).
+El sistema SHALL calcular el ausentismo como AUSENTE / (ATENDIDO + AUSENTE), con un decimal. Si no hay turnos atendidos ni ausentes MUST mostrar "Sin datos" y no 0% (RN-ST-04, US-070).
 
 #### Scenario: Diez atendidos y dos ausentes
 
 - **WHEN** el mes tiene 10 turnos atendidos y 2 ausentes
-- **THEN** el ausentismo es 16,7 %
+- **THEN** el ausentismo es 16,7%
 
 #### Scenario: Reservados, confirmados y cancelados no cuentan
 
 - **WHEN** el período tiene 1 atendido, 1 ausente y además reservados, confirmados y cancelados
-- **THEN** el ausentismo es 50,0 %, sin contar los otros estados en el denominador
+- **THEN** el ausentismo es 50,0%, sin contar los otros estados en el denominador
 
 #### Scenario: Sin atendidos ni ausentes
 
@@ -89,7 +89,7 @@ El sistema SHALL calcular las cancelaciones como CANCELADO / turnos dados y SHAL
 #### Scenario: Cancelaciones del período
 
 - **WHEN** el período tiene 20 turnos dados y 3 cancelados
-- **THEN** la tasa de cancelación es 15,0 %
+- **THEN** la tasa de cancelación es 15,0%
 
 #### Scenario: Motivos escritos de distinta forma
 
@@ -108,12 +108,12 @@ El sistema SHALL calcular la ocupación como los minutos de turnos que ocupan ag
 #### Scenario: Franja con turnos
 
 - **WHEN** un profesional atiende el lunes de 09:00 a 12:00 y ese lunes tiene turnos atendidos, reservados y ausentes que suman 90 minutos
-- **THEN** la ocupación de ese día es 50,0 %
+- **THEN** la ocupación de ese día es 50,0%
 
 #### Scenario: Bloqueos descuentan y cancelados no ocupan
 
 - **WHEN** ese lunes tiene un bloqueo de 10:00 a 11:00 y un turno cancelado de 30 minutos además de 60 minutos de turnos activos
-- **THEN** los minutos de atención son 120, el cancelado no suma y la ocupación es 50,0 %
+- **THEN** los minutos de atención son 120, el cancelado no suma y la ocupación es 50,0%
 
 #### Scenario: Sin franjas en el período
 
@@ -126,8 +126,8 @@ El sistema SHALL comparar cada indicador con el período anterior: la semana pre
 
 #### Scenario: Más turnos y menos ausentismo
 
-- **WHEN** el período actual tiene 312 turnos dados y 7,4 % de ausentismo y el anterior 288 turnos y 8,6 %
-- **THEN** la variación de turnos es +8,3 % y la de ausentismo -1,2 pts, marcada como favorable
+- **WHEN** el período actual tiene 312 turnos dados y 7,4% de ausentismo y el anterior 288 turnos y 8,6%
+- **THEN** la variación de turnos es +8,3% y la de ausentismo -1,2 pts, marcada como favorable
 
 #### Scenario: Período anterior de igual duración
 
@@ -165,7 +165,7 @@ El sistema SHALL mostrar por profesional sus turnos dados, ocupación, ausentism
 #### Scenario: Tabla por profesional
 
 - **WHEN** el Dr. Joaquín Cortez tiene 4 turnos en el mes, 3 de "Consulta" y 1 de "Limpieza", con 1 cancelado
-- **THEN** su fila muestra 4 turnos, 25,0 % de cancelaciones y "Consulta" como prestación más dada
+- **THEN** su fila muestra 4 turnos, 25,0% de cancelaciones y "Consulta" como prestación más dada
 
 #### Scenario: Profesional sin turnos ni franjas
 

@@ -1,0 +1,37 @@
+@import "tailwindcss";
+@import "../components/ui/estilos/tokens.css";
+@import "../components/ui/estilos/componentes.css";
+
+/* Tokens del design system expuestos a Tailwind para layout en los módulos
+   (gap-*, p-*, text-*, rounded-*). Colores semánticos, nunca valores crudos. */
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --color-fondo: var(--color-bg);
+  --color-fondo-suave: var(--color-bg-subtle);
+  --color-apagado: var(--color-muted);
+  --color-borde: var(--color-border);
+  --color-texto: var(--color-text);
+  --color-texto-medio: var(--color-text-muted);
+  --color-texto-suave: var(--color-text-subtle);
+  --color-acento: var(--color-accent-600);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+}
+
+/* Panel lateral en mobile y menú del usuario (complementan componentes.css). */
+.sheet-overlay { position: fixed; inset: 0; z-index: 40; background: var(--color-overlay); animation: fadeIn var(--dur-dialog) var(--ease-out); }
+.sidebar.sheet-sidebar { display: flex; position: fixed; z-index: 41; top: 0; left: 0; bottom: 0; width: min(var(--sidebar-width), 86vw); height: 100dvh; box-shadow: var(--shadow-lg); animation: entrarIzquierda var(--dur-sidebar) var(--ease-out); }
+.menu-usuario { position: static; min-width: 200px; padding: 4px; }
+.menu-item { width: 100%; border: 0; background: transparent; font: inherit; color: var(--color-text); }
+.menu-item:focus-visible, .menu-item[data-highlighted] { outline: none; background: var(--color-muted); box-shadow: none; }
+@keyframes fadeIn { from { opacity: 0; } }
+@keyframes entrarIzquierda { from { transform: translateX(-100%); } }
+@media (prefers-reduced-motion: reduce) { .sidebar.sheet-sidebar { animation: fadeIn 120ms var(--ease-out); } }
+
+/* Control segmentado con enlaces (vistas Día/Lista de la agenda). */
+.segmented a { position: relative; z-index: 1; height: 28px; padding: 0 var(--space-3); display: inline-flex; align-items: center; border-radius: var(--radius-sm); font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--color-text-muted); text-decoration: none; }
+.segmented a:hover { text-decoration: none; color: var(--color-text); }
+.segmented a[aria-current="true"] { color: var(--color-text); background: var(--color-bg); box-shadow: var(--shadow-sm); }
+a.appt { display: block; color: inherit; text-decoration: none; }

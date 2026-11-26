@@ -1,0 +1,134 @@
+/* Complemento de componentes.css para los componentes con Radix y estado propio (C-01, grupos 5 y 8).
+   Solo tokens. Solo se animan transform y opacity. Radix desmonta el contenido cuando termina la
+   animación CSS (no la transición), por eso acá las aperturas y cierres usan @keyframes.
+   Lo importan los componentes de src/components/ui que lo necesitan; el líder puede moverlo a globals.css. */
+
+/* ---------- Contenido flotante (select, popover, calendario, combobox) ---------- */
+.popover.ui-flotante {
+  position: relative; top: auto; left: auto;
+  min-width: var(--radix-popover-trigger-width, var(--radix-select-trigger-width, 0px));
+  max-height: var(--radix-popover-content-available-height, var(--radix-select-content-available-height, 360px));
+  overflow-y: auto;
+  transform-origin: var(--radix-popover-content-transform-origin, var(--radix-select-content-transform-origin, top left));
+  transition: none;
+}
+.popover.ui-flotante[data-state="open"] { animation: ui-pop-in var(--dur-popover) var(--ease-out); }
+.popover.ui-flotante[data-state="closed"] { animation: ui-pop-out var(--dur-popover-exit) var(--ease-out) forwards; }
+@keyframes ui-pop-in { from { opacity: 0; transform: scale(var(--pop-scale)) translateY(-4px); } to { opacity: 1; transform: none; } }
+@keyframes ui-pop-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: scale(var(--pop-scale)) translateY(-4px); } }
+.ui-select-viewport { padding: 0; }
+.lb-opt[data-disabled] { color: var(--color-text-subtle); cursor: not-allowed; }
+.lb-opt:focus { outline: none; }
+.ui-listbox:focus-visible { box-shadow: none; }
+.ui-listbox:focus-visible .lb-opt[data-highlighted] { box-shadow: inset 0 0 0 1px var(--color-accent-600); }
+.lb-vacio { padding: 10px 8px; font-size: var(--text-sm); color: var(--color-text-subtle); }
+button.control[data-placeholder], button.control .placeholder { color: var(--color-text-subtle); }
+button.control > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+button.control[aria-invalid="true"] { border-color: var(--estado-cancelado-fg); }
+
+/* Select múltiple: chips + disparador */
+.ui-multiple { position: relative; cursor: pointer; }
+.ui-multiple .placeholder { padding-left: 8px; color: var(--color-text-subtle); }
+.ui-multiple > .trail-btn { right: 4px; }
+.ui-multiple[aria-disabled="true"] { cursor: not-allowed; }
+.ui-multiple:focus-within { border-color: var(--color-accent-600); box-shadow: var(--focus-ring); }
+.ui-multiple:focus-within .trail-btn:focus-visible { box-shadow: none; }
+
+/* Calendario y horarios */
+.cal-grid .ui-fila { display: contents; }
+.cal-grid button.d, .slot { font: inherit; color: inherit; background: transparent; border-width: 0; padding: 0; }
+.cal-grid button.d.sel { color: var(--color-on-accent); background: var(--color-accent-600); }
+.cal-grid button.d:disabled { cursor: not-allowed; }
+.cal-grid button.d.ui-sem { background: var(--color-accent-50); border-radius: 0; }
+.cal-grid button.d.ui-sem.sel { background: var(--color-accent-600); }
+.cal.ui-cal-semanas { width: 300px; }
+.cal.ui-cal-semanas .cal-grid { grid-template-columns: 28px repeat(7, 1fr); }
+.slots button.slot, .months button.slot { border: 1px solid var(--color-border); }
+.slots button.slot.sel, .months button.slot.sel { color: var(--color-on-accent); border-color: var(--color-accent-600); }
+.slots button.slot.off, .months button.slot.off { border-color: transparent; }
+.ui-hora { width: 264px; }
+.ui-hora .slots { max-height: 232px; overflow-y: auto; }
+.ui-fecha-hora { display: flex; gap: var(--space-2); align-items: flex-start; }
+.ui-fecha-hora > .ui-hora { border-left: 1px solid var(--color-border); }
+@media (max-width: 599px) { .ui-fecha-hora { flex-direction: column; } .ui-fecha-hora > .ui-hora { border-left: 0; border-top: 1px solid var(--color-border); } }
+.ui-mes { width: 264px; padding: var(--space-1); }
+
+/* ---------- Checkbox, radio, switch (Radix) ---------- */
+.box, .switch { padding: 0; cursor: pointer; }
+.box[data-state="indeterminate"] { background: var(--color-accent-600); border-color: var(--color-accent-600); }
+.box[data-state="indeterminate"]::after { content: ""; width: 8px; height: 2px; border-radius: 1px; background: var(--color-on-accent); }
+.box[data-state="indeterminate"] svg.i { display: none; }
+.box[aria-invalid="true"], .switch[aria-invalid="true"] { border-color: var(--estado-cancelado-fg); box-shadow: 0 0 0 1px var(--estado-cancelado-fg); }
+.box.radio { position: relative; }
+.choice:has(:disabled), .choice:has([data-disabled]) { opacity: 0.55; cursor: not-allowed; }
+.choice:has(:disabled) *, .choice:has([data-disabled]) * { cursor: not-allowed; }
+.segmented button:disabled { cursor: not-allowed; opacity: 0.55; }
+.ui-radios { display: flex; flex-direction: column; gap: 10px; }
+.ui-radios.horizontal { flex-direction: row; flex-wrap: wrap; gap: var(--space-4); }
+
+/* ---------- Número con stepper ---------- */
+.stepper input { min-width: 0; width: 100%; border: 0; border-left: 1px solid var(--color-border); border-right: 1px solid var(--color-border); background: transparent; color: var(--color-text); font: inherit; font-size: var(--text-base); text-align: center; font-variant-numeric: tabular-nums; padding: 0 var(--space-1); }
+.stepper input:focus-visible { outline: none; box-shadow: none; border-radius: 0; }
+.stepper:focus-within { border-color: var(--color-accent-600); box-shadow: var(--focus-ring); }
+.stepper:has([aria-invalid="true"]) { border-color: var(--estado-cancelado-fg); }
+.stepper:has([aria-invalid="true"]):focus-within { box-shadow: var(--focus-ring-error); }
+.stepper:has(input:disabled) { background: var(--color-muted); border-color: var(--color-border); box-shadow: none; color: var(--color-text-subtle); }
+.stepper:has(input:disabled) button { cursor: not-allowed; }
+.stepper:has(input:disabled) input { color: var(--color-text-subtle); }
+.stepper button:disabled { cursor: not-allowed; opacity: 0.45; }
+
+/* ---------- Deslizador (Radix Slider) ---------- */
+.slider.ui-deslizador { touch-action: none; user-select: none; }
+.slider.ui-deslizador .thumb { position: relative; display: block; margin-left: 0; }
+.slider.ui-deslizador[data-disabled] { opacity: 0.55; cursor: not-allowed; }
+
+/* ---------- Color ---------- */
+.swatch { padding: 0; background: var(--sw); color: var(--sw); }
+.swatch:disabled { cursor: not-allowed; opacity: 0.55; }
+
+/* ---------- Archivos ---------- */
+.dropzone[data-arrastrando] { border-color: var(--color-accent-500); background: var(--color-accent-50); }
+.dropzone[aria-disabled="true"] { cursor: not-allowed; opacity: 0.55; }
+.dropzone[aria-disabled="true"]:hover { border-color: var(--color-border-strong); background: var(--color-bg-subtle); }
+.dropzone[aria-invalid="true"] { border-color: var(--estado-cancelado-fg); }
+.dropzone .help { margin-top: 4px; }
+
+/* ---------- Diálogo (Radix Dialog) ---------- */
+.overlay.ui-overlay { transition: none; }
+.overlay.ui-overlay[data-state="open"] { animation: ui-fade-in 180ms var(--ease-out); }
+.overlay.ui-overlay[data-state="closed"] { animation: ui-fade-out var(--dur-dialog-exit) var(--ease-out) forwards; }
+.overlay.ui-overlay .dialog { transition: none; }
+.overlay.ui-overlay .dialog[data-state="open"] { animation: ui-dialog-in var(--dur-dialog) var(--ease-out); }
+.overlay.ui-overlay .dialog[data-state="closed"] { animation: ui-dialog-out var(--dur-dialog-exit) var(--ease-out) forwards; }
+.dialog:focus-visible { box-shadow: var(--shadow-lg); }
+@keyframes ui-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ui-fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes ui-dialog-in { from { opacity: 0; transform: scale(var(--pop-scale)); } to { opacity: 1; transform: none; } }
+@keyframes ui-dialog-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: scale(var(--pop-scale)); } }
+
+/* ---------- Tooltip (Radix Tooltip) ---------- */
+.ui-tip { z-index: 70; padding: 4px 8px; border-radius: var(--radius-sm); background: var(--color-text); color: var(--color-bg); font-size: var(--text-xs); line-height: var(--leading-snug); max-width: 280px; box-shadow: var(--shadow-md); transform-origin: var(--radix-tooltip-content-transform-origin); }
+.ui-tip[data-state="delayed-open"], .ui-tip[data-state="instant-open"] { animation: ui-tip-in var(--dur-tooltip) var(--ease-out); }
+.ui-tip[data-state="closed"] { animation: ui-fade-out var(--dur-tooltip) var(--ease-out) forwards; }
+@keyframes ui-tip-in { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: none; } }
+
+/* ---------- Toasts ---------- */
+.toaster:empty { display: none; }
+@media (max-width: 767px) { .toaster { left: var(--space-4); right: var(--space-4); bottom: var(--space-4); align-items: stretch; } .toast { max-width: none; } }
+
+/* ---------- Movimiento reducido: sin escalas ni desplazamientos, solo fundidos cortos ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .popover.ui-flotante[data-state="open"], .ui-tip[data-state="delayed-open"], .ui-tip[data-state="instant-open"],
+  .overlay.ui-overlay .dialog[data-state="open"] { animation: ui-fade-in 120ms linear; }
+  .popover.ui-flotante[data-state="closed"], .ui-tip[data-state="closed"],
+  .overlay.ui-overlay .dialog[data-state="closed"] { animation: ui-fade-out 120ms linear forwards; }
+  .overlay.ui-overlay[data-state="open"] { animation-duration: 120ms; }
+  .overlay.ui-overlay[data-state="closed"] { animation-duration: 120ms; }
+  .toast[data-entering], .toast[data-leaving] { transform: none; }
+  .slider .thumb, .swatch, .stepper button svg { transition: none; transform: none; }
+}
+
+/* Íconos dentro de controles y casillas */
+.ui-icono-control { display: grid; place-items: center; flex: none; color: var(--color-text-subtle); }
+.box > span { display: grid; place-items: center; }
+.dialog-head + .dialog-foot { margin-top: var(--space-5); }

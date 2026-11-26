@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import { accesoPagina } from "@/server/auth/pagina";
-import { PaginaPendiente } from "../../_shell/pagina-pendiente";
+import { permisosCatalogo } from "@/server/catalogo/permisos";
+import { listarSillones } from "@/server/catalogo/repositorios";
 import { SinPermiso } from "../../_shell/sin-permiso";
+import { ListaSillones } from "./lista-sillones";
 
 export const metadata: Metadata = { title: "Sillones" };
 
-// Placeholder del C-01. Lo reemplaza el C-03.
+/** /configuracion/sillones: todos consultan, solo ADMIN edita (RN-CA-06). */
 export default async function PaginaConfiguracionSillones() {
-  const { permitido } = await accesoPagina("sillones.ver");
+  const { usuario, permitido } = await accesoPagina("sillones.ver");
   if (!permitido) return <SinPermiso />;
-  return <PaginaPendiente titulo="Sillones" descripcion="Sillones disponibles para los turnos." change="C-03" icono="armchair" />;
+  const sillones = await listarSillones();
+  return <ListaSillones sillones={sillones} puedeEditar={permisosCatalogo(usuario.rol, "sillones").editar} />;
 }

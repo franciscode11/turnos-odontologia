@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import { accesoPagina } from "@/server/auth/pagina";
-import { PaginaPendiente } from "../../_shell/pagina-pendiente";
+import { permisosCatalogo } from "@/server/catalogo/permisos";
+import { listarProfesionales } from "@/server/catalogo/repositorios";
 import { SinPermiso } from "../../_shell/sin-permiso";
+import { ListaProfesionales } from "./lista-profesionales";
 
 export const metadata: Metadata = { title: "Profesionales" };
 
-// Placeholder del C-01. Lo reemplaza el C-03.
+/** /configuracion/profesionales: todos consultan, solo ADMIN edita (RN-CA-06). */
 export default async function PaginaConfiguracionProfesionales() {
-  const { permitido } = await accesoPagina("profesionales.ver");
+  const { usuario, permitido } = await accesoPagina("profesionales.ver");
   if (!permitido) return <SinPermiso />;
-  return <PaginaPendiente titulo="Profesionales" descripcion="Odontólogos del consultorio y sus matrículas." change="C-03" icono="stethoscope" />;
+  const profesionales = await listarProfesionales();
+  return <ListaProfesionales profesionales={profesionales} puedeEditar={permisosCatalogo(usuario.rol, "profesionales").editar} />;
 }

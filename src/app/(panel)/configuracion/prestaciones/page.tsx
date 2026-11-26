@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import { accesoPagina } from "@/server/auth/pagina";
-import { PaginaPendiente } from "../../_shell/pagina-pendiente";
+import { permisosCatalogo } from "@/server/catalogo/permisos";
+import { listarPrestaciones } from "@/server/catalogo/repositorios";
 import { SinPermiso } from "../../_shell/sin-permiso";
+import { ListaPrestaciones } from "./lista-prestaciones";
 
 export const metadata: Metadata = { title: "Prestaciones" };
 
-// Placeholder del C-01. Lo reemplaza el C-03.
+/** /configuracion/prestaciones: todos consultan, solo ADMIN edita (RN-CA-06). */
 export default async function PaginaConfiguracionPrestaciones() {
-  const { permitido } = await accesoPagina("prestaciones.ver");
+  const { usuario, permitido } = await accesoPagina("prestaciones.ver");
   if (!permitido) return <SinPermiso />;
-  return <PaginaPendiente titulo="Prestaciones" descripcion="Tratamientos con su duración." change="C-03" icono="clipboard-list" />;
+  const prestaciones = await listarPrestaciones();
+  return <ListaPrestaciones prestaciones={prestaciones} puedeEditar={permisosCatalogo(usuario.rol, "prestaciones").editar} />;
 }
